@@ -22,7 +22,7 @@ const Navber = ({ isLogged }) => {
                           isPending ? "nav_link_pending" : isAction ? "nav_link_action" : " "
                         }
                       >
-                        eshop
+                        SHopIt
                       </NavLink>
                     </li>
             </div>
@@ -103,7 +103,7 @@ const Navber = ({ isLogged }) => {
               </div>
               <div className={styles.hdt_buttons}>
                 <Link to={`/${!isLogged ? 'login' : 'home?profile_view=true'}`}>
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} style={{color: `${new URLSearchParams(location.search).get('profile_view') === "true" ? 'var(--bs-accent)' : ''}`}} />
                   Profile
                 </Link>
                 <Link to={"/cart"}>
