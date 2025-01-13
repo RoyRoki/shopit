@@ -1,0 +1,18 @@
+.main {
+      height: 100%;
+      color: var(--bs-tx);
+}
+
+.main .login_box {
+      height: 1000px;
+      background-color: var(--bs-bg1);
+      display: flex;
+      justify-content: center;
+}
+
+.main .login_box .box_wrap {
+      height: 450px;
+      width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+}

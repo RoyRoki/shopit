@@ -1,0 +1,106 @@
+.main_box {
+      width: 100%;
+      aspect-ratio: 2/1;
+      max-height: 800px;
+      max-width: 1600px;
+      background-color: var(--bs-bg2);
+      display: flex;
+      padding: 24px;
+      gap: 24px;
+}
+
+.main_box .sub_hero_box {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+}
+
+.main_box .sub_hero_box .sub_hero_header {
+      width: auto;
+      height: 80px;
+      display: grid;
+      padding: 16px 0 0 42px;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--bs-tx1);
+}
+
+.main_box .sub_hero_box .sub_hero_wrap {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 16px;
+}
+
+
+.main_box .sub_hero_box .sub_hero_wrap .sub_hero {
+      height: 100%;
+      width: 100%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: var(--bs-bg1);
+      box-shadow: var(--bs-box-shadow);
+      transition: box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+}
+
+.main_box .sub_hero_box .sub_hero_wrap .sub_hero:hover {
+      box-shadow: none;
+}
+
+.main_box .sub_hero_box .sub_hero_wrap .sub_hero .sub_hero_img_box {
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+}
+
+.main_box .sub_hero_box .sub_hero_wrap .sub_hero .sub_hero_info_box {
+      width: 100%;
+      padding: 0 0 8px 16px;
+}
+
+.main_box .sub_hero_box .sub_hero_wrap .sub_hero .sub_hero_info_box .info_name {
+      color: var(--bs-tx2);
+}
+
+
+.main_box .sub_hero_box .sub_hero_wrap .sub_hero .sub_hero_info_box .info_offer {
+      color: var(--bs-accent);
+      font-weight: 800;
+      font-size: 1.1rem;
+}
+
+
+.main_box .main_hero_box {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+}
+
+.main_box .main_hero_box .hero_img_box {
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+}
+
+.main_box .main_hero_box .hero_header {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      padding: 0 0 0 32px;
+      color: var(--bs-tx1);
+}
+

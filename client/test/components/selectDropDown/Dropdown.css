@@ -1,0 +1,30 @@
+.select_quantity_option {
+  cursor: pointer;
+  position: relative;
+  background-color: var(--bs-bg3);
+  padding: 10px;
+  border-radius: 5px;
+  color: var(--bs-tx2);
+}
+
+.dropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: var(--bs-bg3);
+  border: 1px solid var(--bs-tx2);
+  border-radius: 5px;
+  max-height: 135px;
+  overflow-y: auto;
+  min-width: 207px;
+  z-index: 10;
+}
+
+.a-dropdown-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.a-dropdown-item:hover {
+  background-color: var(--bs-bg2);
+}

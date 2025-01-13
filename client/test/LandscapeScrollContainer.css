@@ -1,0 +1,19 @@
+.landscape-scroll-container {
+  display: flex;
+  flex-wrap: nowrap; /* Ensure items are in a single row */
+  overflow-x: auto;
+  overflow-y: hidden; /* Hide vertical scrolling */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.landscape-scroll-container > * {
+  flex: 0 0 auto; /* Prevent children from shrinking */
+  width: 80vw; /* Adjust size of each child (80% of viewport width) */
+  height: 90%; /* Leave some padding from top and bottom */
+  background: #ddd;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}

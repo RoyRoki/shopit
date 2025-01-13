@@ -1,0 +1,21 @@
+.nav_box {
+ width: 100%;
+}
+
+.nav_wrap {
+      display: flex;
+      gap: 24px;
+      justify-content: flex-start;
+}
+
+.nav_link {
+      color: var(--bs-blue);
+}
+
+.nav_link:hover > span{
+      color: var(--bs-accent);
+}
+
+.no_key_wrap {
+      color: var(--bs-blue);
+}

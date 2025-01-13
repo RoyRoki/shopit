@@ -1,0 +1,389 @@
+.main_wrap {
+      background-color: var(--bs-bg3);  
+      width: 100%;
+      height: 960px;
+      padding: 40px 80px 80px 80px;
+}
+.main_container {
+      width: 100%;
+      height: 872px;
+      padding: 40px 24px 40px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+}
+
+.main_container .categories_nav {
+      height: 40px;
+      width: 100%;
+}
+
+.main_container .hero_container {
+      height: 100%;
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      background-color: var(--bs-bg2);
+      border-radius: 15px;
+      padding: 16px;
+      transform: translateY(-100px);
+      transition: transform 0.5s ease-in-out;
+}
+
+.main_container .hero_container .product_header {
+      width: 50%;
+}
+
+.main_container .hero_container .product_meta {
+      width: 50%;
+      margin-left: 16px;
+}
+
+.main_container .hero_container .product_header .gallery_box {
+      height: 72%;
+      display: flex;
+}
+
+
+.main_container .hero_container .product_header .button_box {
+      height: 20%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: end;
+}
+
+.main_container .hero_container .product_header .button_box button {
+      height: 50%;
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10%;
+      font-size: 1.3rem;
+      color: var(--bs-accent-tx1);
+      box-shadow: var(--bs-box-shadow3);
+      border-radius: 8px;
+}
+
+.btn_add_to_cart {
+      background-color: var(--bs-btn1);
+      
+}
+
+.btn_buy_now {
+      background-color: var(--bs-btn2);
+}
+
+
+.main_container .hero_container .product_header .gallery_box .gallery_explorer {
+      width: 124px;
+      height: 100%;
+      background-color: var(--bs-bg1);
+      box-shadow: var(--bs-box-shadow);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      gap: 16px;
+}
+
+.gallery_box .gallery_explorer .optional_img_frame {
+      width: 100%;
+      height: 104px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 4px;
+}
+
+.gallery_box .hero_img_wrap {
+      width: 100%;
+      height: 100%;
+      padding: 24px;
+      background-color: var(--bs-bg1);
+      margin-left: 8px;
+}
+
+.main_container .hero_container .product_header .gallery_box .hero_img_wrap .hero_img_frame {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+}
+
+.demo_hero_img {
+      
+}
+
+
+.main_container .hero_container .product_meta .name_box {
+      font-size: 1.4rem;
+      height: 72px;
+      margin-top: 8px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: keep-all;
+      color: var(--bs-tx2);
+      
+}
+
+.main_container .hero_container .product_meta .prices_info {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+}
+.special_text {
+      margin: 8px 0 2px 0;
+}
+.offer_info_header {
+      color: var(--bs-success);
+}
+
+.final_price {
+      font-size: 2rem;
+      font-weight: 600;
+      font-style: oblique;
+      color: var(--bs-tx2);
+}
+
+.offer_info {
+      display: flex;
+      gap: 8px;
+}
+
+.mrp_line {
+      color: var(--bs-tx1);
+      text-decoration: line-through;
+}
+.offer_line{
+      color: var(--bs-success);
+      font-weight: 600;
+      font-size: 1.5rem;
+}
+
+
+.main_container .hero_container .product_meta .store_info {
+      margin: 16px 0 8px 0;
+      width: fit-content;
+}
+
+.product_meta .store_info button {
+      padding: 8px;
+      background-color: var(--bs-bg3);
+      border-radius: 20px;
+      font-size: large;
+      font-style: italic;
+      color: var(--bs-blue);
+}
+
+
+.main_container .hero_container .product_meta .table_info {
+      height: 264px;
+      overflow: auto;
+      scrollbar-width: none;
+      color: var(--bs-tx2);
+}
+.table_info::-webkit-scrollbar {
+      scrollbar-width: none;
+}
+
+.main_container .hero_container .product_meta .table_info p {
+      margin-bottom: 8px;
+      color: var(--bs-tx1);
+}
+
+
+.main_container .hero_container .product_meta .description {
+      color: var(--bs-tx2);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: keep-all;
+}
+
+.main_container .hero_container .product_meta .description p {
+      color: var(--bs-tx1);
+      margin-bottom: 4px;
+}
+
+
+.main_container .hero_container .product_meta .keyword_wrap {
+      margin-top: 24px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+}
+.main_container .hero_container .product_meta .keyword_wrap p {
+      color: var(--bs-tx1);
+      margin-bottom: 4px;      
+}
+
+/* Cart Notification */
+.cart_notifier_box {
+      min-height: 200px;
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 24px;
+      padding: 24px 24px 24px 24px;
+      display: flex;
+      justify-content: space-evenly;
+      background-color: var(--bs-bg4);
+      border-radius: 8px;
+      box-shadow: var(--bs-box-shadow1);
+      transform: translateY(-50%);
+      scale: 1;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      z-index: 10;
+}
+
+.notifier_show {
+  transform: translateX(0) translateY(20%);
+  opacity: 1;
+  scale: 1;
+}
+.notifier_show ~ .hero_container {
+  transform: translateY(24px);
+}
+
+.notifier_hide {
+  transform: translateX(-24px) translateY(-100px);
+  opacity: 0;
+}
+.cart_notifier_box .highlight_box {
+      width: 42%;
+      background-color: var(--bs-bg1);
+      padding-left: 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+}
+
+.highlight_img_wrap {
+      width: 104px;
+      height: 104px;
+}
+.highlight_img_wrap .hero_img_frame {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+.highlight_img_wrap .demo_hero_img {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bs-glass);
+      border-radius: 10px;
+      box-shadow: var(--bs-box-shadow);
+}
+
+.highlight_text_box {
+      display: flex;
+      flex-direction: column;
+}
+
+.highlight_text_box .add_to_cart_span {
+      color: var(--bs-success);
+      font-size: 1.1rem;
+}
+
+.highlight_text_box span {
+      color: var(--bs-tx1);
+}
+
+.cart_notifier_box .action_box {
+      background-color: var(--bs-bg1);
+      width: 50%;
+}
+.action_btn_wrap {
+      width: 500px;
+      height: 100%;
+      padding: 24px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      place-items: end;
+}
+
+.action_btn_wrap  button {
+      border: 2px solid var(--bs-tx2);
+      width: 60%;
+      border-radius: 15px;
+      padding: 4px 0 4px 0;
+}
+
+.to_cart_btn {
+      background-color: var(--bs-glass1);
+      color: var(--bs-tx1);
+}
+
+.buy_btn {
+      background-color: var(--bs-btn2);
+      color: var(--bs-accent-tx1);
+}
+
+.action_btn_wrap .auth_btn {
+      color: var(--bs-tx2);
+      display: flex;
+      gap: 4px;
+}
+
+.action_btn_wrap .auth_btn a {
+      color: var(--bs-blue);
+      cursor: pointer;
+}
+
+.select_quantity_option {
+      margin-left: 82px;
+      width: 175px;
+      padding: 2px;
+      display: flex;
+      transform: translateY(24px);
+      background-color: var(--bs-bg3);
+      border-radius: 10px;
+      color: var(--bs-tx2);
+      justify-content: center;
+}
+.select_quantity_option span {
+      cursor: pointer;
+      position: relative;
+      background-color: var(--bs-bg3);
+      padding: 10px;
+      border-radius: 5px;
+      color: var(--bs-tx2);    
+}
+.select_quantity_option .dropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: var(--bs-bg3);
+  border: 1px solid var(--bs-tx2);
+  border-radius: 5px;
+  max-height: 135px;
+  overflow-y: auto;
+  min-width: 207px;
+  z-index: 10;      
+}
+.select_quantity_option .dropdown .select_quantity {
+      
+}
+.select_quantity .a_dropdown_item {
+   padding: 5px;
+  cursor: pointer;     
+}
+.a-dropdown-item:hover {
+  background-color: var(--bs-bg2);
+}
+
+.select_quantity a {
+
+}

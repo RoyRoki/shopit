@@ -1,0 +1,37 @@
+.main_content {
+      width: auto;
+      height: 100%;
+}
+
+.main_content  .main_banner {
+      width: 80%;
+      height: 580px;
+      margin: 40px auto 80px auto;
+}
+
+.main_content  .best_section {
+      height: 500px;
+      width: 100%;
+      background-color: var(--bs-bg3);
+      padding: 80px 40px 80px 40px;
+}
+
+.main_content  .img_hero_group {
+      height: 800px;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      background-color: var(--bs-bg1);
+      padding: 80px 40px 80px 40px;   
+      margin-bottom: 160px; 
+}
+
+.main_content  .img_sub_hero_groups {
+      height: 800px;
+      width: 100%;
+      background-color: var(--bs-bg3);
+      display: flex;
+      justify-content: space-around;
+      gap: 24px;
+      padding: 80px 80px 80px 80px; 
+}

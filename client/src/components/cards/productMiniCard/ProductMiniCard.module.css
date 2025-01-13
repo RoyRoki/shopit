@@ -1,0 +1,47 @@
+.mini_card {
+      height: 250px;
+      width: 250px;
+      background-color: var(--bs-bg2);
+      overflow: hidden;
+      color: var(--bs-tx1);
+}
+
+.mini_card .img_wrap {
+      display: flex;
+      justify-content: center;
+      padding: 4px;
+      height: 70%;
+      border-radius: 10px;
+}
+
+.mini_card .img_wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* mix-blend-mode: multiply; cant apply for dark mode */
+}
+
+.mini_card .no_img_box {
+
+}
+
+
+.mini_card .info_box {
+      margin: 0 20px 0 20px;
+      white-space: nowrap;
+}
+
+.mini_card .info_box .name_line {
+      white-space: inherit;
+      width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+}
+
+.mini_card .info_box .prices_line {
+      margin: 8px 0 0 0;
+}
+
+.mini_card .info_box .prices_line p {
+      font-weight: 700;
+}

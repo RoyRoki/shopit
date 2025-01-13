@@ -1,0 +1,81 @@
+.slider {
+      height: 100%;
+      position: relative;
+}
+.slider .slider_wrap {
+      height: 100%;
+}
+.slider .slider_show {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 0.8s ease-in-out;
+}
+
+.slider .slider_show span{
+      opacity: 0;
+      display: none;
+      transition: opacity 0.5s ease-in-out;
+}
+
+.slider .slider_show_active span {
+      display: none; /*@Fix*/
+      color: var(--bs-tx);
+      opacity: 1;
+      font-size: 1rem;
+      font-style: italic;
+      position: absolute;
+      bottom: 3px;
+      left: 10px;
+}
+
+.slider .slider_show_active {
+      opacity: 1;
+      z-index: 1;
+}
+
+.slider .arrow_left {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      left: 32px;
+      scale: 2;
+      z-index: 2;
+      cursor: pointer;
+}
+
+.slider .arrow_right {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      right: 32px;
+      scale: 2;
+      z-index: 2;
+      cursor: pointer;
+}
+
+.slider .dot_container {
+      display: flex;
+      justify-content: center;
+      color: var(--bs-tx) !important;
+      margin: 20px 0;
+      z-index: 2;
+}
+
+.slider .dot_container .dot_style {
+      margin: 0 5px;
+      scale: 0.5;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+}
+
+.slider .dot_container .dot_style :hover {
+      transform: translateY(2px);
+}
