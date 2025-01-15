@@ -1,0 +1,98 @@
+.main_container {
+ display: flex;
+ padding: 24px 80px 24px 80px;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap: 24px;
+ margin: 80px 0 80px 0;
+}
+
+.header {
+      width: 100%;
+      padding-left: 20%;
+      font-size: larger;
+      color: var(--bs-tx1);
+}
+
+.section {
+      padding: 16px;
+      background-color: var(--bs-bg2);
+      border-radius: 8px;
+      width: 320px;
+      min-height: 104px;
+      height: max-content;
+      display: flex;
+      justify-content: space-between;
+      border: var(--bs-bd1) 2px solid;
+}
+
+.form_row {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+}
+
+.form_row label {
+      font-size: 1.3rem;
+      color: var(--bs-tx3);
+}
+
+.form_input_box {
+ border-bottom: 2px solid var(--bs-bd1);
+ padding-left: 8px;
+ color: var(--bs-tx2);
+ font-size: 1.2rem;
+ transition: all 0.3s ease;
+}
+
+.form_input_box input {
+      width: 90%;
+      outline: none;
+      background: none;
+}
+
+.form_input_box:focus-within {
+      border-bottom: 2px solid var(--bs-accent);
+}
+
+.button_wrap {
+      position: relative;
+}
+
+.button_wrap button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      justify-content: center;
+      flex-wrap: nowrap;
+      color: var(--bs-tx1);
+}
+
+.otp_box {
+      margin: 24px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: start;
+}
+
+.otp_box input {
+      outline: none;
+      background: transparent;
+      border: 1px solid var(--bs-bd1);
+      border-radius: 8px;   
+      padding: 2px 0 2px 4px;
+      width: 50%;
+      color: var(--bs-tx1);
+}
+
+.otp_box span {
+      color: var(--bs-success)
+}
+
+.otp_box button {
+      color: var(--bs-blue);
+      font-size: small;
+      border-bottom: 1px solid var(--bs-blue);
+}
