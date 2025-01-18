@@ -31,9 +31,12 @@ public class User {
     private String password;
     private String profileUrl;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "user-addresses",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "address_id"))
+    private List<Address> addresses;
+    private Long defaultAddressId;
 
     private LocalDateTime createAt;
     private LocalDateTime updatedAt;

@@ -16,7 +16,7 @@ public class UserDTO {
     private String email;
     private String mobileNo;
     private String profileUrl;
-    private Address address;
+    private List<Address> addresses;
+    private Long defaultAddressId;
     private List<Role> roles;
-    private Cart cart;
 }

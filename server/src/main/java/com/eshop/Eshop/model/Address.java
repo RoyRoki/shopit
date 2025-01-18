@@ -23,8 +23,7 @@ public class Address {
     private String pinCode;
     private String landmark;
 
-    @OneToOne(mappedBy = "address")
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private User user;
 }

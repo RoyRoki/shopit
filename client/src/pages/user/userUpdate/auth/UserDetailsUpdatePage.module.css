@@ -13,8 +13,14 @@
       padding-left: 20%;
       font-size: larger;
       color: var(--bs-tx1);
+      font-weight: 600;
 }
-
+.header span {
+      cursor: pointer;
+}
+.header span:hover {
+      color: var(--bs-blue);
+}
 .section {
       padding: 16px;
       background-color: var(--bs-bg2);
@@ -95,4 +101,41 @@
       color: var(--bs-blue);
       font-size: small;
       border-bottom: 1px solid var(--bs-blue);
+}
+
+.password_input_box span {
+      color: var(--bs-tx1);
+}
+.input_wrap {
+      display: flex;
+}
+.password_input_form form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+}
+
+.form_input_box {
+
+}
+
+.form_input_box span {
+      font-size: 1rem;
+}
+
+.forget_pass_wrap {
+      width: 100%;
+      display: flex;
+      justify-content: start;
+      margin: 16px 0 8px 0;
+      padding-left: 8px;
+}
+
+.forget_pass_wrap span {
+      font-size: small;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      color: var(--bs-blue);
+      cursor: pointer;
+      
 }

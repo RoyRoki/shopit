@@ -8,10 +8,13 @@ import { faPenToSquare, faFloppyDisk, faArrowRight, faPlus } from "@fortawesome/
 import { request } from "../../../../helper/AxiosHelper";
 import { urls } from "../../../../util/URLS";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const UserDetailsUpdatePage = () => {
   const dispatch = useDispatch();
   const { userDto, loading } = useSelector((state) => state.userDetails);
+  const navigate = useNavigate();
 
   const [name, setName] = useState(userDto.userName || "");
   const [email, setEmail] = useState(userDto.email || "");
@@ -19,6 +22,14 @@ const UserDetailsUpdatePage = () => {
   const [isOtpSend, setOtpSend] = useState(false);
   const [otp, setOtp] = useState("");
   const [editingField, setEditingField] = useState(null);
+  const [showPassword, setShowPassword] = useState({old: false, new: false});
+
+  const {
+    register,
+    watch,
+    reset,
+    handleSubmit
+  } = useForm();
 
   const handleSaveName = async () => {
     if(name === userDto.userName) {
@@ -89,12 +100,23 @@ const UserDetailsUpdatePage = () => {
     }
   }
 
+  const handlePasswordChange = async (data) => {
+    try {
+      const response = await request("PUT", urls.updatePassword, data);
+      console.log(response.data);
+      setEditingField(null);
+      reset();
+    } catch (error) {
+      console.error(error.response.data);  
+    }
+  }
   return (
     <>
       <Navber isLogged={true} />
       <div className={styles.main_container}>
         <div className={styles.header}>
-            Profile {`>`} Login & security
+             <span onClick={() => navigate("/home?profile_view=true")}>Profile</span> {` > `} 
+             <span onClick={() => { setEditingField(null) }}>Login & security</span>
         </div>
         <div className={styles.section}>
           <div className={styles.form_row}>
@@ -201,6 +223,78 @@ const UserDetailsUpdatePage = () => {
                 <button onClick={() => setEditingField("mobile")}>
                   <FontAwesomeIcon icon={mobile && mobile.trim() !== "" ? faPenToSquare : faPlus} />
                   {`${mobile && mobile.trim() !== "" ? 'edit' : 'add'}`}
+                </button>
+              )}
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <div className={styles.form_row}>
+            <label>Password</label>
+            <div className={styles.password_input_box}>
+              {editingField !== "password" ? (
+                <span>* * * * * *</span>
+              ) : (
+                <div className={styles.password_input_form}>
+                  <form onSubmit={handleSubmit(handlePasswordChange)}>
+                    <div className={styles.form_input_box}>
+                      <span>Old Password</span>
+                      <div className={styles.input_wrap}>
+                        <input 
+                            type={showPassword.old ? 'text' : 'password'}
+                            placeholder="" {...register("oldPassword")} 
+                        />
+                          <span
+                                className={`${showPassword.old ? styles.pass_show : styles.pass_hide}`}
+                                onMouseEnter={() => setShowPassword({...showPassword, old: true})}
+                                onMouseLeave={() => setShowPassword({...showPassword, old: false})}
+                          >
+                          {showPassword.old ? (
+                                <FontAwesomeIcon icon="fa-regular fa-eye" />
+                          ) : (
+                                <FontAwesomeIcon icon="fa-regular fa-eye-slash" />
+                          )}
+                          </span>
+                      </div>
+                    </div>
+                    <div className={styles.form_input_box}>
+                      <span>New Password</span>
+                      <div className={styles.input_wrap}>
+                        <input 
+                            type={showPassword.new ? 'text' : 'password'}
+                            placeholder="" {...register("newPassword")} 
+                        />
+                          <span
+                                className={`${showPassword.new ? styles.pass_show : styles.pass_hide}`}
+                                onMouseEnter={() => setShowPassword({...showPassword, new: true})}
+                                onMouseLeave={() => setShowPassword({...showPassword, new: false})}
+                          >
+                          {showPassword.new ? (
+                                <FontAwesomeIcon icon="fa-regular fa-eye" />
+                          ) : (
+                                <FontAwesomeIcon icon="fa-regular fa-eye-slash" />
+                          )}
+                          </span>
+                      </div>
+                    </div>                    
+                  </form>
+                  <div className={styles.forget_pass_wrap}>
+                    <span onClick={() => navigate("/forget-pass")}>Forget password</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className={styles.button_wrap}>
+              {editingField === "password" ? (
+                <button onClick={handleSubmit(handlePasswordChange)}>
+                  <FontAwesomeIcon icon={faFloppyDisk} />
+                  update
+                </button>
+              ) : (
+                <button onClick={() => setEditingField("password")}>
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                  change
                 </button>
               )}
           </div>

@@ -5,6 +5,8 @@ import { AdminHome } from "../pages/Admin";
 import { role } from "../util/ROLE";
 import UserLayout from "./layout/UserLayout";
 import HomeLayout from "./layout/HomeLayout";
+import AboutPage from "../pages/shopitHelp/about/AboutPage"
+import ContactUsPage from "../pages/shopitHelp/contactus/ContactUsPage"
 
 // Define routes based on role
 const RootRoutes = () => {
@@ -31,6 +33,10 @@ const RootRoutes = () => {
 
       {/* Admin Routes */}
       {auth.profileMode === role.admin && <Route path="*" element={<AdminHome />} />}
+
+      {/* For Public pages*/}
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact_us" element={<ContactUsPage />} />
 
     </Routes>
   )

@@ -11,6 +11,11 @@ import UnknownPath from '../../pages/UnknownPath'
 import UserHomePage from '../../pages/user/homePage/UserHomePage'
 import UserCartPage from '../../pages/user/cart/UserCartPage'
 import TestPage from '../../../test/page/TestPage'
+import UserOrdersPage from '../../pages/user/order/UserOrdersPage'
+import UserDetailsUpdatePage from '../../pages/user/userUpdate/auth/UserDetailsUpdatePage'
+import UserAddressUpdatePage from '../../pages/user/userUpdate/address/UserAddressUpdatePage'
+import UserWishListPage from '../../pages/user/wish/UserWishListPage'
+import ForgetPasswordPage from '../../pages/user/userUpdate/auth/ForgetPasswordPage'
 
 const UserLayout = () => {
   return (
@@ -20,6 +25,11 @@ const UserLayout = () => {
         <Route path='/' element={<Navigate to={"/home"} replace />} />
         <Route path='/home' element={<UserHomePage />} />
         <Route path='/cart' element={<UserCartPage isLogged={true} />} />
+        <Route path='/orders' element={<UserOrdersPage />} />
+        <Route path='/security' element={<UserDetailsUpdatePage />} />
+        <Route path='/addresses' element={<UserAddressUpdatePage />} />
+        <Route path='/wishlist' element={<UserWishListPage />} />
+        <Route path='/forget-pass' element={<ForgetPasswordPage />} />
         <Route path='/logout' element={<h1>Logout</h1>} />
         <Route path='/test' element={<TestPage />} />
       </Routes>

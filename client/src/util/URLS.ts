@@ -5,6 +5,10 @@ export const urls = {
       verifyOtp: 'auth/verify-otp',
       loginPass: 'auth/login',
       loginOtp: 'auth/login-verify',
+      updatePassword: 'auth/update-password',
+      forgetPasswordRequest: 'auth/forget-password-request?',
+      updatePasswordVaiOtp: 'auth/set-password-otp',
+
 
       fetchCategories: 'home/get-categories',
       fetchAdminStore: 'admin/get-store',
@@ -22,7 +26,14 @@ export const urls = {
       updateUserDetails: 'user/update-user',
       updateCart: 'user/update-cart',
       fetchCart: 'user/view-cart',
-
+      updateUserName: 'user/update-user-name?name=',
+      userUpdateRequest: 'user/request-update?',
+      userEmailOrMobileUpdate: 'user/update-user-',
+      addNewAddress: 'user/add-new-address',
+      updateAddressById: 'user/update-address?id=',
+      deleteAddressById: 'user/delete-address?id=',
+      setDefaultAddressById: 'user/set-default-address?addressId=',
+      
 
       fetchHomeProductsBy_: 'home/products',
       fetchHomeStore: 'home/stores',

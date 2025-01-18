@@ -5,6 +5,7 @@ import com.eshop.Eshop.model.Order;
 import com.eshop.Eshop.model.dto.CartItemDTO;
 import com.eshop.Eshop.model.dto.CartSummaryDTO;
 import com.eshop.Eshop.model.dto.ViewCartDTO;
+import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserDTO;
@@ -32,4 +33,18 @@ public interface UserService {
     ViewCartDTO changeQuantityInCart(Map<Long, Integer> idQuantityMap);
 
     ViewCartDTO deleteProductInCart(List<Long> productIds);
+
+    boolean updateUserEmail(String email);
+
+    boolean updateUserMobileNo(String mobile);
+
+    void updateUserName(String name);
+
+    void addNewAddress(UserAddressDTO addressDTO);
+
+    void updateUserAddress(Long id, UserAddressDTO addressDTO);
+
+    void deleteAddress(Long id);
+
+    void setDefaultAddress(Long addressId);
 }

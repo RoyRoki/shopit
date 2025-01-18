@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -45,7 +47,6 @@ public class AuthController {
     public ResponseEntity<?> doSingUp(@RequestBody UserSignUpRequestDTO requestDTO) {
         try {
             UserSignUpResponseDTO responseDTO = authService.registerNewUser(requestDTO);
-            System.out.println("Hi is this null! "+responseDTO.getUserName()); // @CleanUp
             if(responseDTO.getUserId() != null) {
                 return new ResponseEntity<>(responseDTO, HttpStatus.OK);
             }
@@ -75,9 +76,37 @@ public class AuthController {
 
     }
 
-    // Accept MobileNo and generate an otp and sent it.
+    // Accept MobileNo and Email and generate an otp and sent it.
     @PostMapping(value = "/generate-otp")
     public ResponseEntity<?> generateOtp(@RequestBody SignupRequestOtpDTO requestOtpDTO) {
+
+        if(requestOtpDTO.getMobileNo() != null) {
+            String otp = otpService.generateOTP();
+            String hashOtp = otpService.hashMe(otp);
+
+            otpService.sentOtpToMobile(requestOtpDTO.getMobileNo(), otp);
+            otpService.saveOTP(requestOtpDTO.getMobileNo(), hashOtp);
+
+            return ResponseEntity.status(HttpStatus.OK).body("Otp sent to "+requestOtpDTO.getMobileNo()+"/n Otp: {"+otp+"}");
+        } else if(requestOtpDTO.getEmail() != null) {
+            String otp = otpService.generateOTP();
+            String hashOtp = otpService.hashMe(otp);
+
+            otpService.sentOtpToEmail(requestOtpDTO.getEmail(), otp);
+            otpService.saveOTP(requestOtpDTO.getEmail(), hashOtp);
+            return ResponseEntity.status(HttpStatus.OK).body("Otp sent to "+requestOtpDTO.getEmail()+"/n Otp: {"+otp+"}");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Mobile No!");
+    }
+
+    // Accept new unique MobileNo and Email and generate an otp and sent it.
+    @PostMapping(value = "/generate-otp/unique")
+    public ResponseEntity<?> generateOtpForUniqueUser(@RequestBody SignupRequestOtpDTO requestOtpDTO) {
+
+        // Check that the email or mobile is already exist
+        if(userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email/mobile already Exist. Cant send otp");
+        }
         if(requestOtpDTO.getMobileNo() != null) {
             String otp = otpService.generateOTP();
             String hashOtp = otpService.hashMe(otp);
@@ -195,6 +224,58 @@ public class AuthController {
         return new ResponseEntity<>("OTP not valid", HttpStatus.UNAUTHORIZED);
     }
 
+    @PutMapping(value = "/update-password")
+    public ResponseEntity<?> updatePasswordByOldPass (@RequestBody UpdatePasswordDTO passwordDTO) {
+        try {
+           authService.handleUpdatePassword(passwordDTO);
+           return ResponseEntity.ok("Successfully password updated");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to update password");
+        }
+    }
+
+    @PostMapping(value = "/forget-password-request")
+    public ResponseEntity<?> forgetPasswordRequest(
+                                        @RequestParam(required = false) String email,
+                                        @RequestParam(required = false) String mobile) {
+        if(email == null && mobile == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Please provide email/mobile");
+        }
+        if(userService.isUserExist(email, mobile)) {
+            try {
+                if(email != null) {
+                    String otp = otpService.generateOTP();
+                    String hash = otpService.hashMe(otp);
+
+                    otpService.sentOtpToEmail(email, otp);
+                    otpService.saveOTP(email+":fp:", hash);
+
+                    return ResponseEntity.ok("OTP sent to your email " + email);
+                } else {
+                    String otp = otpService.generateOTP();
+                    String hash = otpService.hashMe(otp);
+
+                    otpService.sentOtpToMobile(mobile, otp);
+                    otpService.saveOTP(mobile+":fp:", hash);
+
+                    return ResponseEntity.ok("OTP sent to your phone "+mobile);
+                }
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Request failed!");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No account found with this email/mobile");
+    }
+
+    @PutMapping(value = "/set-password-otp")
+    public ResponseEntity<?> updatePasswordVaiOtp(@RequestBody UpdatePasswordVaiOtp updatePasswordVaiOtpDto) {
+        try {
+            authService.handleUpdatePasswordVaiOtp(updatePasswordVaiOtpDto);
+            return ResponseEntity.ok("Password update successful");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to update password!");
+        }
+    }
     @GetMapping("/refresh")
     public ResponseEntity<?> doRefresh(@RequestBody JwtRefreshRequestDTO requestDTO){
 

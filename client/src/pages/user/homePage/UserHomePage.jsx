@@ -11,6 +11,7 @@ import HeroProduct from '../../../components/home/heroProduct/HeroProduct';
 import ProductsByQuery from '../../../components/home/productByQuery/ProductsByQuery';
 import ProductsByCategory from '../../../components/home/productsByCategory/ProductsByCategory';
 import StorePublicPage from '../../../components/store/publicPage/StorePublicPage';
+import ProfileViewEdit from '../../../components/user/profileView/ProfileViewEdit';
 
 const UserHomePage = () => {
       const { auth } = useContext(AuthContext);
@@ -22,6 +23,7 @@ const UserHomePage = () => {
       const category_id = searchParams.get('category_id');
       const product_id = searchParams.get('product_id');
       const store_id = searchParams.get('store_id');
+      const profile_view = searchParams.get('profile_view');
 
       const navigate = useNavigate();
   return (
@@ -36,7 +38,6 @@ const UserHomePage = () => {
                         {/* Products show by Search query */}
                         {query && (
                               <ProductsByQuery query={query} />
-                              // @Todo search store also
                         )}
 
                         {/* Products show by Category */}
@@ -54,8 +55,13 @@ const UserHomePage = () => {
                               <StorePublicPage storeId={store_id} />
                         )}
 
+                        {/* User Profile View and Update */}
+                        {profile_view && (
+                              <ProfileViewEdit />
+                        )}
+
                         {/*Default container*/}
-                        {!key && !query && !category_id && !product_id && !store_id && (
+                        {!key && !query && !category_id && !product_id && !store_id && !profile_view && (
                               <DefaultContainer />              
                         )}
                   </div>

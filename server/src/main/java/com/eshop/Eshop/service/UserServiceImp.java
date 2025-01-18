@@ -2,6 +2,7 @@ package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.*;
+import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserDTO;
@@ -112,17 +113,6 @@ public class UserServiceImp implements UserService {
             }
             if(requestDTO.getEmail() != null) {
                 user.setEmail(requestDTO.getEmail());
-            }
-            if(requestDTO.getAddress() != null) {
-                if (user.getAddress() != null) {
-                    Long addressId = user.getAddress().getId();
-                    requestDTO.getAddress().setId(addressId);
-                    user.setAddress(requestDTO.getAddress());
-                } else {
-                    // Handle the case where user doesn't have an address
-                    user.setAddress(requestDTO.getAddress());
-                }
-
             }
 
             user.setUpdatedAt(LocalDateTime.now());
@@ -312,6 +302,127 @@ public class UserServiceImp implements UserService {
         }
     }
 
+    @Override
+    public boolean updateUserEmail(String email) {
+        try {
+            User user = currentUser();
+            user.setEmail(email);
+            userRepo.save(user);
+            return true;
+        } catch (RuntimeException e) {
+            System.err.println("Error updating user email: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateUserMobileNo(String mobile) {
+        try {
+            User user = currentUser();
+            user.setMobileNo(mobile);
+            userRepo.save(user);
+            return true;
+        } catch (RuntimeException e) {
+            System.err.println("Error updating user mobile: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public void updateUserName(String name) {
+        try {
+            User user = currentUser();
+            user.setUserName(name);
+            userRepo.save(user);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Error during updating user name"+e.getMessage());
+        }
+    }
+
+    @Override
+    public void addNewAddress(UserAddressDTO addressDTO) {
+        try {
+            User user = currentUser();
+            Address newAddress = Address.builder()
+                    .landmark(addressDTO.getLandmark())
+                    .street(addressDTO.getStreet())
+                    .state(addressDTO.getState())
+                    .houseNo(addressDTO.getHouseNo())
+                    .city(addressDTO.getCity())
+                    .pinCode(addressDTO.getPinCode())
+                    .build();
+
+            user.getAddresses().add(newAddress);
+            userRepo.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Error during save new address : "+e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateUserAddress(Long id, UserAddressDTO addressDTO) {
+        try {
+            User user = currentUser();
+            Address address = user.getAddresses().stream()
+                    .filter((ads -> ads.getId().equals(id)))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Address with ID " + id + " not found"));
+
+            // Update address fields
+            address.setLandmark(addressDTO.getLandmark());
+            address.setCity(addressDTO.getCity());
+            address.setState(addressDTO.getState());
+            address.setStreet(addressDTO.getStreet());
+            address.setPinCode(addressDTO.getPinCode());
+            address.setHouseNo(addressDTO.getHouseNo());
+
+            // If it is default address
+            if(addressDTO.isDefault()) {
+                user.setDefaultAddressId(address.getId());
+            }
+            // Save the updated user
+            userRepo.save(user);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteAddress(Long id) {
+        try {
+            User user = currentUser();
+
+            Address addressToDelete = user.getAddresses().stream()
+                    .filter((ads -> ads.getId().equals(id)))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Address with ID " + id + " not found"));
+
+            // Remove the address
+            user.getAddresses().remove(addressToDelete);
+            // Save the updated user
+            userRepo.save(user);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error during deleting user address : "+e.getMessage());
+        }
+    }
+
+    @Override
+    public void setDefaultAddress(Long addressId) {
+        try {
+            User user = currentUser();
+            if(user.getAddresses().stream().anyMatch(address -> address.getId().equals(addressId))) {
+                user.setDefaultAddressId(addressId);
+                userRepo.save(user);
+            } else {
+                throw new RuntimeException("Wrong address id to set as default.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     private CartItemDTO buildCartItemDTO(Long productId, Integer quantity) {
         try {
             Product product = productRepo.findById(productId)
@@ -337,6 +448,4 @@ public class UserServiceImp implements UserService {
         else if(mobileNo != null) return userRepo.existsByMobileNo(mobileNo);
         else return true;
     }
-
-
 }

@@ -1,11 +1,10 @@
 package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.dto.UserDetailsImp;
-import com.eshop.Eshop.model.dto.requestdto.OTPVerifyRequestDTO;
-import com.eshop.Eshop.model.dto.requestdto.UserLoginRequestDTO;
-import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
+import com.eshop.Eshop.model.dto.requestdto.*;
 import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
 import com.eshop.Eshop.model.User;
+import com.eshop.Eshop.repository.UserRepo;
 import com.eshop.Eshop.service.Interface.AuthService;
 import com.eshop.Eshop.service.helper.RedisService;
 import com.eshop.Eshop.util.OtpService;
@@ -30,6 +29,9 @@ public class AuthServiceImp implements AuthService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private UserRepo userRepo;
 
     @Override
     public UserSignUpResponseDTO registerNewUser(UserSignUpRequestDTO userRequest) {
@@ -150,5 +152,46 @@ public class AuthServiceImp implements AuthService {
 
         }
         return null;
+    }
+
+    @Override
+    public void handleUpdatePassword(UpdatePasswordDTO passwordDTO) {
+        try {
+            User user = userService.currentUser();
+            boolean isAuthenticated = checkPassword(user, passwordDTO.getOldPassword());
+            if(isAuthenticated) {
+                user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
+                userRepo.save(user);
+            } else {
+                throw new RuntimeException("Try to update password with invalid password");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void handleUpdatePasswordVaiOtp(UpdatePasswordVaiOtp updateDto) {
+        try {
+            String key = updateDto.getEmail() != null ? updateDto.getEmail()+":fp:" : updateDto.getMobile() != null ? updateDto.getMobile()+":fp:" : null;
+            if(key == null) {
+                throw new RuntimeException("Null value provided during update password vai otp.");
+            }
+            String givenHash = otpService.hashMe(updateDto.getOtp());
+            String savedHash = otpService.getOTP(key);
+
+            if(givenHash.equals(savedHash)) {
+                otpService.deleteOTP(key);
+                // Continue to set new password
+                String hashPass = passwordEncoder.encode(updateDto.getNewPassword());
+                User user = userService.currentUser();
+                user.setPassword(hashPass);
+                userRepo.save(user);
+            } else {
+                throw new RuntimeException("Otp now match");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

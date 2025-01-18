@@ -1,0 +1,182 @@
+.main_container {
+ display: flex;
+ padding: 24px 80px 24px 80px;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap: 24px;
+ margin: 80px 0 80px 0;
+}
+
+.header {
+      width: 100%;
+      padding-left: 10%;
+      margin-bottom: 80px;
+      font-size: larger;
+      font-weight: 600;
+      color: var(--bs-tx1);
+}
+.header span {
+      cursor: pointer;
+}
+.header span:hover {
+      color: var(--bs-blue);
+}
+.box_wrap {
+      min-width: 400px;
+      max-width: 1200px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+}
+
+.box_wrap .add_address_box {
+      border: 4px dotted var(--bs-tx3);
+      width: 320px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      font-size: larger;
+      cursor: pointer;
+      color: var(--bs-tx1);
+      transition: background-color 0.3s ease;
+}
+
+.plus_icon {
+      color: rgba(128, 128, 128, 0.685);
+      scale: 5;
+      margin-bottom: 20px;
+}
+
+.box_wrap .address_box {
+      border: 1px solid var(--bs-bd1);
+      border-radius: 8px;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 24px 24px 24px;
+      overflow-y: scroll;
+      transition: background-color 0.3s ease;
+}
+.box_wrap .address_box:hover,
+.box_wrap .add_address_box:hover {
+      background-color: var(--bs-bg4);
+}
+.box_wrap .address_box .info_box {
+      color: var(--bs-tx1);
+      font-size: 1.1rem;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      white-space: normal;
+}
+
+.box_wrap .address_box .info_box span {
+      color: var(--bs-tx3);
+      font-size: 1rem;
+}
+
+.box_wrap .address_box .action_box {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      color: var(--bs-blue2);
+}
+.box_wrap .address_box .action_box span {
+      color: var(--bs-tx1);
+}
+
+.box_wrap .address_box .action_box button {
+      border-bottom: 0px solid var(--bs-blue2);
+      transition: all 0.3s ease;
+}
+.box_wrap .address_box .action_box button:hover {
+      border-bottom: 1px solid var(--bs-blue2);
+}
+
+.address_form_wrap {
+      background-color: var(--bs-bg4);
+      margin-top: 40px;
+      position: relative;
+      padding: 8px;
+      padding-bottom: 16px;
+      border-radius: 8px;
+      min-height: 400px;
+      min-width: 480px;
+}
+
+.form_hide {
+      display: flex;
+      justify-content: end;
+      right: 12px;
+      position: absolute;
+}
+
+.form_hide button {
+      color: var(--bs-tx3);
+}
+
+.form_header {
+      color: var(--bs-tx);
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding: 8px 0 0 8px;
+}
+
+.address_form_wrap form {
+      margin-top: 8px;
+      margin-left: 16px;
+}
+
+.form_row {
+      width: 80%;
+      margin: 10px 0;
+}
+
+.form_input_box {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+}
+
+
+.form_input_box label {
+      margin-bottom: 5px;
+      font-size: 1rem;
+      color: var(--bs-tx3);
+}
+
+.form_input_box input {
+      border: none;
+      background: none;
+      width: 300px;
+      border-bottom:solid var(--bs-tx1) 1px;
+      color: var(--bs-tx2);
+      padding: 5px 0;
+}
+
+.form_input_box input:valid,
+.form_input_box input:focus {
+      outline: none;
+      background: none;
+}
+
+.submit_box {
+      width: 100%;
+}
+.address_form_wrap form button {
+      background-color: var(--bs-btn1);
+      color: var(--bs-tx3);
+      border-radius: 8px;
+      padding: 4px 8px 4px 8px;
+      width: auto;
+      transition: all 0.3s ease;
+}
+
+.input_default {
+      transform: translateY(18px);
+}

@@ -15,5 +15,5 @@ library.add(
       faEye, 
       faEyeSlash, 
       faSun, 
-      faMoon
+      faMoon,
 );

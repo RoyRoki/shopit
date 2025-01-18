@@ -8,7 +8,7 @@
   --bs-bg2:#efefef;
   --bs-bg3:#ebebeb;
 
-  --bs-tx: #212529;
+  --bs-tx: #080808;
   --bs-tx1:#343a40;
   --bs-tx2: #292929;
   --bs-tx3: #5c5a5a;
@@ -29,12 +29,14 @@
 
   --bs-btn1: #ffd814;
   --bs-btn2: #ffa41c;
-
+  
   --bs-success: #198754;
-
+  
   --bs-op1 : 1;
-
+  
   --bs-blue: #0d6efd;
+  --bs-blue2: #0045ad;
+  
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;

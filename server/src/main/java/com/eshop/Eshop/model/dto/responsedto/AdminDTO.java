@@ -4,6 +4,8 @@ import com.eshop.Eshop.model.Address;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class AdminDTO {
@@ -12,5 +14,5 @@ public class AdminDTO {
     private String email;
     private String mobileNo;
     private String profileUrl;
-    private Address address;
+    private List<Address> addresses;
 }

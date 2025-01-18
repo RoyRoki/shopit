@@ -88,10 +88,10 @@ public class DTOService {
                         .userName(user.getUserName())
                         .email(user.getEmail())
                         .mobileNo(user.getMobileNo())
-                        .address(user.getAddress())
+                        .addresses(user.getAddresses())
+                        .defaultAddressId(user.getDefaultAddressId())
                         .roles(user.getRoles())
                         .profileUrl(user.getProfileUrl())
-                        .cart(user.getCart())
                         .build();
     }
 
@@ -159,7 +159,7 @@ public class DTOService {
                         .id(user.getId())
                         .userName(user.getUserName())
                         .email(user.getEmail())
-                        .address(user.getAddress())
+                        .addresses(user.getAddresses())
                         .profileUrl(user.getProfileUrl())
                         .build();
     }
