@@ -1,0 +1,65 @@
+.table_wrap {
+      border: 2px solid var(--bs-bd1);
+      border-left: 4px solid var(--bs-bd1);
+      border-top: 4px solid var(--bs-bd1);
+      width: fit-content;
+      margin-bottom: 40px;
+}
+
+.header_wrap {
+      width: 100%;
+      border-bottom: var(--bs-bd1) 2px solid;
+      display: flex;
+      position: relative;
+}
+
+.header_wrap input {
+      flex: 1;
+      border-right: 2px solid var(--bs-bd1);
+      padding: 4px;
+      color: var(--bs-tx3);
+      font-size: 1.1rem;
+      background: var(--bs-bg2);
+}
+
+.header_action_wrap {
+      display: flex;
+      flex-direction: column;
+      padding: 4px;
+      position: absolute;
+      right: -40px;
+}
+
+.add_btn {
+      color: var(--bs-success);
+}
+
+.rm_btn {
+      color: var(--bs-red);
+}
+
+.rows_wrap {
+      width: 100%;
+      position: relative;
+}
+
+.cell_wrap {
+      width: 100%;
+      display: flex;
+      border-bottom: 2px solid var(--bs-bd1);
+}
+
+.cell_wrap input {
+      flex: 1;
+      background: transparent;
+      padding-left: 4px;
+      border-right: 2px solid var(--bs-bd1);
+      color: var(--bs-tx1);
+}
+
+.row_action_wrap {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+}

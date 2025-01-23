@@ -7,6 +7,7 @@ import com.eshop.Eshop.model.Store;
 import com.eshop.Eshop.model.User;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
+import com.eshop.Eshop.model.enums.ShippingType;
 import com.eshop.Eshop.repository.CategoryRepo;
 import com.eshop.Eshop.repository.RoleRepo;
 import com.eshop.Eshop.repository.UserRepo;
@@ -93,6 +94,7 @@ public class AdminServiceImp implements AdminService {
                     .products(new ArrayList<>())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
+                    .shippingType(ShippingType.SELF)
                     .build();
 
             Store savedStore = storeService.createStore(newStore);

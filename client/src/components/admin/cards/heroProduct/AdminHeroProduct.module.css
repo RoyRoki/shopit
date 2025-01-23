@@ -1,0 +1,31 @@
+.main_wrap {
+      
+}
+
+.product_box {
+      min-height: 320px;
+      width: 90%;
+}
+
+.deleting {
+      opacity: 0.8;
+}
+
+.action_wrap {
+      margin: 40px 0 0 24px;
+}
+
+.delete_btn button {
+ display: flex;
+ gap: 16px;
+ align-items: center;
+ color: var(--bs-red);
+ border: 2px solid var(--bs-red);
+ padding: 4px 8px 4px 8px;
+ border-radius: 8px;
+}
+
+.delete_btn button:hover {
+      background-color: var(--bs-red);
+      color: var(--bs-tx1);
+}

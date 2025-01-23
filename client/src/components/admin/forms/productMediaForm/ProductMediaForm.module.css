@@ -1,0 +1,13 @@
+.main_wrap {
+}
+
+.image_form_wrap {
+
+}
+.image_header {
+      color: var(--bs-tx2);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 8px;
+      margin-bottom: 40px;
+}

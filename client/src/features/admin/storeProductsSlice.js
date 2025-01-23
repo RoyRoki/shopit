@@ -6,9 +6,7 @@ export const fetchStoreProducts = createAsyncThunk(
       'admin/fetchStoreProducts',
       async(_, { thunkAPI }) => {
             try {
-                  console.log("Try to fetch store products!");
                   const response = await request("GET", urls.fetchStoreProducts, {} );
-                  console.log("After fetching store products: ",response.data);
                   return response.data.reverse(); // Show the latest product first
             } catch (error) {
                   return thunkAPI.rejectWithValue(error.response.data);

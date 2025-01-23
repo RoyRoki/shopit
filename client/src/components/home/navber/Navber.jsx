@@ -5,7 +5,7 @@ import { isAction, isPending } from '@reduxjs/toolkit'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import ThemeToggleButton from '../../buttons/ThemeToggleButton'
+import ThemeToggleButton from '../../buttons/toggleButton/ThemeToggleButton'
 import HomeSearchBar from '../../searchbar/HomeSearchBar'
 
 const Navber = ({ isLogged }) => {

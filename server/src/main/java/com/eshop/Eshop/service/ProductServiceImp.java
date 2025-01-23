@@ -1,6 +1,7 @@
 package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.*;
+import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.TableDto;
 import com.eshop.Eshop.model.dto.requestdto.ProductEditRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
@@ -89,7 +90,7 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public ProductResponseDTO UpdateProduct(ProductEditRequestDTO requestDTO, Product product) {
+    public ProductDTO UpdateProduct(ProductEditRequestDTO requestDTO, Product product) {
 
         if(requestDTO.getTable() != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -151,7 +152,7 @@ public class ProductServiceImp implements ProductService {
 
         product.setUpdatedAt(LocalDateTime.now());
         Product savedProduct = productRepo.save(product);
-        return dtoService.productToResponseDto(savedProduct);
+        return dtoService.productToProductDTO(savedProduct);
     }
 
     @Override
@@ -195,6 +196,26 @@ public class ProductServiceImp implements ProductService {
             return products.stream().map(product -> dtoService.productToResponseDto(product)).collect(Collectors.toList());
         } catch (RuntimeException e) {
             e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteProductById(Long productId) {
+        try {
+            Product product = productRepo.findById(productId)
+                    .orElseThrow(() -> new RuntimeException("Error during delete product"));
+
+            try {
+                product.getImageUrls().forEach((url) -> {
+                    cloudinaryService.deleteImage(url);
+                });
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            productRepo.delete(product);
+        } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }

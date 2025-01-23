@@ -42,7 +42,7 @@ const UpdateProduct = ({onComplete, product}) => {
                         onComplete();
                   }
             } catch(error) {
-                  console.log(error.response);
+                  console.log(error);
             }
       }
 

@@ -23,7 +23,10 @@ public class Product {
     private Long id;
     private Boolean isActive;
 
+    @Column(length = 255)
     private String name;
+
+    @Column(columnDefinition = "TEXT", length = 500)
     private String description;
     private Double prices;
 
@@ -31,7 +34,15 @@ public class Product {
     private Double discount;
     private Integer stock;
 
+    @ElementCollection
+    @CollectionTable(name = "product_image_urls",
+            joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private List<String> imageUrls = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "product_video_urls", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "video_url", columnDefinition = "TEXT")
     private List<String> videoUrls = new ArrayList<>();
 
     @Column(columnDefinition = "TEXT")
@@ -65,6 +76,8 @@ public class Product {
     private Double width;
     private Double height;
     private Double weight;
+
+    @Column(length = 255)
     private String material;
 
     private LocalDateTime createdAt;

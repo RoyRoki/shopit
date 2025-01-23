@@ -7,7 +7,6 @@ export const fetchAdminStore = createAsyncThunk(
       async(_, { thunkAPI } ) => {
             try {
                   const response = await request("GET", urls.fetchAdminStore, {});
-                  console.log(response)
                   return response.data;
             } catch (error) {
                   return thunkAPI.rejectWithValue(error.response);

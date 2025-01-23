@@ -43,6 +43,7 @@ public class Store {
     private String landmark;
 
     private String logoUrl;
+    private String bannerUrl;
     private String header;
     private String about;
 

@@ -1,0 +1,55 @@
+.main_component {
+      width: 100%;
+      display: flex;
+}
+
+.form_section {
+      width: 50%;
+      height: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.other_section {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-top: 40px;
+}
+
+.banner_text_wrap {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      word-wrap: break-word;
+      white-space: normal;
+      color: var(--bs-tx2);
+}
+
+.banner_wrap {
+      width: auto;
+      height: 800px;
+      background-size: contain;
+      background-position: bottom;
+      background-repeat: no-repeat;
+}
+
+
+.banner_text_wrap span {
+      font-size: 1.6rem;
+      font-weight: 600;
+      font-family: monospace;
+}
+
+
+.user_name {
+      text-shadow: 1px 1px 4px  var(--bs-blue);
+}
+
+.platform_name {
+      text-shadow: 1px 1px 4px  var(--bs-blue);
+}

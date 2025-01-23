@@ -16,6 +16,7 @@ public class StoreResponseDto {
     private String state;
     private String city;
     private String logoUrl;
+    private String bannerUrl;
     private String header;
     private String about;
     private Set<Long> categoryIds;

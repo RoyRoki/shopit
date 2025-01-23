@@ -1,0 +1,53 @@
+.box_wrap {
+      padding: 8px;
+      width: 400px;
+}
+
+.keywords_box {
+      width: 400px;
+}
+
+.input_box {
+      width: 100%;
+      border: var(--bs-accent) 2px solid;
+      border-radius: 24px;
+      padding: 1px 0 1px 8px;
+      margin-bottom: 24px;
+      position: relative;
+      color: var(--bs-tx1);
+}
+
+.input_box input {
+      width: auto;
+      outline: none;
+      background: transparent;
+}
+
+.input_box button {
+      position: absolute;
+      right: 16px;
+}
+
+.show_keys_box {
+      padding: 4px;
+      min-height: 80px;
+      color: var(--bs-tx1);
+}
+
+.show_keys_box ul {
+      display: flex;
+      column-gap: 8px;
+      flex-wrap: wrap;
+      max-width: 400px;
+}
+
+.show_keys_box li {
+      background-color: var(--bs-bg3);
+      padding: 0 8px 0 8px;
+      margin: 4px;
+      border-radius: 24px;
+}
+
+.show_keys_box button {
+      font-size: 0.8rem;
+}

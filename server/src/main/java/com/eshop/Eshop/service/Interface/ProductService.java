@@ -1,5 +1,6 @@
 package com.eshop.Eshop.service.Interface;
 
+import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.requestdto.ProductEditRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.Product;
@@ -16,11 +17,13 @@ public interface ProductService {
 
     List<ProductResponseDTO> getProductsByStoreId(Long id);
 
-    ProductResponseDTO UpdateProduct(ProductEditRequestDTO requestDTO, Product product);
+    ProductDTO UpdateProduct(ProductEditRequestDTO requestDTO, Product product);
 
     List<ProductResponseDTO> getProductsByIds(List<Long> ids);
 
     List<String> removeImageUrls(List<String> imageUrls, Product product);
 
     List<ProductResponseDTO> getProductBySearch(String q);
+
+    void deleteProductById(Long productId);
 }

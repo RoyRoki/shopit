@@ -32,8 +32,10 @@ const ProductHeroTable = ({ tableDto }) => {
           <thead className={styles.demo_table_head}>
             <tr className={styles.demo_table_header_row}>
                 <th className={styles.demo_table_header}>
+                  create 
                 </th>
                 <th className={styles.demo_table_header}>
+                  information table
                 </th>
             </tr>
           </thead>

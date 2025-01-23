@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTheme } from '../../context/theme'
+import { useTheme } from '../../../context/theme'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ThemeToggleButton = () => {
@@ -10,7 +10,7 @@ const ThemeToggleButton = () => {
         { theme === 'light' ? (
           <FontAwesomeIcon icon="fa-regular fa-moon" />
         ) : (
-          <FontAwesomeIcon icon="fa-regular fa-sun" />
+          <FontAwesomeIcon icon="fa-regular fa-sun" color='white' />
         )}
       </button>
     </div>

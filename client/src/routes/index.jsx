@@ -7,6 +7,7 @@ import UserLayout from "./layout/UserLayout";
 import HomeLayout from "./layout/HomeLayout";
 import AboutPage from "../pages/shopitHelp/about/AboutPage"
 import ContactUsPage from "../pages/shopitHelp/contactus/ContactUsPage"
+import AdminLayout from "./layout/AdminLayout";
 
 // Define routes based on role
 const RootRoutes = () => {
@@ -32,7 +33,7 @@ const RootRoutes = () => {
       )}
 
       {/* Admin Routes */}
-      {auth.profileMode === role.admin && <Route path="*" element={<AdminHome />} />}
+      {auth.profileMode === role.admin && <Route path="*" element={<AdminLayout />} />}
 
       {/* For Public pages*/}
       <Route path="/about" element={<AboutPage />} />

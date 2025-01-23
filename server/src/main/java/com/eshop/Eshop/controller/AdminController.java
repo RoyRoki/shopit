@@ -2,6 +2,7 @@ package com.eshop.Eshop.controller;
 
 import com.eshop.Eshop.model.OrderPerStore;
 import com.eshop.Eshop.model.Product;
+import com.eshop.Eshop.model.Store;
 import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.requestdto.AddProductRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.CreateStoreRequestDTO;
@@ -74,6 +75,21 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/upload-store-logo-banner")
+    public ResponseEntity<?> uploadStoreLogoBanner(
+            @RequestParam(value = "logo", required = false) MultipartFile logo,
+            @RequestParam(value = "banner", required = false) MultipartFile banner,
+            @RequestParam("storeId") Long storeId)
+    {
+            try {
+                storeService.updateLogoBanner(logo, banner, storeId);
+                return  ResponseEntity.ok("Update successful");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResponseEntity.badRequest().body("Failed to update");
+            }
+    }
+
     @GetMapping(value = "/get-store")
     public ResponseEntity<?> getMyStore() {
         try {
@@ -128,7 +144,6 @@ public class AdminController {
         }
     }
 
-    // Keep the imageUrls
     @PostMapping(value = "/remove-images")
     public ResponseEntity<?> removeProductImages(@RequestParam("product-id") Long productId,
                                                  @RequestBody List<String> imageUrls) {
@@ -157,7 +172,7 @@ public class AdminController {
         try {
             Product product = productService.getProductById(productId);
 
-            ProductResponseDTO responseDTO = productService.UpdateProduct(requestDTO, product);
+            ProductDTO responseDTO = productService.UpdateProduct(requestDTO, product);
             return ResponseEntity.status(HttpStatus.OK).body(responseDTO);
 
         } catch (Exception e) {
@@ -172,6 +187,16 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.OK).body(products);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error during get products of this store");
+        }
+    }
+
+    @DeleteMapping(value = "/delete-product")
+    public ResponseEntity<?> deleteProduct(@RequestParam Long productId) {
+        try {
+            productService.deleteProductById(productId);
+            return ResponseEntity.ok("Successfully Deleted");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to delete");
         }
     }
 

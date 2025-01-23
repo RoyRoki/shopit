@@ -16,16 +16,15 @@ public class KeywordServiceHelper {
 
     public Set<Keyword> getKeywordsByStringSet(Set<String> words) {
         try {
-            return words.stream().map(word -> {
-                return keywordsRepo.findByWordIgnoreCase(word)
-                        .orElseGet(() -> {
-                            Keyword newKeyword = new Keyword();
-                            newKeyword.setWord(word);
-                            return keywordsRepo.save(newKeyword);
-                        });
-            }).collect(Collectors.toSet());
+            return words.stream().map(word -> keywordsRepo.findByWordIgnoreCase(word)
+                    .orElseGet(() -> {
+                        Keyword newKeyword = new Keyword();
+                        newKeyword.setWord(word);
+                        return keywordsRepo.save(newKeyword);
+                    })).collect(Collectors.toSet());
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Error keywordServiceHelper-getkeywordsByStringSet");
         }
     }

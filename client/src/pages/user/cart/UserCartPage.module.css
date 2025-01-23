@@ -1,10 +1,10 @@
 .main_page {
-      height: auto;
+      height: 100vh;
       width: 100vw;
 }
 
 .main_page .hero_box {
-      min-height: 800px;
+      min-height: 100%;
       padding-bottom: 40px;
       background-color: var(--bs-bg3);
 }
@@ -192,8 +192,7 @@
       display: flex;
       justify-content: space-around;
 }
-.guest_btn_wrap button,
-.user_btn_wrap button {
+.guest_btn_wrap button {
       border: 2px solid var(--bs-tx1);
       padding: 8px 12px 8px 12px;
       border-radius: 15px;
@@ -207,11 +206,30 @@
 .login_btn {
       background-color: var(--bs-bg1);
 }
-.guest_btn_wrap button:hover,
-.user_btn_wrap button:hover {
+.guest_btn_wrap button:hover{
       border-color: var(--bs-accent);
       color: var(--bs-accent);
 }
+
+.user_btn_wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+}
 .user_btn_wrap button {
       color: var(--bs-accent-tx);
+      background-color: var(--bs-btn2);
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 8px 32px 8px 32px;
+      border-radius: 8px;
+      box-shadow: var(--bs-box-shadow3);
+      transition: all 0.3s ease;
+}
+
+.user_btn_wrap button:hover {
+      transform: translateY(8px);
+      scale: 1.1;
+      background-color: var(--bs-btn2-h);
+      box-shadow: var(--bs-box-shadow2);
 }

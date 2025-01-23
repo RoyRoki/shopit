@@ -16,6 +16,7 @@ import com.eshop.Eshop.util.AuthenticationContextService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,6 +52,9 @@ public class StoreServiceImp implements StoreService {
 
     @Autowired
     private OrderPerStoreRepo orderPerStoreRepo;
+
+    @Autowired
+    private CloudinaryServiceImp cloudinaryService;
 
     @Override
     public Store createStore(Store store) {
@@ -215,7 +219,7 @@ public class StoreServiceImp implements StoreService {
             Store store = authenticationContextService.getAuthenticatedStore();
             return dtoService.storeToStoreDTO(store);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -253,6 +257,43 @@ public class StoreServiceImp implements StoreService {
             return stores.stream().map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
         } catch (RuntimeException e) {
             e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateLogoBanner(MultipartFile logo, MultipartFile banner, Long storeId) {
+        try {
+            Store store = findById(storeId);
+            String logoUrl = store.getLogoUrl();
+            String bannerUrl = store.getBannerUrl();
+
+            if(logo != null) {
+                if(logoUrl != null) {
+                    // Remove older one
+                    cloudinaryService.deleteImage(logoUrl);
+                }
+                // Upload logo
+                logoUrl = cloudinaryService.uploadImage(logo);
+            }
+            if(banner != null) {
+                if(bannerUrl != null) {
+                    // Remove older one
+                    cloudinaryService.deleteImage(bannerUrl);
+                }
+                // Upload banner
+                bannerUrl = cloudinaryService.uploadImage(banner);
+            }
+
+
+            if(logoUrl != null) {
+                store.setLogoUrl(logoUrl);
+            }
+            if(bannerUrl != null) {
+                store.setBannerUrl(bannerUrl);
+            }
+            storeRepo.save(store);
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }

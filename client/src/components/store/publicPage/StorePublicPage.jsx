@@ -176,11 +176,13 @@ const StorePublicPage = ({ storeId }) => {
                               <div className={styles.description_box}>
                                     <span>Description</span>
                                     <div className={styles.description}>
+                                          <p>{store.description}</p>
                                     </div>
                               </div>
                               <div className={styles.about_box}>
                                     <span>About</span>
                                     <p className={styles.about}>
+                                          {store.about}
                                     </p>
                               </div>
                               <div className={styles.address_box}>

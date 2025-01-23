@@ -20,6 +20,9 @@ export const urls = {
       uploadProductImage: 'admin/upload-images',
       removeProductImageWithId: 'admin/remove-images?product-id=',
       fetchStoreOrders: 'admin/orders',
+      deleteProductById: 'admin/delete-product?productId=',
+      updateLogoBanner: 'admin/upload-store-logo-banner',
+      
 
       fetchUserDto: 'user/get-user',
       fetchUserDetails: 'user/get-user',

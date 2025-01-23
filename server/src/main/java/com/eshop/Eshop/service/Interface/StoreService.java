@@ -7,6 +7,7 @@ import com.eshop.Eshop.model.dto.requestdto.StoreUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreResponseDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,4 +35,6 @@ public interface StoreService {
     List<StoreResponseDto> getStoreResponseDtosByCategoryId(Long categoryId);
 
     List<StoreResponseDto> getStoresDtoBySearch(String q);
+
+    void updateLogoBanner(MultipartFile logo, MultipartFile banner, Long storeId);
 }

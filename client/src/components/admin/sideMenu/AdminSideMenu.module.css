@@ -1,0 +1,53 @@
+.sidebar {
+      position: fixed;
+      left: 24px;
+      top: 2%;
+      bottom: 2%;
+      border: 2px solid var(--bs-bd1);
+      background-color: var(--bs-bg1);
+      border-radius: 40px;
+      height: 96%;
+      width: 80px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 8px 0;
+}
+
+.group_primary {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+}
+
+.group_secondary {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+}
+
+.nav_item {
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+      border: 2px solid var(--bs-bd1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+}
+.nav_item_focus {
+      background-color: var(--bs-accent);
+}
+
+.nav_item:hover {
+      background-color: var(--bs-accent);
+}
+
+.nav_item svg {
+      width: 50%;
+      height: 50%;  
+      color: var(--bs-tx1);
+}

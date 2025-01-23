@@ -38,8 +38,6 @@ const Categories = ({ onSelect, initialSelectedCategories }) => {
       if(error) return <p>Error: {error}</p>
 
   return (
-    <div>
-      <h1>Categories</h1>
       <ul>
             {categories.map((category) => (
                   <li key={category.id}>
@@ -55,7 +53,6 @@ const Categories = ({ onSelect, initialSelectedCategories }) => {
                   </li>
             ))}
       </ul>
-    </div>
   );
 };
 

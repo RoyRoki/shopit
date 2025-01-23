@@ -58,7 +58,7 @@
       height: 20px;
 }
 .demo_table_head .demo_table_header_row .demo_table_header {
-      font-size: 1rem;
+      font-size: 0.7rem;
       padding-left: 16px;
       color: var(--bs-tx1);
       text-transform: capitalize;

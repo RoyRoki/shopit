@@ -1,0 +1,14 @@
+.main_wrap {
+      width: 90%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+}
+
+.product_box {
+      min-height: 320px;
+      width: 100%;
+      background-color: var(--bs-bg1);
+      box-shadow: var(--bs-box-shadow3);
+}
