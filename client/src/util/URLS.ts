@@ -36,6 +36,7 @@ export const urls = {
       updateAddressById: 'user/update-address?id=',
       deleteAddressById: 'user/delete-address?id=',
       setDefaultAddressById: 'user/set-default-address?addressId=',
+      getUserCartSummary: 'user/cart-summary',
       
 
       fetchHomeProductsBy_: 'home/products',

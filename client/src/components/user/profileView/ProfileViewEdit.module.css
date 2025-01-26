@@ -25,7 +25,7 @@
       border: 2px solid var(--bs-bd1);
       border-radius: 8px;
       padding: 0 0 0 16px;
-      height: 104px;
+      min-height: 128px;
       width: 320px;     
       display: flex;
       background-color: transparent;

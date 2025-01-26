@@ -26,7 +26,7 @@ public class OrderPerStoreDTO {
     @Enumerated(EnumType.STRING)
     private Set<PaymentType> paymentTypes;
 
-    private List<ProductDTO> products;
+    private List<CartItemDTO> cartItems;
 
     private double storeSubtotal;
     private double gstAmount;

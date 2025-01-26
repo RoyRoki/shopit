@@ -1,6 +1,7 @@
 package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.*;
+import com.eshop.Eshop.model.dto.CartItemDTO;
 import com.eshop.Eshop.model.dto.OrderPerStoreDTO;
 import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
@@ -116,8 +117,8 @@ public class CartServiceImp {
                     // Total = Subtotal + GST + Delivery Cost
                     double total = storeSubtotal + gstAmount + deliveryCost;
 
-                    List<ProductDTO> productDTOS = cartItems.stream()
-                            .map(item -> dtoService.productToProductDTO(item.getProduct()))
+                    List<CartItemDTO> cartItemDTOS = cartItems.stream()
+                            .map(item -> dtoService.cartItemToDTO(item))
                             .toList();
 
                     return OrderPerStoreDTO.builder()
@@ -125,7 +126,7 @@ public class CartServiceImp {
                             .storeName(store.getName())
                             .shippingType(store.getShippingType())
                             .paymentTypes(store.getPaymentTypes())
-                            .products(productDTOS)
+                            .cartItems(cartItemDTOS)
                             .gstAmount(gstAmount)
                             .deliveryCost(deliveryCost)
                             .storeSubtotal(storeSubtotal)

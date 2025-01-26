@@ -15,6 +15,7 @@ import com.eshop.Eshop.util.OtpService;
 import com.shippo.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -283,6 +284,10 @@ public class UserController {
     @GetMapping(value = "/cart-summary")
     public ResponseEntity<?> getCartSummary() {
         try {
+            // Address need for order
+            if(userService.currentUser().getAddresses().isEmpty()) {
+              return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Please Add Address before order!");
+            }
             CartSummaryDTO cartSummary = userService.getCartSummary();
             return ResponseEntity.status(HttpStatus.OK).body(cartSummary);
         } catch (Exception e) {

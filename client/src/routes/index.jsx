@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { AuthContext } from "../context";
-import { AdminHome } from "../pages/Admin";
 import { role } from "../util/ROLE";
 import UserLayout from "./layout/UserLayout";
 import HomeLayout from "./layout/HomeLayout";

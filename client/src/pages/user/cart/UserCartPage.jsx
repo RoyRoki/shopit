@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './UserCartPage.module.css'
 import Navber from '../../../components/home/navber/Navber'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { homeProductTypes, urls } from '../../../util/URLS';
-import { fetchProducts, removeCurrentCacheKey } from '../../../features/home/productSlice';
-import ProductShowCaseMiniCard from '../../../components/cards/productMiniCard/ProductShowCaseMiniCard';
+import { urls } from '../../../util/URLS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { request } from '../../../helper/AxiosHelper';
@@ -232,7 +230,7 @@ const UserCartPage = ({ isLogged }) => {
                 </div>
               ) : (
                 <div className={styles.user_btn_wrap}>
-                  <button>Buy Now</button>
+                  <button onClick={() => navigate("/orders")}>Order Now</button>
                 </div>
               )}
             </div>

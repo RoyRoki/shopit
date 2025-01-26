@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { request } from '../../../helper/AxiosHelper'
-import {urls} from '../../../util/URLS'
+import React from 'react'
 import styles from './ProfileViewEdit.module.css'
 import { useNavigate } from 'react-router-dom'
 
