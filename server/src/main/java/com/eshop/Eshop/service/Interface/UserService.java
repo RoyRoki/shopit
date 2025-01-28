@@ -8,6 +8,7 @@ import com.eshop.Eshop.model.dto.ViewCartDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
+import com.eshop.Eshop.model.dto.responsedto.OrderDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
 import com.eshop.Eshop.model.User;
@@ -25,7 +26,7 @@ public interface UserService {
     UserDTO updateUser(UserDetailsUpdateRequestDTO requestDTO);
     ViewCartDTO getCartItems();
     CartSummaryDTO getCartSummary();
-    List<Order> getOrders();
+    List<OrderDTO> getOrders();
     void removePendingOrder(Long orderId);
     void handleConfirmedOrder(Order order);
     UserDTO fetchUserDto();

@@ -29,7 +29,8 @@ public class PaymentServiceHelper {
 
     @Transactional
     public void handleSuccessfulPayment(PaymentOrder paymentOrder) {
-        Order order = paymentOrder.getOrder();
+        Long orderId = paymentOrder.getOrderId();
+        Order order = orderRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Failed while change the status during successful payment!"));
 
         // Update order status
         order.setOrderStatus(OrderStatus.CONFIRMED);

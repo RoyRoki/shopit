@@ -23,8 +23,8 @@
       color: var(--bs-blue);
 }
 .box_wrap {
-      min-width: 400px;
-      max-width: 1200px;
+      min-width: 480px;
+      max-width: 80%;
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
@@ -32,7 +32,7 @@
 
 .box_wrap .add_address_box {
       border: 4px dotted var(--bs-tx3);
-      width: 320px;
+      min-width: 400px;
       height: 320px;
       display: flex;
       flex-direction: column;
@@ -54,7 +54,7 @@
 .box_wrap .address_box {
       border: 1px solid var(--bs-bd1);
       border-radius: 8px;
-      width: 320px;
+      min-width: 400px;
       height: 320px;
       display: flex;
       flex-direction: column;

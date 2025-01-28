@@ -103,24 +103,24 @@ public class DTOService {
                 .build();
     }
 
-    public CartSummaryDTO OrderPerStoreToCartSummary(List<OrderPerStoreDTO> orderPerStores, Cart cart) {
-        double cartSubtotal = orderPerStores.stream()
-                .mapToDouble(OrderPerStoreDTO::getStoreSubtotal)
+    public CartSummaryDTO OrderPerStoreToCartSummary(List<OrderSummaryPerStoreDTO> orderSummaryPerStores, Cart cart) {
+        double cartSubtotal = orderSummaryPerStores.stream()
+                .mapToDouble(OrderSummaryPerStoreDTO::getStoreSubtotal)
                 .sum();
 
-        double totalGstAmount = orderPerStores.stream()
-                .mapToDouble(OrderPerStoreDTO::getGstAmount)
+        double totalGstAmount = orderSummaryPerStores.stream()
+                .mapToDouble(OrderSummaryPerStoreDTO::getGstAmount)
                 .sum();
 
-        double totalDeliveryCost = orderPerStores.stream()
-                .mapToDouble(OrderPerStoreDTO::getDeliveryCost)
+        double totalDeliveryCost = orderSummaryPerStores.stream()
+                .mapToDouble(OrderSummaryPerStoreDTO::getDeliveryCost)
                 .sum();
 
         double grantTotal = cartSubtotal + totalGstAmount + totalDeliveryCost;
 
         return CartSummaryDTO.builder()
                 .cartId(cart.getId())
-                .orderPerStore(orderPerStores)
+                .orderSummaryPerStores(orderSummaryPerStores)
                 .cartSubtotal(cartSubtotal)
                 .totalGstAmount(totalGstAmount)
                 .totalDeliveryCost(totalDeliveryCost)
@@ -191,6 +191,57 @@ public class DTOService {
                         .cartItems(cart.getCartItems()
                                 .stream()
                                 .map(this::cartItemToDTO).collect(Collectors.toList()))
+                        .build();
+    }
+
+    public OrderPerStoreDTO orderPerStoreToDto(OrderPerStore orderPerStore) {
+        return
+                OrderPerStoreDTO.builder()
+                        .storeId(orderPerStore.getStore().getId())
+                        .storeName(orderPerStore.getStore().getName())
+                        .shippingType(orderPerStore.getStore().getShippingType())
+                        .paymentTypes(orderPerStore.getStore().getPaymentTypes())
+                        .orderItems(orderPerStore.getOrderItems().stream()
+                                .map(this::orderItemToDto).collect(Collectors.toList()))
+                        .storeSubtotal(orderPerStore.getStoreSubtotal())
+                        .gstAmount(orderPerStore.getGstAmount())
+                        .deliveryCost(orderPerStore.getDeliveryCost())
+                        .Total(orderPerStore.getTotal())
+                        .build();
+
+    }
+
+    private OrderItemDTO orderItemToDto(OrderItem orderItem) {
+        return
+                OrderItemDTO.builder()
+                        .id(orderItem.getId())
+                        .product(productToProductDTO(orderItem.getProduct()))
+                        .quantity(orderItem.getQuantity())
+                        .finalPrice(orderItem.getFinalPrice())
+                        .build();
+    }
+
+    public OrderDTO orderToOrderDto(Order order) {
+        return OrderDTO.builder()
+                .id(order.getId())
+                .orderPerStores(order.getOrderPerStores().stream().map(this::orderPerStoreToDto).collect(Collectors.toList()))
+                .updatedAt(order.getUpdatedAt())
+                .createdAt(order.getCreatedAt())
+                .orderStatus(order.getOrderStatus())
+                .grandPrice(order.getGrandPrice())
+                .build();
+
+    }
+
+    public OrderAddress userAddressToOrderAddress(Address address) {
+        return
+                OrderAddress.builder()
+                        .state(address.getState())
+                        .city(address.getCity())
+                        .street(address.getStreet())
+                        .landmark(address.getLandmark())
+                        .pinCode(address.getPinCode())
+                        .houseNo(address.getHouseNo())
                         .build();
     }
 }

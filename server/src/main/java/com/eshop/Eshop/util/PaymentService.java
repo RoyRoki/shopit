@@ -37,7 +37,6 @@ public class PaymentService {
 
         try {
             RazorpayClient razorpay = new RazorpayClient(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET);
-            System.out.println(RAZORPAY_KEY_SECRET+"  "+RAZORPAY_KEY_ID);
 
             JSONObject orderRequest = new JSONObject();
             orderRequest.put("amount",amountInPaise.intValue());
@@ -48,43 +47,44 @@ public class PaymentService {
             notes.forEach(jsonNotes::put);
             orderRequest.put("notes",jsonNotes);
 
-//            Order order = razorpay.orders.create(orderRequest);
-//            return order.get("id");
-                Random random = new Random();
-            return String.valueOf("*rpay#"+random.nextLong(1000,9999));
-
+            Order order = razorpay.orders.create(orderRequest);
+            return order.get("id");
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
     }
 
     // Verify Razorpay payment callback
-    public String verifyPaymentCallback(String paymentId, String orderId, String signature) {
+    public String verifyPaymentCallback(String rz_paymentId, String rz_orderId, String rz_signature) {
         try {
             RazorpayClient razorpayClient = new RazorpayClient(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET);
 
             JSONObject paymentDetails = new JSONObject();
-            paymentDetails.put("razorpay_payment_id", paymentId);
-            paymentDetails.put("razorpay_order_id", orderId);
-            paymentDetails.put("razorpay_signature", signature);
+            paymentDetails.put("razorpay_payment_id", rz_paymentId);
+            paymentDetails.put("razorpay_order_id", rz_orderId);
+            paymentDetails.put("razorpay_signature", rz_signature);
 
-//            boolean status = Utils.verifyPaymentSignature(paymentDetails, RAZORPAY_KEY_SECRET);
-            boolean status = true;
-            PaymentOrder paymentOrder = paymentOrderRepo.findByOrderId(orderId);
+            boolean status = Utils.verifyPaymentSignature(paymentDetails, RAZORPAY_KEY_SECRET);
+
+            // Get the payment model by using the unique rz_orderId
+            PaymentOrder paymentOrder = paymentOrderRepo.findByPaymentId(rz_orderId);
+
             if (paymentOrder == null) {
-                throw new IllegalArgumentException("PaymentOrder not found for orderId: " + orderId);
+                throw new IllegalArgumentException("PaymentOrder not found for orderId: " + rz_orderId);
             }
-            paymentOrder.setPaymentId(paymentId);
-            paymentOrder.setPayStatus(PayStatus.SUCCESS);
-            // Saved the updated paymentOrder
-            paymentOrderRepo.save(paymentOrder);
+
 
             if(status) {
-                // update the order
+                // Update the payment status
+                paymentOrder.setPayStatus(PayStatus.SUCCESS);
+
+                // Update the order
                 paymentServiceHelper.handleSuccessfulPayment(paymentOrder);
             }
+
+            // Saved the updated paymentOrder
+            paymentOrderRepo.save(paymentOrder);
 
             return status ? "Payment successful!" : "Payment Failed!";
 

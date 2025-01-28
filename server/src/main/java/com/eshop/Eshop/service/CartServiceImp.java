@@ -2,8 +2,7 @@ package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.CartItemDTO;
-import com.eshop.Eshop.model.dto.OrderPerStoreDTO;
-import com.eshop.Eshop.model.dto.ProductDTO;
+import com.eshop.Eshop.model.dto.responsedto.OrderSummaryPerStoreDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
 import com.eshop.Eshop.repository.CartRepo;
 import com.eshop.Eshop.repository.ProductRepo;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImp {
@@ -92,7 +90,10 @@ public class CartServiceImp {
         return  false;
     }
 
-    public List<OrderPerStoreDTO> getOrderPerStoreDTO(Cart cart, User user) {
+    /*
+    *   before Order OrderSummary
+    * */
+    public List<OrderSummaryPerStoreDTO> getOrderSummaryPerStoreDTO(Cart cart, User user) {
         Map<Store, List<CartItem>> cartItemsPerStore = new HashMap<>();
 
         cart.getCartItems()
@@ -100,7 +101,7 @@ public class CartServiceImp {
                     cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), k -> new ArrayList<>()).add(item);
                 });
 
-        List<OrderPerStoreDTO> orderPerStores = cartItemsPerStore.entrySet().stream()
+        List<OrderSummaryPerStoreDTO> orderSummaryPerStores = cartItemsPerStore.entrySet().stream()
                 .map(entry -> {
                     Store store = entry.getKey();
                     List<CartItem> cartItems = entry.getValue();
@@ -121,7 +122,7 @@ public class CartServiceImp {
                             .map(item -> dtoService.cartItemToDTO(item))
                             .toList();
 
-                    return OrderPerStoreDTO.builder()
+                    return OrderSummaryPerStoreDTO.builder()
                             .storeId(store.getId())
                             .storeName(store.getName())
                             .shippingType(store.getShippingType())
@@ -135,7 +136,7 @@ public class CartServiceImp {
                 })
                 .toList();
 
-        return orderPerStores;
+        return orderSummaryPerStores;
     }
 
     public List<OrderPerStore> getOrderPerStore(Cart cart, User user) {

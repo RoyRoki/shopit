@@ -9,6 +9,7 @@ import UserDetailsUpdatePage from '../../pages/user/userUpdate/auth/UserDetailsU
 import UserAddressUpdatePage from '../../pages/user/userUpdate/address/UserAddressUpdatePage'
 import UserWishListPage from '../../pages/user/wish/UserWishListPage'
 import ForgetPasswordPage from '../../pages/user/userUpdate/auth/ForgetPasswordPage'
+import OrderPaymentPage from '../../pages/user/payment/OrderPaymentPage'
 
 const UserLayout = () => {
   return (
@@ -19,6 +20,7 @@ const UserLayout = () => {
         <Route path='/home' element={<UserHomePage />} />
         <Route path='/cart' element={<UserCartPage isLogged={true} />} />
         <Route path='/orders' element={<UserOrdersPage />} />
+        <Route path='/payment' element={<OrderPaymentPage />} />
         <Route path='/security' element={<UserDetailsUpdatePage />} />
         <Route path='/addresses' element={<UserAddressUpdatePage />} />
         <Route path='/wishlist' element={<UserWishListPage />} />

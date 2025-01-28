@@ -27,3 +27,8 @@ export const userHeroDiv = {
       editUser: 1,
       
 }
+
+export const userOrderPage = {
+      prevOrderList: 0,
+      newOrderSum: 1,
+}

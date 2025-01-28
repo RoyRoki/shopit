@@ -230,7 +230,7 @@ const UserCartPage = ({ isLogged }) => {
                 </div>
               ) : (
                 <div className={styles.user_btn_wrap}>
-                  <button onClick={() => navigate("/orders")}>Order Now</button>
+                  <button onClick={() => navigate("/orders?summary=true")}>Order Now</button>
                 </div>
               )}
             </div>

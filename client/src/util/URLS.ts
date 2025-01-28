@@ -37,6 +37,7 @@ export const urls = {
       deleteAddressById: 'user/delete-address?id=',
       setDefaultAddressById: 'user/set-default-address?addressId=',
       getUserCartSummary: 'user/cart-summary',
+      userOrdersList: 'user/orders',
       
 
       fetchHomeProductsBy_: 'home/products',
@@ -44,7 +45,8 @@ export const urls = {
       fetchHomeStoreById: 'home/store-id?id=',
       fetchHomeStoreDtoByQuery: 'home/stores/query?query=',
 
-      
+      placeOrder: 'order/place',
+      deletePendingOrder: 'order/cancel/',
        
 
 }

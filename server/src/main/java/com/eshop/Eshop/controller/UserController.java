@@ -8,6 +8,7 @@ import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.ViewCartDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
+import com.eshop.Eshop.model.dto.responsedto.OrderDTO;
 import com.eshop.Eshop.model.dto.responsedto.UpdateResponse;
 import com.eshop.Eshop.model.dto.responsedto.UserDTO;
 import com.eshop.Eshop.service.UserServiceImp;
@@ -298,7 +299,7 @@ public class UserController {
     @GetMapping(value = "/orders")
     public ResponseEntity<?> getUserOrders() {
         try {
-            List<Order> orders = userService.getOrders();
+            List<OrderDTO> orders = userService.getOrders();
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Error during fetching orders for user");

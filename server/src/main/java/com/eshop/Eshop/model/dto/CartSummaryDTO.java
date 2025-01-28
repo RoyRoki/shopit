@@ -1,11 +1,14 @@
 package com.eshop.Eshop.model.dto;
 
+import com.eshop.Eshop.model.dto.responsedto.OrderSummaryPerStoreDTO;
+import com.eshop.Eshop.model.enums.PaymentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -13,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CartSummaryDTO {
       private Long cartId;
-      List<OrderPerStoreDTO> orderPerStore;
+      private List<OrderSummaryPerStoreDTO> orderSummaryPerStores;
       private double cartSubtotal;
       private double totalGstAmount;
       private double totalDeliveryCost;

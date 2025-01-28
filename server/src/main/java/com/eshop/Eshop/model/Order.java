@@ -1,6 +1,8 @@
 package com.eshop.Eshop.model;
 
+import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
+import com.eshop.Eshop.model.enums.PaymentType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +27,9 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Embedded
+    private OrderAddress orderAddress;
+
     @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<OrderPerStore> orderPerStores = new ArrayList<>();
 
@@ -33,6 +38,9 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; // PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
+
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType; // ONLINE, COD
 
     @Column(nullable = false)
     private LocalDateTime createdAt;

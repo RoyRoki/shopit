@@ -5,6 +5,8 @@ import com.eshop.Eshop.model.dto.*;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
+import com.eshop.Eshop.model.dto.responsedto.OrderDTO;
+import com.eshop.Eshop.model.dto.responsedto.OrderSummaryPerStoreDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
@@ -157,8 +159,8 @@ public class UserServiceImp implements UserService {
                 return new CartSummaryDTO();
             }
 
-            List<OrderPerStoreDTO> orderPerStores = cartService.getOrderPerStoreDTO(cart, user);
-            return  dtoService.OrderPerStoreToCartSummary(orderPerStores, cart);
+            List<OrderSummaryPerStoreDTO> orderSummaryPerStores = cartService.getOrderSummaryPerStoreDTO(cart, user);
+            return  dtoService.OrderPerStoreToCartSummary(orderSummaryPerStores, cart);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -166,10 +168,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<Order> getOrders() {
+    public List<OrderDTO> getOrders() {
         try {
             User user =  currentUser();
-            return orderRepo.findAllByUser(user);
+            List<Order> orders =  orderRepo.findAllByUser(user);
+            return orders.stream().map(order -> dtoService.orderToOrderDto(order)).collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException("Error to fetch orders"+e);
         }

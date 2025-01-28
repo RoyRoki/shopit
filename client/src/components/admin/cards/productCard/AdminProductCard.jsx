@@ -4,19 +4,9 @@ import ProductHeroTable from '../../../table/productTable/ProductHeroTable'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPhotoFilm } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { toDate } from '../../../../util/dateUtils'
 
 const AdminProductCard = ({ product, onEdit, onMediaEdit, showHero }) => {
-      const navigate = useNavigate();
-      const toDate = (iso) => {
-      return new Date(iso).toLocaleString("en-US", { 
-            year: "numeric", 
-            month: "long", 
-            day: "numeric", 
-            hour: "2-digit", 
-            minute: "2-digit",
-            hour12: true 
-            });
-      };
   return (
     <div className={styles.main_wrap}>
       <div className={styles.section1}>

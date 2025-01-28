@@ -14,9 +14,15 @@
       max-width: 70%;
       padding: 24px 40px 24px 40px;
 }
+.confirmed_order {
+      border: var(--bs-success) 2px solid;
+}
 
+.confirmed_order .order_status {
+      color: var(--bs-success);
+}
 .per_store {
-
+     
 }
 
 .store_name {
@@ -31,7 +37,7 @@
 }
 
 .cart_items_wrap {
-      min-height: 400px;
+      min-height: 240px;
       background-color: var(--bs-bg1);
       display: flex;
       flex-direction: column;
@@ -141,3 +147,204 @@
       font-style: italic;
       text-decoration: line-through;
 }
+
+.footer_box {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bs-bg1);
+      align-items: end;
+      padding: 48px;
+      color: var(--bs-tx3);
+}
+
+.order_info_wrap {
+      margin: 40px 0 0 0;
+      background-color: var(--bs-bg1);
+      padding: 24px;
+      color: var(--bs-tx2);
+      position: relative;
+}
+
+.grand_total {
+      font-size: 1.3rem;
+      font-weight: 600;
+      border: 4px solid var(--bs-success);
+      padding: 4px 8px 4px 8px;
+      width: fit-content;
+      margin-bottom: 24px;
+}
+
+.change_address_wrap span {
+      font-weight: 600;
+      border-left: 4px solid var(--bs-bd1);
+      padding: 2px 2px 4px 4px;
+      color: var(--bs-tx2);
+}
+.order_btn {
+      border: 2px solid var(--bs-bd1);
+      border-radius: 8px;
+      width: 50%;
+      height: 60px;
+      margin: 0 auto;
+      margin-top: 24px;
+      box-shadow: var(--bs-box-shadow);
+}
+.online_pay_btn {
+      background-color: var(--bs-success);
+      border-color: var(--bs-bd1);
+      color: var(--bs-bg1);
+}
+
+.cod_pay_btn {
+      background-color: var(--bs-btn2);
+}
+.order_btn button {
+      width: 100%;
+      height: 100%;
+}
+
+.orders_list {
+      width: 100%;
+      height: fit-content;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+}
+
+.order_wrap {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+}
+
+.per_stores_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bs-bg2);
+      padding: 24px 40px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+}
+
+.order_info {
+ 
+}
+
+.order_info p {
+      font-size: 1rem;
+      color: var(--bs-tx1);
+}
+
+.order_info span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--bs-tx2);
+}
+.see_details_wrap {
+      cursor: pointer;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: var(--bs-blue);
+}
+.per_store_wrap {
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid var(--bs-bd1);
+  border-radius: 0.5rem;
+  background-color: var(--bs-bg5);
+}
+
+.per_store {
+  color: var(--bs-tx1);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.store_info {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--bs-tx2);
+}
+
+.products_info {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  border-left: 3px solid var(--bs-bd1);
+}
+
+.order_item {
+  margin-bottom: 1rem;
+}
+
+.item_product__info {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--bs-tx1);
+}
+
+.order_item_info {
+  font-size: 0.9rem;
+  color: var(--bs-tx1);
+  margin-top: 0.2rem;
+}
+.payment_wrap {
+      position: absolute;
+      top: 80px;
+      right: 40px;
+}
+.payment_wrap button {
+      border: 2px solid var(--bs-bd1);
+      font-size: 1.2rem;
+      padding: 4px;
+      border-radius: 8px;
+      background-color: var(--bs-success);
+      color: var(--bs-bg1);
+      box-shadow: var(--bs-box-shadow);
+}
+
+
+.cancel_pen_order {
+      color: var(--bs-red);
+      font-size: 0.8rem;
+}
+
+.payment_wrap {
+      padding-right: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+}
+
+.payment_wrap span {
+      border-left: 4px solid var(--bs-bd1);
+      padding: 4px;
+}
+
+.payment_types {
+
+}
+
+.pay_type {
+      cursor: pointer;
+}
+
+.pay_type span {
+      border: 0px;
+}
+
+.pay_type_active {
+      color: var(--bs-success);
+      font-size: 1.2rem;
+      font-weight: 600;
+}
+
+.pay_type_inactive {
+      color: var(--bs-tx3);
+}
+

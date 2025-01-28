@@ -104,6 +104,7 @@
 
 html, body {
   height: 100%;
+  overflow: auto;
   background-color: var(--bs-bg1);
 }
 

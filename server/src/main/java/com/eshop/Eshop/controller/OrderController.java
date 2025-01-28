@@ -2,6 +2,7 @@ package com.eshop.Eshop.controller;
 
 import com.eshop.Eshop.model.Order;
 import com.eshop.Eshop.model.dto.responsedto.PaymentIdDetails;
+import com.eshop.Eshop.model.enums.PaymentType;
 import com.eshop.Eshop.service.OrderServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,10 @@ public class OrderController {
 
     // place order for all cart items
     @PostMapping(value = "/place")
-    public ResponseEntity<?> placeOrder() {
+    public ResponseEntity<?> placeOrder(@RequestParam(required = false) Long addressId,
+                                        @RequestParam(value = "payment_type", required = false) PaymentType paymentType) {
         try {
-            Order order = orderService.placeOrder();
+            Order order = orderService.placeOrder(addressId, paymentType);
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
@@ -37,6 +39,18 @@ public class OrderController {
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to generate orderId for payment\n"+e.getMessage());
+        }
+    }
+
+    // For now, If Order Status id pending then its works
+    @PutMapping(value = "/cancel/{orderId}")
+    public ResponseEntity<?> cancelOrder(@RequestBody(required = false) String message,
+                                         @PathVariable Long orderId) {
+        try {
+            orderService.cancelOrder(orderId, message);
+            return ResponseEntity.ok("Your Order Cancelled");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to cancel order");
         }
     }
 }

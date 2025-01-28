@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { adminStorePage } from '../../../../util/HERODIV'
 import StoreEditForm from '../../forms/storeEdit/StoreEditForm'
+import { toDate } from '../../../../util/dateUtils'
 
 const AdminStoreCard = ({ store, onUpdate }) => {
       const [pageState, setPageState] = useState(adminStorePage.home);
@@ -12,17 +13,6 @@ const AdminStoreCard = ({ store, onUpdate }) => {
             onUpdate();
             setPageState(adminStorePage.home);
       }
-
-      const toDate = (iso) => {
-      return new Date(iso).toLocaleString("en-US", { 
-            year: "numeric", 
-            month: "long", 
-            day: "numeric", 
-            hour: "2-digit", 
-            minute: "2-digit",
-            hour12: true 
-            });
-      };
 
   return (
     <div className={styles.main_wrap}>
