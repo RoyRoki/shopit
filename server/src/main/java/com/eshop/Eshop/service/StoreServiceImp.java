@@ -2,12 +2,12 @@ package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.ProductDTO;
+import com.eshop.Eshop.model.dto.StoreOrderDto;
 import com.eshop.Eshop.model.dto.requestdto.AddProductRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.StoreUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreResponseDto;
-import com.eshop.Eshop.model.enums.OrderStatus;
 import com.eshop.Eshop.repository.*;
 import com.eshop.Eshop.service.Interface.StoreService;
 import com.eshop.Eshop.service.helper.CategoryServiceHelper;
@@ -15,11 +15,11 @@ import com.eshop.Eshop.service.helper.KeywordServiceHelper;
 import com.eshop.Eshop.util.AuthenticationContextService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,9 +56,13 @@ public class StoreServiceImp implements StoreService {
     @Autowired
     private CloudinaryServiceImp cloudinaryService;
 
+    @Lazy
+    @Autowired
+    private OrderServiceImp orderService;
+
     @Override
     public Store createStore(Store store) {
-        try{
+        try {
             return storeRepo.save(store);
         } catch (Exception e) {
             return null;
@@ -69,7 +73,8 @@ public class StoreServiceImp implements StoreService {
     public ProductResponseDTO addProduct(AddProductRequestDTO productRequest) {
         try {
             Long admin_id = authenticationContextService.getAuthenticatedUserId();
-            Store store = storeRepo.findByOwnerId(admin_id).orElseThrow(() -> new RuntimeException("Store not found for admin ID: " + admin_id));
+            Store store = storeRepo.findByOwnerId(admin_id)
+                    .orElseThrow(() -> new RuntimeException("Store not found for admin ID: " + admin_id));
 
             Set<Category> categories = categoryHelper.getCategorySetByIdSet(productRequest.getCategoryIds());
 
@@ -93,7 +98,7 @@ public class StoreServiceImp implements StoreService {
             return dtoService.productToResponseDto(savedProduct);
 
         } catch (Exception e) {
-            throw new RuntimeException("StoreServiceImp-addProduct-error "+e.getMessage());
+            throw new RuntimeException("StoreServiceImp-addProduct-error " + e.getMessage());
         }
     }
 
@@ -111,7 +116,7 @@ public class StoreServiceImp implements StoreService {
         try {
             return storeRepo.findByCategories_Id(categoryId);
         } catch (Exception e) {
-            throw new RuntimeException("StoreServiceImp-getStoreByCategoryId-error "+e.getMessage());
+            throw new RuntimeException("StoreServiceImp-getStoreByCategoryId-error " + e.getMessage());
         }
     }
 
@@ -141,39 +146,56 @@ public class StoreServiceImp implements StoreService {
             Store store = authenticationContextService.getAuthenticatedStore();
 
             // Update basic details
-            if (requestDTO.getName() != null) store.setName(requestDTO.getName());
-            if (requestDTO.getEmail() != null) store.setEmail(requestDTO.getEmail());
-            if (requestDTO.getDescription() != null) store.setDescription(requestDTO.getDescription());
-            if(requestDTO.getMobileNo() != null) store.setMobileNo(requestDTO.getMobileNo());
-            if (requestDTO.getIsActive() != null) store.setIsActive(requestDTO.getIsActive());
+            if (requestDTO.getName() != null)
+                store.setName(requestDTO.getName());
+            if (requestDTO.getEmail() != null)
+                store.setEmail(requestDTO.getEmail());
+            if (requestDTO.getDescription() != null)
+                store.setDescription(requestDTO.getDescription());
+            if (requestDTO.getMobileNo() != null)
+                store.setMobileNo(requestDTO.getMobileNo());
+            if (requestDTO.getIsActive() != null)
+                store.setIsActive(requestDTO.getIsActive());
 
             // Update address details
-            if (requestDTO.getHouseNo() != null) store.setHouseNo(requestDTO.getHouseNo());
-            if (requestDTO.getStreet() != null) store.setStreet(requestDTO.getStreet());
-            if (requestDTO.getCity() != null) store.setCity(requestDTO.getCity());
-            if (requestDTO.getState() != null) store.setState(requestDTO.getState());
-            if (requestDTO.getPinCode() != null) store.setPinCode(requestDTO.getPinCode());
-            if (requestDTO.getLandmark() != null) store.setLandmark(requestDTO.getLandmark());
+            if (requestDTO.getHouseNo() != null)
+                store.setHouseNo(requestDTO.getHouseNo());
+            if (requestDTO.getStreet() != null)
+                store.setStreet(requestDTO.getStreet());
+            if (requestDTO.getCity() != null)
+                store.setCity(requestDTO.getCity());
+            if (requestDTO.getState() != null)
+                store.setState(requestDTO.getState());
+            if (requestDTO.getPinCode() != null)
+                store.setPinCode(requestDTO.getPinCode());
+            if (requestDTO.getLandmark() != null)
+                store.setLandmark(requestDTO.getLandmark());
 
             // Update additional details
-            if (requestDTO.getLogoUrl() != null) store.setLogoUrl(requestDTO.getLogoUrl());
-            if (requestDTO.getHeader() != null) store.setHeader(requestDTO.getHeader());
-            if (requestDTO.getAbout() != null) store.setAbout(requestDTO.getAbout());
+            if (requestDTO.getLogoUrl() != null)
+                store.setLogoUrl(requestDTO.getLogoUrl());
+            if (requestDTO.getHeader() != null)
+                store.setHeader(requestDTO.getHeader());
+            if (requestDTO.getAbout() != null)
+                store.setAbout(requestDTO.getAbout());
 
             // Update categories / By replace the old data
             if (requestDTO.getCategoryIds() != null) {
                 Set<Category> categories = requestDTO.getCategoryIds().stream()
-                                .map(id -> categoryRepo.findById(id).orElseThrow(() -> new RuntimeException("Category not found for id "+id)))
-                                        .collect(Collectors.toSet());
+                        .map(id -> categoryRepo.findById(id)
+                                .orElseThrow(() -> new RuntimeException("Category not found for id " + id)))
+                        .collect(Collectors.toSet());
 
                 store.setCategories(categories);
             }
 
             // Update shipping type
-            if (requestDTO.getShippingType() != null) store.setShippingType(requestDTO.getShippingType());
+            if (requestDTO.getShippingType() != null)
+                store.setShippingType(requestDTO.getShippingType());
 
             // Update payment type
-            if (requestDTO.getPaymentTypes() != null) store.setPaymentTypes(requestDTO.getPaymentTypes());
+            if (requestDTO.getPaymentTypes() != null)
+                store.setPaymentTypes(requestDTO.getPaymentTypes());
 
             // Set updated timestamp
             store.setUpdatedAt(LocalDateTime.now());
@@ -181,11 +203,12 @@ public class StoreServiceImp implements StoreService {
             return storeRepo.save(store);
 
         } catch (Exception e) {
-            throw new RuntimeException("Error in storeServiceImp-updateStore : "+e.getMessage());
+            throw new RuntimeException("Error in storeServiceImp-updateStore : " + e.getMessage());
         }
     }
 
     @Override
+    @Transactional
     public void handleConfirmedOrder(Order order) {
         try {
             order.getOrderPerStores().forEach(orderPerStore -> {
@@ -193,19 +216,47 @@ public class StoreServiceImp implements StoreService {
                 Store store = orderPerStore.getStore();
                 String mobileNo = store.getOwner().getMobileNo();
                 messageService.sentMessageToMobile(mobileNo, "New order received. Please check!");
+
+                // Reduce stock quantities
+                orderPerStore.getOrderItems()
+                        .stream()
+                        .map(item -> {
+                            Product product = item.getProduct();
+                            product.setStock((product.getStock() - item.getQuantity()));
+                            return product;
+                        })
+                        .forEach(productRepo::save);
             });
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Database operation failed : " + e.getMessage());
         }
     }
 
     @Override
     @Transactional
-    public List<OrderPerStore> getOrders() {
+    public List<StoreOrderDto> getOrders() {
         try {
             Long storeId = authenticationContextService.getAuthenticatedStoreId();
-            return orderPerStoreRepo.findOrdersByStoreId(storeId);
+            List<OrderPerStore> orderPerStores = orderPerStoreRepo.findOrdersByStoreId(storeId);
+
+            return orderPerStores.stream()
+            .map(opStore -> {
+
+                return StoreOrderDto.builder()
+                            .storeSubtotal(opStore.getStoreSubtotal())
+                            .gstAmount(opStore.getGstAmount())
+                            .deliveryCost(opStore.getDeliveryCost())
+                            .total(opStore.getTotal())
+                            .orderItems(opStore.getOrderItems().stream()
+                                .map(orderItem -> dtoService.orderItemToDTO(orderItem))
+                                .toList()
+                            )
+                            .orderInfo(dtoService.orderToOrderInfo(opStore.getOrder()))
+                            .customer(dtoService.userToCustomerDTO(opStore.getOrder().getUser()))
+                            .build();
+            })
+            .toList();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -227,11 +278,9 @@ public class StoreServiceImp implements StoreService {
     public List<StoreResponseDto> getAllStoreDto() {
         try {
             return storeRepo.findAll().stream()
-                    .map(store -> dtoService.
-                            storeToStoreResponseDTO(store)).
-                    collect(Collectors.toList());
+                    .map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
         } catch (RuntimeException e) {
-            throw new RuntimeException("Error during fetch all stores and return storeDto "+e.getMessage());
+            throw new RuntimeException("Error during fetch all stores and return storeDto " + e.getMessage());
         }
     }
 
@@ -243,12 +292,12 @@ public class StoreServiceImp implements StoreService {
     @Override
     public List<StoreResponseDto> getStoreResponseDtosByCategoryId(Long categoryId) {
         try {
-            return storeRepo.findByCategories_Id(categoryId).stream().map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
+            return storeRepo.findByCategories_Id(categoryId).stream()
+                    .map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
         } catch (Exception e) {
-            throw new RuntimeException("StoreServiceImp-getStoreByCategoryId-error "+e.getMessage());
+            throw new RuntimeException("StoreServiceImp-getStoreByCategoryId-error " + e.getMessage());
         }
     }
-
 
     @Override
     public List<StoreResponseDto> getStoresDtoBySearch(String q) {
@@ -268,16 +317,16 @@ public class StoreServiceImp implements StoreService {
             String logoUrl = store.getLogoUrl();
             String bannerUrl = store.getBannerUrl();
 
-            if(logo != null) {
-                if(logoUrl != null) {
+            if (logo != null) {
+                if (logoUrl != null) {
                     // Remove older one
                     cloudinaryService.deleteImage(logoUrl);
                 }
                 // Upload logo
                 logoUrl = cloudinaryService.uploadImage(logo);
             }
-            if(banner != null) {
-                if(bannerUrl != null) {
+            if (banner != null) {
+                if (bannerUrl != null) {
                     // Remove older one
                     cloudinaryService.deleteImage(bannerUrl);
                 }
@@ -285,15 +334,24 @@ public class StoreServiceImp implements StoreService {
                 bannerUrl = cloudinaryService.uploadImage(banner);
             }
 
-
-            if(logoUrl != null) {
+            if (logoUrl != null) {
                 store.setLogoUrl(logoUrl);
             }
-            if(bannerUrl != null) {
+            if (bannerUrl != null) {
                 store.setBannerUrl(bannerUrl);
             }
             storeRepo.save(store);
         } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
+    public void shippedOrder(Long orderId) {
+        try {
+            Store store = authenticationContextService.getAuthenticatedStore();
+            orderService.handleShipped(orderId, store);
+        } catch(Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }

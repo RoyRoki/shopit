@@ -2,6 +2,7 @@ package com.eshop.Eshop.service.Interface;
 
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.ProductDTO;
+import com.eshop.Eshop.model.dto.StoreOrderDto;
 import com.eshop.Eshop.model.dto.requestdto.AddProductRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.StoreUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
@@ -24,9 +25,10 @@ public interface StoreService {
     Address getAddress(Store store);
 
     Store updateStore(StoreUpdateRequestDTO requestDTO);
+
     void handleConfirmedOrder(Order order);
 
-    List<OrderPerStore> getOrders();
+    List<StoreOrderDto> getOrders();
 
     StoreDTO getStore();
     List<StoreResponseDto> getAllStoreDto();

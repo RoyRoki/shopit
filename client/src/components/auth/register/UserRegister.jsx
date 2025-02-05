@@ -48,7 +48,7 @@ const UserRegister = () => {
                   
                   console.log("send otp to ", mobileNo);
                   try {
-                        const response = await publicRequest("POST", urls.generateOtp, {mobileNo: mobileNo});
+                        const response = await publicRequest("POST", urls.generateOtpUnique, {mobileNo: mobileNo});
                         setOtpSend(true);
                         
                   } catch(error) {

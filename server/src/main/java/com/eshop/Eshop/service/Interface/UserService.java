@@ -1,8 +1,6 @@
 package com.eshop.Eshop.service.Interface;
 
-import com.eshop.Eshop.model.Cart;
 import com.eshop.Eshop.model.Order;
-import com.eshop.Eshop.model.dto.CartItemDTO;
 import com.eshop.Eshop.model.dto.CartSummaryDTO;
 import com.eshop.Eshop.model.dto.ViewCartDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
@@ -48,4 +46,6 @@ public interface UserService {
     void deleteAddress(Long id);
 
     void setDefaultAddress(Long addressId);
+
+    void handleShipped(Order order);
 }

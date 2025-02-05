@@ -4,11 +4,7 @@ import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.CartItemDTO;
 import com.eshop.Eshop.model.dto.responsedto.OrderSummaryPerStoreDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
-import com.eshop.Eshop.repository.CartRepo;
 import com.eshop.Eshop.repository.ProductRepo;
-import com.eshop.Eshop.repository.RoleRepo;
-import com.eshop.Eshop.repository.UserRepo;
-import com.eshop.Eshop.util.AuthenticationContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +12,6 @@ import java.util.*;
 
 @Service
 public class CartServiceImp {
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private RoleRepo roleRepo;
-
-    @Autowired
-    private CartRepo cartRepo;
-
-    @Autowired
-    private AuthenticationContextService authContextService;
 
     @Autowired
     private DTOService dtoService;
@@ -98,7 +83,7 @@ public class CartServiceImp {
 
         cart.getCartItems()
                 .forEach(item -> {
-                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), k -> new ArrayList<>()).add(item);
+                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), _ -> new ArrayList<>()).add(item);
                 });
 
         List<OrderSummaryPerStoreDTO> orderSummaryPerStores = cartItemsPerStore.entrySet().stream()
@@ -144,7 +129,7 @@ public class CartServiceImp {
 
         cart.getCartItems()
                 .forEach(item -> {
-                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), k -> new ArrayList<>()).add(item);
+                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), _ -> new ArrayList<>()).add(item);
                 });
 
         List<OrderPerStore> orderPerStores = cartItemsPerStore.entrySet().stream()

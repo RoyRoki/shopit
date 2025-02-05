@@ -4,6 +4,7 @@ import com.eshop.Eshop.model.OrderPerStore;
 import com.eshop.Eshop.model.Product;
 import com.eshop.Eshop.model.Store;
 import com.eshop.Eshop.model.dto.ProductDTO;
+import com.eshop.Eshop.model.dto.StoreOrderDto;
 import com.eshop.Eshop.model.dto.requestdto.AddProductRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.CreateStoreRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.ProductEditRequestDTO;
@@ -25,6 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/admin")
@@ -77,9 +82,9 @@ public class AdminController {
 
     @PostMapping("/upload-store-logo-banner")
     public ResponseEntity<?> uploadStoreLogoBanner(
-            @RequestParam(value = "logo", required = false) MultipartFile logo,
-            @RequestParam(value = "banner", required = false) MultipartFile banner,
-            @RequestParam("storeId") Long storeId)
+            @RequestParam(required = false) MultipartFile logo,
+            @RequestParam(required = false) MultipartFile banner,
+            @RequestParam Long storeId)
     {
             try {
                 storeService.updateLogoBanner(logo, banner, storeId);
@@ -203,11 +208,21 @@ public class AdminController {
     @GetMapping(value = "/orders")
     public ResponseEntity<?> getOrders() {
         try {
-            List<OrderPerStore> orders = storeService.getOrders();
+            List<StoreOrderDto> orders = storeService.getOrders();
             return ResponseEntity.ok(orders);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to fetch order for your store!");
+        }
+    }
+
+    @PutMapping("shipped/{orderId}")
+    public ResponseEntity<?> shippedOrder(@PathVariable Long orderId) {
+        try {
+            storeService.shippedOrder(orderId);
+            return ResponseEntity.ok("Order Shipped");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to shipped!");
         }
     }
 }

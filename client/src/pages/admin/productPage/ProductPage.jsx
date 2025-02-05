@@ -98,7 +98,7 @@ const ProductPage = ({ store, state }) => {
             </>
           )}
           {pageState === adminProductPageState.heroProduct && (
-            <AdminHeroProduct product={heroProduct} onDelete={handleProductDelete} />
+            <AdminHeroProduct product={heroProduct} onDelete={handleProductDelete} onEdit={handleProductEdit} onMediaEdit={handleMediaEdit} />
           )}
       </div>
     </div>

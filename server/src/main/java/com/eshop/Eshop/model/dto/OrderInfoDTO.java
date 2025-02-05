@@ -1,7 +1,8 @@
-package com.eshop.Eshop.model.dto.responsedto;
+package com.eshop.Eshop.model.dto;
+
+import java.time.LocalDateTime;
 
 import com.eshop.Eshop.model.OrderAddress;
-import com.eshop.Eshop.model.dto.OrderPerStoreDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
 import com.eshop.Eshop.model.enums.PaymentType;
 
@@ -11,14 +12,11 @@ import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Data
 @Builder
-public class OrderDTO {
+public class OrderInfoDTO {
+
     private Long id;
-    private List<OrderPerStoreDTO> orderPerStores;
     private Double grandPrice;
 
     @Enumerated(EnumType.STRING)

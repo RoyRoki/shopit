@@ -1,0 +1,41 @@
+.main_wrap {
+ border: 2px solid var(--bs-bd1);
+ min-height: 160px;
+}
+
+.product_wrap {
+ width: 90%;
+ color: var(--bs-tx1);
+ font-size: 1rem;
+ display: flex;
+ gap: 40px;
+ padding: 16px;
+}
+
+.img_wrap {
+ width: 80px;
+ height: 80px;
+}
+
+.img_frame {
+ width: 100%;
+ height: 100%;
+ background-size: cover;
+}
+
+.demo_img_frame {
+ width: 100%;
+ height: 100%;
+ background-color: var(--bs-bg3); 
+}
+.order_wrap {
+ width: 80%;
+ padding: 16px;
+}
+
+
+.info_wrap {
+ display: flex;
+ justify-content: space-between;
+ color: var(--bs-tx1);
+}

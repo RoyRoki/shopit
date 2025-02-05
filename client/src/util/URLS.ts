@@ -2,6 +2,7 @@ export const urls = {
       adminRegister: 'auth/admin-signup',
       userRegister: 'auth/signup',
       generateOtp: 'auth/generate-otp',
+      generateOtpUnique: 'auth/generate-otp/unique',
       verifyOtp: 'auth/verify-otp',
       loginPass: 'auth/login',
       loginOtp: 'auth/login-verify',
@@ -22,6 +23,8 @@ export const urls = {
       fetchStoreOrders: 'admin/orders',
       deleteProductById: 'admin/delete-product?productId=',
       updateLogoBanner: 'admin/upload-store-logo-banner',
+      getAdminOrders: 'admin/orders',
+      shippedOrderById: 'admin/shipped/',
       
 
       fetchUserDto: 'user/get-user',

@@ -19,6 +19,7 @@ public interface KeywordsRepo extends JpaRepository<Keyword, Long> {
 
     Keyword findByWordContaining(String id);
 
-    @Query(value = "SELECT * FROM keywords WHERE LOWER(word) IN :words", nativeQuery = true)
+    // @Query(value = "SELECT * FROM keywords WHERE LOWER(word) IN :words", nativeQuery = true)
+    @Query(value = "SELECT * FROM keywords WHERE LOWER(word) = ANY(:words)", nativeQuery = true)
     List<Keyword> findAllByWordIgnoreCaseIn(@Param("words") Set<String> words);
-}
+}   

@@ -14,6 +14,7 @@ import com.eshop.Eshop.repository.*;
 import com.eshop.Eshop.service.Interface.UserService;
 import com.eshop.Eshop.util.AuthenticationContextService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -38,17 +39,9 @@ public class UserServiceImp implements UserService {
     @Autowired
     private DTOService dtoService;
 
-    @Autowired
-    private ProductRepo productRepo;
-
+    @Lazy
     @Autowired
     private CartServiceImp cartService;
-
-    @Autowired
-    private DeliveryPartnerService deliveryPartner;
-
-    @Autowired
-    private StoreServiceImp storeService;
 
     @Autowired
     private OrderRepo orderRepo;
@@ -426,29 +419,16 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    private CartItemDTO buildCartItemDTO(Long productId, Integer quantity) {
-        try {
-            Product product = productRepo.findById(productId)
-                    .orElseThrow(() -> new RuntimeException("Product not found for Id: "+productId));
-            ProductDTO productDTO = dtoService.productToProductDTO(product);
-
-            CartItemDTO cartItemDTO = new CartItemDTO();
-            cartItemDTO.setProduct(productDTO);
-            cartItemDTO.setQuantity(quantity);
-
-            return cartItemDTO;
-
-        } catch (Exception e) {
-            // Skip missing products instead of throwing an error for the entire operation.
-            System.out.println("Skipping product ID: \n" + productId +" Reason: \n" + e.getMessage());
-            return null;
-        }
-    }
-
     @Override
     public boolean isUserExist(String email, String mobileNo) {
         if(email != null) return userRepo.existsByEmail(email);
         else if(mobileNo != null) return userRepo.existsByMobileNo(mobileNo);
         else return true;
     }
+
+    @Override
+    public void handleShipped(Order order) {
+        messageService.sentMessageToMobile(order.getUser().getMobileNo(), "Hey "+order.getUser().getUserName()+"\nOrder Shipped id: "+order.getId()+"\n Total cost: "+order.getGrandPrice()); 
+    }
+    
 }

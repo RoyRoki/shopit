@@ -1,15 +1,12 @@
 package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.CartItem;
-import com.eshop.Eshop.model.Store;
 import com.shippo.Shippo;
 import com.shippo.exception.APIConnectionException;
 import com.shippo.exception.APIException;
 import com.shippo.exception.AuthenticationException;
 import com.shippo.exception.InvalidRequestException;
 import com.shippo.model.Address;
-import com.shippo.model.Shipment;
-import com.shippo.model.Transaction;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

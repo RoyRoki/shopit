@@ -2,12 +2,9 @@ package com.eshop.Eshop.service;
 
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.ProductDTO;
-import com.eshop.Eshop.model.dto.TableDto;
 import com.eshop.Eshop.model.dto.requestdto.ProductEditRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
-import com.eshop.Eshop.model.enums.ShippingType;
 import com.eshop.Eshop.repository.CategoryRepo;
-import com.eshop.Eshop.repository.KeywordsRepo;
 import com.eshop.Eshop.repository.ProductRepo;
 import com.eshop.Eshop.service.Interface.ProductService;
 import com.eshop.Eshop.service.helper.CategoryServiceHelper;
@@ -30,9 +27,6 @@ public class ProductServiceImp implements ProductService {
 
     @Autowired
     private CategoryRepo categoryRepo;
-
-    @Autowired
-    private KeywordsRepo keywordsRepo;
 
     @Autowired
     private DTOService dtoService;

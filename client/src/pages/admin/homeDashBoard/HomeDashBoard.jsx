@@ -9,6 +9,7 @@ import NewStorePage from '../newStorePage/NewStorePage'
 import StoreHome from '../storeHome/StoreHome'
 import ProductPage from '../productPage/ProductPage'
 import AdminStoreCard from '../../../components/admin/cards/storeCard/AdminStoreCard'
+import AdminOrdersPage from '../ordersPage/AdminOrdersPage'
 
 const HomeDashBoard = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,10 @@ const HomeDashBoard = () => {
 
         {heroDiv === adminHeroDiv.store && (
           <AdminStoreCard  store={storeDto} onUpdate={handleStoreUpdate}/>
+        )}
+
+        {heroDiv === adminHeroDiv.orders && (
+          <AdminOrdersPage />
         )}
       </div>
     </div>

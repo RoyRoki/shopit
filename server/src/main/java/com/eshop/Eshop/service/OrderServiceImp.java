@@ -7,9 +7,7 @@ import com.eshop.Eshop.model.enums.PayStatus;
 import com.eshop.Eshop.model.enums.PaymentType;
 import com.eshop.Eshop.repository.*;
 import com.eshop.Eshop.service.Interface.OrderService;
-import com.eshop.Eshop.service.helper.CategoryServiceHelper;
-import com.eshop.Eshop.service.helper.KeywordServiceHelper;
-import com.eshop.Eshop.util.AuthenticationContextService;
+import com.eshop.Eshop.service.helper.UpdateServiceHelper;
 import com.eshop.Eshop.util.PaymentService;
 import com.razorpay.RazorpayException;
 import jakarta.transaction.Transactional;
@@ -25,25 +23,7 @@ import java.util.Map;
 public class OrderServiceImp implements OrderService {
 
     @Autowired
-    private StoreRepo storeRepo;
-
-    @Autowired
-    private ProductRepo productRepo;
-
-    @Autowired
-    private CategoryRepo categoryRepo;
-
-    @Autowired
-    private AuthenticationContextService authenticationContextService;
-
-    @Autowired
     private DTOService dtoService;
-
-    @Autowired
-    private CategoryServiceHelper categoryHelper;
-
-    @Autowired
-    private KeywordServiceHelper keywordHelper;
 
     @Autowired
     private UserServiceImp userService;
@@ -55,9 +35,6 @@ public class OrderServiceImp implements OrderService {
     private OrderRepo orderRepo;
 
     @Autowired
-    private OrderPerStoreRepo orderPerStoreRepo;
-
-    @Autowired
     private PaymentService paymentService;
 
     @Autowired
@@ -65,6 +42,9 @@ public class OrderServiceImp implements OrderService {
 
     @Autowired
     private StoreServiceImp storeService;
+
+    @Autowired
+    private UpdateServiceHelper updateServiceHelper;
 
     @Value("${payment.com.RAZORPAY_KEY_ID}")
     private String RAZORPAY_KEY_ID;
@@ -206,5 +186,21 @@ public class OrderServiceImp implements OrderService {
         return orderPerStores.stream()
                 .mapToDouble(OrderPerStore::getTotal)
                 .sum();
+    }
+
+    @Override
+    public void handleShipped(Long orderId, Store store) {
+        try {
+            Order order = orderRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Error During fetching order;"));
+            order.setOrderStatus(OrderStatus.SHIPPED);
+            order.setUpdatedAt(LocalDateTime.now());
+
+            orderRepo.save(order);
+
+            // Send Message to use and store
+            updateServiceHelper.handleShippedOrder(order, store);
+        } catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

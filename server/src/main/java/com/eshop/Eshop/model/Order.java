@@ -1,6 +1,5 @@
 package com.eshop.Eshop.model;
 
-import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
 import com.eshop.Eshop.model.enums.PaymentType;
 import jakarta.persistence.*;

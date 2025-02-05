@@ -1,0 +1,89 @@
+.main_wrap {
+      min-height: 560px;
+      width: 80%;
+      background-color: var(--bs-bg1);
+      padding: 40px;
+      border-radius: 8px;
+}
+
+.order_info_wrap {
+      display: flex;
+      justify-content: space-between;
+      color: var(--bs-tx1);
+      font-size: 1.2rem;
+      border-bottom: 2px solid var(--bs-bd1);
+}
+
+.order_items_wrap {
+      margin-top: 40px;
+      position: relative;
+}
+
+.info_wrap {
+      display: flex;
+      gap: 80px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+}
+
+.address_wrap, 
+.customer_wrap {
+      margin: 20px 0 0 4px;
+}
+.address_wrap h2,
+.customer_wrap h2 {
+      border-left: 4px solid var(--bs-blue);
+      padding-left: 4px;
+      font-weight: 600;
+      color: var(--bs-tx2);
+}
+.address_info,
+.customer_info {
+      padding-left: 20px;
+}
+
+.address_info p,
+.customer_info p {
+      color: var(--bs-tx3);
+}
+
+.address_info span,
+.customer_info span {
+      color: var(--bs-tx1);
+}
+
+.action_wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+}
+
+.ship_button {
+      border: 2px solid var(--bs-bd1);
+      padding: 4px 0 4px 0;
+      width: 50%;
+      background-color: var(--bs-btn1);
+      border-radius: 8px;
+      box-shadow: var(--bs-box-shadow1);
+      color: var(--bs-accent-tx);
+      font-size: large;
+}
+
+.others_info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--bs-tx2);
+}
+
+.total_wrap {
+      display: flex;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--bs-tx1);
+      margin-top: 20px;
+      border-bottom: 2px solid var(--bs-tx3);
+      width: fit-content;
+      padding-right: 40px;
+}

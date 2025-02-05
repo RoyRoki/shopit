@@ -6,7 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 import { request } from '../../../../helper/AxiosHelper'
 import { urls } from '../../../../util/URLS'
 
-const AdminHeroProduct = ({ product, onDelete }) => {
+const AdminHeroProduct = ({ product, onDelete, onEdit, onMediaEdit }) => {
 
   const [deleting, setDeleting] = useState(false);
 
@@ -26,7 +26,7 @@ const AdminHeroProduct = ({ product, onDelete }) => {
   return (
     <div className={styles.main_wrap}>
       <div className={`${styles.product_box} ${!deleting ? '' : styles.deleting}`}>
-        <AdminProductCard product={product} />
+        <AdminProductCard product={product} onEdit={onEdit} onMediaEdit={onMediaEdit} />
       </div>
       <div className={styles.action_wrap}>
         <div className={styles.delete_btn}>

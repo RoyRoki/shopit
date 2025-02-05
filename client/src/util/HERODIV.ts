@@ -3,7 +3,7 @@ export const adminHeroDiv = {
       store: 1,
       addProduct: 2,
       allProduct: 4,
-
+      orders: 5,
 }
 
 export const adminStorePage = {
@@ -21,6 +21,11 @@ export const adminEditProduct = {
       basic: 0,
       other: 1,
       media: 2
+}
+export const adminOrdersState = {
+      pending: 0,
+      shipped: 1,
+      all: 2
 }
 export const userHeroDiv = {
       home: 0,
