@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { AuthContext } from '../context';
+import { AuthContext } from '../../context';
 import { replace, useNavigate } from 'react-router-dom';
-import { role } from '../util/ROLE';
+import { role } from '../../util/ROLE';
 
 const UnknownPath = () => {
       const { auth } = useContext(AuthContext);

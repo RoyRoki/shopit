@@ -1,9 +1,8 @@
 import React from 'react'
-import { Navigate, replace, Route, Routes } from 'react-router-dom'
-import UnknownPath from '../../pages/UnknownPath'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import UnknownPath from '../../pages/other/UnknownPath'
 import UserHomePage from '../../pages/user/homePage/UserHomePage'
 import UserCartPage from '../../pages/user/cart/UserCartPage'
-import TestPage from '../../../test/page/TestPage'
 import UserOrdersPage from '../../pages/user/order/UserOrdersPage'
 import UserDetailsUpdatePage from '../../pages/user/userUpdate/auth/UserDetailsUpdatePage'
 import UserAddressUpdatePage from '../../pages/user/userUpdate/address/UserAddressUpdatePage'
@@ -26,7 +25,6 @@ const UserLayout = () => {
         <Route path='/wishlist' element={<UserWishListPage />} />
         <Route path='/forget-pass' element={<ForgetPasswordPage />} />
         <Route path='/logout' element={<h1>Logout</h1>} />
-        <Route path='/test' element={<TestPage />} />
       </Routes>
     </div>
   )

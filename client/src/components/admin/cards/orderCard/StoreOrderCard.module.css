@@ -4,6 +4,7 @@
       background-color: var(--bs-bg1);
       padding: 40px;
       border-radius: 8px;
+      margin-top: 40px;
 }
 
 .order_info_wrap {

@@ -110,8 +110,8 @@ public class AdminController {
     @PostMapping("/add-product")
     public ResponseEntity<?> addProduct(@RequestBody AddProductRequestDTO addProductRequest) {
         try {
-            ProductResponseDTO responseDTO = storeService.addProduct(addProductRequest);
-            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+            ProductDTO savedProduct = storeService.addProduct(addProductRequest);
+            return new ResponseEntity<>(savedProduct, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Product creation failed", HttpStatus.BAD_REQUEST);
         }

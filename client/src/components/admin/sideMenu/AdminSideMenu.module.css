@@ -42,6 +42,7 @@
       background-color: var(--bs-accent);
 }
 
+
 .nav_item:hover {
       background-color: var(--bs-accent);
 }
@@ -50,4 +51,10 @@
       width: 50%;
       height: 50%;  
       color: var(--bs-tx1);
+}
+.nav_item_focus svg,
+.nav_item:hover svg {
+      width: 50%;
+      height: 50%;  
+      color: var(--bs-accent-tx);      
 }

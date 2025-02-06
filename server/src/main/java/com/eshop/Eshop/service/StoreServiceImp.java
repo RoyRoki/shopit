@@ -70,7 +70,7 @@ public class StoreServiceImp implements StoreService {
     }
 
     @Override
-    public ProductResponseDTO addProduct(AddProductRequestDTO productRequest) {
+    public ProductDTO addProduct(AddProductRequestDTO productRequest) {
         try {
             Long admin_id = authenticationContextService.getAuthenticatedUserId();
             Store store = storeRepo.findByOwnerId(admin_id)
@@ -95,7 +95,7 @@ public class StoreServiceImp implements StoreService {
                     .build();
 
             Product savedProduct = productRepo.save(newProduct);
-            return dtoService.productToResponseDto(savedProduct);
+            return dtoService.productToProductDTO(savedProduct);
 
         } catch (Exception e) {
             throw new RuntimeException("StoreServiceImp-addProduct-error " + e.getMessage());

@@ -59,7 +59,7 @@ const AddProductForm = ({ onComplete }) => {
             <div className={styles.form_row}>
             <div className={styles.form_input_box}>
                         <label >Discount In %</label>
-                        <input type="number" {...register("discount")} />
+                        <input type="number" {...register("discount")} defaultValue={0} />
             </div>                  
             </div> 
             <div className={styles.form_row}>

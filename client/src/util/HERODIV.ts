@@ -23,7 +23,7 @@ export const adminEditProduct = {
       media: 2
 }
 export const adminOrdersState = {
-      pending: 0,
+      new: 0,
       shipped: 1,
       all: 2
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import UnknownPath from '../../pages/UnknownPath'
+import UnknownPath from '../../pages/other/UnknownPath'
 import HomeDashBoard from '../../pages/admin/homeDashBoard/HomeDashBoard'
 
 const AdminLayout = () => {

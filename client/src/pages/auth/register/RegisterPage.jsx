@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { AuthContext } from '../../context';
-import AdminRegister from '../../components/auth/register/AdminRegister';
-import UserRegister from '../../components/auth/register/UserRegister';
+import { AuthContext } from '../../../context';
+import AdminRegister from '../../../components/auth/register/AdminRegister';
+import UserRegister from '../../../components/auth/register/UserRegister';
 import styles from './Register.module.css'
-import Navber from '../../components/home/navber/Navber';
+import Navber from '../../../components/home/navber/Navber';
 
 export const RegisterPage = () => {
       const { auth } = useContext(AuthContext);

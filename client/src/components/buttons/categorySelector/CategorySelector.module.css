@@ -1,3 +1,8 @@
 .wrap {
       color: var(--bs-tx2);
 }
+
+label,
+input {
+      cursor: pointer;
+}

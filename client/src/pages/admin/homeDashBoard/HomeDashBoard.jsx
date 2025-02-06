@@ -41,7 +41,7 @@ const HomeDashBoard = () => {
   return (
     <div className={styles.main}>
       <div className={styles.side_bar_wrap}>
-            <AdminSideMenu curr={heroDiv} setHeroDiv={setHeroDiv} notify={true} />
+            <AdminSideMenu curr={heroDiv} setHeroDiv={setHeroDiv} />
       </div>
       <div className={styles.hero_section}>
         {heroDiv === adminHeroDiv.home && (

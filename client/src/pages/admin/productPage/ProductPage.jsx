@@ -31,12 +31,10 @@ const ProductPage = ({ store, state }) => {
 
   const handleAddProduct = async (product) => {
     setEditProduct(product);
-    setPageState(adminProductPageState.editProduct);
   }
 
   const handleProductEdit = (product) => {
     setEditProduct(product);
-    setPageState(adminProductPageState.editProduct);
   }
 
   const handleMediaEdit = (product) => {
@@ -54,6 +52,12 @@ const ProductPage = ({ store, state }) => {
     dispatch(fetchStoreProducts());
     setPageState(adminProductPageState.allProducts);
   }
+
+  useEffect(() => {
+    if(editProduct) {
+      setPageState(adminProductPageState.editProduct);
+    }
+  }, [editProduct]);
 
   return (
     <div className={styles.main_page}>

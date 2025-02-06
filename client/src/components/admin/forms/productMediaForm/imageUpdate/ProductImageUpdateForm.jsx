@@ -88,7 +88,7 @@ const ProductImageUpdateForm = ({ productId, savedUrls, onComplete }) => {
     <div className={styles.main_form_wrap}>
       <div className={styles.saved_images}>
         <div className={styles.saved_imgs_wrap}>
-          {savedUrls.map((url, index) => (
+          {savedUrls?.map((url, index) => (
             <div key={index} className={styles.saved_img_frame_wrap}>
               <div
                   className={`${styles.saved_img_frame} 

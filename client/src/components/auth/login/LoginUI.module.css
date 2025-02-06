@@ -5,15 +5,18 @@
  background-color: var(--bs-box-bg);
  box-shadow: var(--bs-box-shadow);
  margin: 20px 0;
- row-gap: 50px;
+ row-gap: 24px;
  border-radius: 10px;
 }
 
 .main_container h2 {
-      padding: 10px 50px 0;
-      font-size: 1.2rem;
+      margin-top: 24px;
+      margin-left: 40px;
+      padding: 0 16px;
+      font-size: 1.5rem;
       font-weight: 800;
-      color: var(--bs-tx1);
+      border-bottom: 2px solid var(--bs-bd1);
+      width: fit-content;
 }
 
 .main_container form {
@@ -25,6 +28,16 @@
 
 .main_container .form_row {
       margin: 10px 0;
+      position: relative;
+}
+
+.error {
+      position: absolute;
+      bottom: -4px;
+      font-size: 0.8rem;
+      color: var(--bs-red);
+      border-left: 2px solid var(--bs-red);
+      padding-left: 4px;
 }
 
 .main_container .form_row .form_input_box {
@@ -76,6 +89,13 @@
       display: flex;
       flex-direction: row;
       cursor: pointer;
+      margin-bottom: 40px;
+}
+.pass_box span {
+      padding: 8px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
 }
 .main_container .form_row .form_input_box .pass_box .pass_show {
       transform: translateX(-25px);
@@ -83,24 +103,27 @@
 .main_container .form_row .form_input_box .pass_box .pass_hide {
       transform: translateX(-25px);
 }
-/* .main_container .form_submit_box {
-} */
-
-.main_container .form_submit_box .form_submit_button {
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      background-color: var(--bs-secondary);
-      border: 2px solid var(--bs-tx2);
-      color: var(--bs-tx1);
-      padding: 5px;
-      width: 80px;
-
-      transition: all 1s ease;
+.main_container .form_submit_box {
+      width: calc(100% - 50px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
-.main_container .form_submit_box .form_submit_button:hover {
-      border-color: var(--bs-tx);
+.main_container .form_submit_box .form_submit_button {
+      border-radius: 8px;
+      border: 2px solid var(--bs-accent);
+      color: var(--bs-accent);
+      font-weight: 600;
+      font-size: 1.2rem;
+      width: 70%;
+      height: 48px;
+      transition: all 0.3s ease;
+}
+
+.form_submit_button:hover {
+      background-color: var(--bs-accent);
+      color: var(--bs-accent-tx1) !important;
 }
 
 .login_method_box {
@@ -111,12 +134,13 @@
 
 .login_method_box .login_mth_btn {
       font-size: 0.8rem;
-      border-bottom: 2px solid var(--bs-tx1);
+      color: var(--bs-blue);
+      border-bottom: 2px solid var(--bs-bd1);
       transition: border 0.2s ease-in-out;
 }
 
 .login_method_box .login_mth_btn:hover {
-      border-bottom: 2px solid var(--bs-accent);
+      border-bottom: 2px solid var(--bs-blue);
 }
 /* 
 .get_otp_box {
