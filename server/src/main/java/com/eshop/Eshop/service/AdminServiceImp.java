@@ -87,6 +87,7 @@ public class AdminServiceImp implements AdminService {
                     .description(requestDTO.getDescription())
                     .houseNo(requestDTO.getHouseNo())
                     .city(requestDTO.getCity())
+                    .street(requestDTO.getStreet())
                     .state(requestDTO.getState())
                     .pinCode(requestDTO.getPinCode())
                     .landmark(requestDTO.getLandmark())

@@ -1,6 +1,6 @@
 .main_wrap {
       width: 560px;
-      height: 720px;
+      min-height: 720px;
       margin-bottom: 104px;
       background-color: var(--bs-bg1);
       box-shadow: var(--bs-box-shadow1);
@@ -18,6 +18,17 @@
 .form_row {
       width: 80%;
       margin: 10px 0;
+      position: relative;
+      margin-bottom: 40px;
+}
+
+.error {
+      position: absolute;
+      bottom: -24px;
+      font-size: 0.8rem;
+      color: var(--bs-red);
+      border-left: 2px solid var(--bs-red);
+      padding-left: 4px;
 }
 
 .form_input_box {
@@ -60,13 +71,16 @@
 }
 
 .action_box {
+      margin-top: 40px;
+      margin-right: 24px;
       display: flex;
-      padding: 0 40px 0 8px;
-      justify-content: space-between;
+      justify-content: center;
 }
 
 .action_box button {
       color:var(--bs-tx1);
+      width: 50%;
+      height: 40px;
       border: 2px solid var(--bs-bd1);
       padding: 0 4px 0 4px;
       border-radius: 8px;

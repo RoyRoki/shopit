@@ -17,6 +17,7 @@ public class AuthenticationContextService {
     @Autowired
     private StoreRepo storeRepo;
 
+    // @Todo add try catch
     public Long getAuthenticatedUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String user_id = authentication.getName();

@@ -70,6 +70,8 @@ const InfoTableInput = ({ tableDto, onComplete }) => {
                   {table.headers.map((header, index) => (
                         <input
                          type="text"
+                         maxLength={25}
+                         minLength={8}
                          key={index}
                          value={header}
                          onChange={(e) =>{e.preventDefault(); handleHeaderChange(index, e.target.value)} }
@@ -92,6 +94,8 @@ const InfoTableInput = ({ tableDto, onComplete }) => {
                               {row.map((cell, cellIndex) => (
                                     <input 
                                       type="text"
+                                      minLength={8}
+                                      maxLength={100}
                                       key={cellIndex}
                                       value={cell}
                                       onChange={(e) => {e.preventDefault(); handleRowChange(rowIndex, cellIndex, e.target.value)} } 

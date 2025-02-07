@@ -330,6 +330,12 @@ const UserOrdersPage = ({ state }) => {
                   )}
                 </div>
               ))}
+              {ordersList.length === 0 && (
+                //@Fix style it
+                <div>
+                  No Order
+                </div>
+              )}
             </div>
           ) : (
             <div>loading</div>

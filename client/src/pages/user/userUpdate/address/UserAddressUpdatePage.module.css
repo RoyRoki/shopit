@@ -11,13 +11,14 @@
 .header {
       width: 100%;
       padding-left: 10%;
-      margin-bottom: 80px;
+      margin-bottom: 24px;
       font-size: larger;
       font-weight: 600;
       color: var(--bs-tx1);
 }
 .header span {
       cursor: pointer;
+      border-bottom: 3px solid var(--bs-bd1);
 }
 .header span:hover {
       color: var(--bs-blue);
@@ -100,7 +101,7 @@
 
 .address_form_wrap {
       background-color: var(--bs-bg4);
-      margin-top: 40px;
+      margin-top: 8px;
       position: relative;
       padding: 8px;
       padding-bottom: 16px;
@@ -134,13 +135,23 @@
 
 .form_row {
       width: 80%;
-      margin: 10px 0;
+      margin: 16px 0;
+      position: relative;
+}
+
+.error {
+      position: absolute;
+      bottom: -18px;
+      font-size: 0.8rem;
+      color: var(--bs-red);
+      border-left: 2px solid var(--bs-red);
+      padding-left: 4px;
 }
 
 .form_input_box {
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
 }
 
 

@@ -31,6 +31,12 @@
       margin-bottom: 20px;
 }
 
+.error {
+      font-size: 0.8rem;
+      color: var(--bs-red);
+      border-left: 2px solid var(--bs-red);
+      padding-left: 4px;
+}
 
 .form_input_box label {
       margin-bottom: 5px;

@@ -1,5 +1,6 @@
 
 header {
+      height: 96px;
       padding: 18.5px;
       background-color: var(--bs-bg2);
 }
@@ -69,6 +70,8 @@ header {
       padding: 10px 20px;
       font-size: 0.9rem;
       transition: color 0.3s ease-in-out;
+      overflow: hidden;
+      text-wrap: nowrap;
 }
 
 .header_wrap .htd_logo_nav  .hdt_nav .menu_wrap .hdt_menu a:hover {
