@@ -4,15 +4,15 @@
 }
 
 .main_content  .main_banner {
-      width: 80%;
-      height: 580px;
-      margin: 40px auto 80px auto;
+      width: 100%;
+      height: 688px;
+      margin: 0 auto 0 auto;
 }
 
 .main_content  .best_section {
-      height: 500px;
+      height: auto;
       width: 100%;
-      background-color: var(--bs-bg3);
+      background-color: var(--bs-nav-bg);
       padding: 80px 40px 80px 40px;
 }
 
@@ -26,12 +26,3 @@
       margin-bottom: 160px; 
 }
 
-.main_content  .img_sub_hero_groups {
-      height: 800px;
-      width: 100%;
-      background-color: var(--bs-bg3);
-      display: flex;
-      justify-content: space-around;
-      gap: 24px;
-      padding: 80px 80px 80px 80px; 
-}

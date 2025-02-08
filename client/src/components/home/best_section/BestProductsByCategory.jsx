@@ -10,7 +10,7 @@ import ProductShowCaseMiniCard from '../../cards/productMiniCard/ProductShowCase
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const BestProductsByCategory = ({ category_id, header }) => {
+const BestProductsByCategory = ({ category_id, header, max }) => {
       const dispatch = useDispatch();
       const navigate = useNavigate();
 
@@ -63,13 +63,12 @@ const BestProductsByCategory = ({ category_id, header }) => {
     <div className={styles.main_box} >
       <div className={styles.header_box} onClick={() => navigate(`/home?category_id=${category_id}`)}>
             <h2>{header || "Header"}<span>see more...</span></h2>
-            <FontAwesomeIcon icon={faCircleChevronDown} className={styles.header_more_icon} />
       </div>
 
 
       <div className={styles.products_wrap}>
             { Array.isArray(products) && products.length > 0 ? (
-                  products?.slice(0,10).map((product, index) => (
+                  products?.slice(0,max || 4).map((product, index) => (
                         <div className={styles.product_box} key={index}>
                               <button 
                                     onClick={() => showProductHero(product)} 
@@ -104,7 +103,8 @@ const BestProductsByCategory = ({ category_id, header }) => {
                         </div>        
                   </>
             )}
-      </div>        
+      </div>     
+   
 
     </div>
   )

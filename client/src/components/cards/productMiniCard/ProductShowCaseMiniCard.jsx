@@ -15,7 +15,6 @@ const ProductShowCaseMiniCard = ({ product }) => {
             }
             {!product.imageUrls?.[0] && (
                   <div className={styles.no_img_box}>
-                        No Image
                   </div>
             )}
       </div>
@@ -24,7 +23,7 @@ const ProductShowCaseMiniCard = ({ product }) => {
                 {product.productName || 'Name'}
             </div>
             <div className={styles.prices_line}>
-                  <p>{`M.R.P.: ₹${(product.prices - product.prices * product.discount) || '000'}`}</p>
+                  <p>{`₹${(product.prices - product.prices * product.discount) || '000'}`}</p>
             </div>
       </div>
     </div>

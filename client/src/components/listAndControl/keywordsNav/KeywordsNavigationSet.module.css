@@ -10,6 +10,7 @@
 
 .nav_link {
       color: var(--bs-blue);
+      cursor: pointer;
 }
 
 .nav_link:hover > span{

@@ -5,7 +5,7 @@ import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 
-const HomeSearchBar = ({ onFocused }) => {
+const HomeSearchBar = ({ onFocused, isFocused }) => {
 
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -27,7 +27,7 @@ const HomeSearchBar = ({ onFocused }) => {
   }, [searchParams, onFocused]);
 
   return (
-    <div className={styles.search_box}>
+    <div className={`${styles.search_box} ${isFocused && styles.search_box_focus}`}>
       <FontAwesomeIcon 
         color='var(--bs-tx)' 
         icon={faMagnifyingGlass}

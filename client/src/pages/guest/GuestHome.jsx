@@ -56,7 +56,7 @@ export const GuestHome = () => {
 
                         {/*Default container*/}
                         {!key && !query && !category_id && !product_id && !store_id && (
-                              <DefaultContainer />              
+                              <DefaultContainer withBanner={true} />              
                         )}
                   </div>
             </div>

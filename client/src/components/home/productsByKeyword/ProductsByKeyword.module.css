@@ -1,6 +1,6 @@
 .main_box {
       background-color: var(--bs-bg3);
-      margin: 80px 40px 80px 40px;
+      padding: 80px 40px 80px 40px;
       min-height: 800px;
 }
 
@@ -13,16 +13,16 @@
 
 .main_box .products_show_box .products_show_header {
       padding: 16px;
-      margin-bottom: 24px;
-      font-size: 1.3rem;
+      font-size: 2.25rem;
       font-weight: 800;
-      font-style: italic;
-      color: var(--bs-tx);
+      font-family: var(--bs-h-ff);
+      color: var(--bs-htx);
       width: fit-content;
-      border-bottom: 2px solid var(--bs-accent);
 }
 
+
 .main_box .products_show_box .products_wrap {
+      margin-top: 80px;
       width: 100%;
       display: flex;
       flex-wrap: wrap;

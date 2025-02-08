@@ -1,15 +1,21 @@
 
 header {
-      height: 96px;
       padding: 18.5px;
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-nav-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 .header_wrap {
       display: flex;
+      width: 1536px;
       justify-content: space-between;
-      margin-left: 40px;
+      margin:0 40px 0 40px;
       gap: 40px;
+      height: 3rem;
+      padding-top: .375rem;
+      padding-bottom: .375rem;
 }
 
 .header_wrap .htd_logo_nav {
@@ -26,17 +32,13 @@ header {
       color: var(--bs-tx);
       list-style: none;
       padding: 0 20px 5px 0;
-      transition: color 0.3s ease-in-out;
-}
-
-.header_wrap .htd_logo_nav  .hdt_logo:hover {
-      color: var(--bs-accent);
+      cursor: pointer;
 }
 
 .header_wrap .htd_logo_nav  .hdt_logo a {
-  font-family: "fantasy";
-  font-weight: 400;
-  font-size: 1.7rem;
+  font-family: var(--bs-h-ff);
+  font-weight: 500;
+  font-size: 2rem;
   font-style: normal;
 }
 
@@ -67,17 +69,14 @@ header {
 }
 
 .header_wrap .htd_logo_nav  .hdt_nav .menu_wrap .hdt_menu a {
+      font-family: var(--bs-h-ff);
       padding: 10px 20px;
-      font-size: 0.9rem;
+      font-size: 1rem;
       transition: color 0.3s ease-in-out;
       overflow: hidden;
       text-wrap: nowrap;
+      cursor: pointer;
 }
-
-.header_wrap .htd_logo_nav  .hdt_nav .menu_wrap .hdt_menu a:hover {
-      color: var(--bs-accent);
-}
-
 
 .header_wrap .hdt_option {
       padding-right: 5%;
@@ -94,10 +93,10 @@ header {
       transition: width 0.5s ease-in-out, margin-right 0.5s ease;
 }
 
-.header_wrap .hdt_option .htd_search_bar_focused {
+/* .header_wrap .hdt_option .htd_search_bar_focused {
       width: 700px;
-      margin-right: 80px;
-}
+      margin-right: 16px;
+} */
 
 .header_wrap .hdt_option .hdt_buttons {
       display: flex;
@@ -109,23 +108,26 @@ header {
 }
 
 .header_wrap .hdt_option .hdt_buttons a {
+      font-family: var(--bs-h-ff);
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 0 20px;
-      transition: color 0.2s ease-in-out;
+      cursor: pointer;
 }
 
-.header_wrap .hdt_option .hdt_buttons a:hover {
-      color: var(--bs-accent);
+.hdt_buttons a svg {
+      color: inherit;
+      transition: color 0.3s ease;
 }
+
 
 .header_wrap .hdt_nav .menu_wrap .hdt_menu .nav_link_pending {
   color: var(--bs-gray);
 }
 
 .header_wrap .hdt_nav .menu_wrap .hdt_menu .nav_link_action {
-      color: var(--bs-tx);
+      color: var(--bs-lnk-tx-hv);
       border-bottom: 2px solid var(--bs-accent);
 }
 

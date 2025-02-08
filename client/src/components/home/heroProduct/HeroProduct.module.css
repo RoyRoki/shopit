@@ -1,5 +1,5 @@
 .main_wrap {
-      background-color: var(--bs-bg3);  
+      background-color: var(--bs-nav);  
       width: 100%;
       height: 960px;
       padding: 40px 80px 80px 80px;
@@ -23,7 +23,7 @@
       width: 80%;
       margin: 0 auto;
       display: flex;
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card1-bg);
       border-radius: 15px;
       padding: 16px;
       transform: translateY(-100px);
@@ -59,7 +59,8 @@
       justify-content: center;
       align-items: center;
       gap: 10%;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      cursor: pointer;
       color: var(--bs-accent-tx1);
       box-shadow: var(--bs-box-shadow3);
       border-radius: 8px;
@@ -104,7 +105,7 @@
       margin-left: 8px;
 }
 
-.main_container .hero_container .product_header .gallery_box .hero_img_wrap .hero_img_frame {
+.gallery_box .hero_img_wrap .hero_img_frame {
       width: 100%;
       height: 100%;
       background-repeat: no-repeat;
@@ -170,6 +171,7 @@
 .main_container .hero_container .product_meta .store_info {
       margin: 16px 0 8px 0;
       width: fit-content;
+      cursor: pointer;
 }
 
 .product_meta .store_info button {
@@ -211,7 +213,8 @@
 
 .main_container .hero_container .product_meta .description p {
       color: var(--bs-tx1);
-      margin-bottom: 4px;
+      font-weight: 500;
+      margin-bottom: 8px;
 }
 
 
@@ -224,7 +227,7 @@
 }
 .main_container .hero_container .product_meta .keyword_wrap p {
       color: var(--bs-tx1);
-      margin-bottom: 4px;      
+      margin-bottom: 4px;     
 }
 
 /* Cart Notification */
@@ -317,6 +320,9 @@
 .action_btn_wrap  button {
       border: 2px solid var(--bs-tx2);
       width: 60%;
+      display: flex;
+      justify-content: center;
+      align-self: center;
       border-radius: 15px;
       padding: 4px 0 4px 0;
 }

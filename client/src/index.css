@@ -1,8 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
+
+  --bs-nav-bg: #ffffff;
+
+  --bs-htx: #000000;
+  --sub-htx: #0f172a;
+  --bs-hlg: #797979;
+  --bs-hlg-hv: #404040;
+
+  --bs-lnk-tx: #4d5b6e;
+  --sub-lnk-tx: #334155;
+  --bs-lnk-tx-hv: #000000;
+
+  --bs-h-ff:  'Poppins', sans-serif;
+  --sub-h-ff: 'Roboto', sans-serif;
+
+  --bs-text-imp: #171717;
+  --bs-text-imp-hv: #262629e1;
+
+  --bs-btn1-bg: #0f172a;
+  --bs-btn1-tx: #ffffff;
+  --bs-btn1-bg-hv: #1e293b;
+
+  --bs-card1-bg: #f1f1f1;
+  --bs-card2-bg: #f7f7f9;
+
+  --bs-ring-color: rgba(59, 130, 246, .5);
+  --bs-money-green: #22c55e;
+
   --bs-bg1: #ffffff;
   --bs-bg2: #efefef;
   --bs-bg3: #ebebeb;
@@ -14,7 +38,7 @@
   --bs-bg4: #f0f0f0;
   --bs-bg5: #e8e7ee;
 
-  --bs-accent: #1097b3;
+  --bs-accent: #0ea5e9;
   --bs-accent-tx: #292929;
   --bs-accent-tx1: #ffffff;
 
@@ -35,6 +59,9 @@
   --bs-success: #198754;
 
   --bs-op1: 1;
+
+  --bs-ber: #ffffff;
+  --bs-ber-active: #0f172a;
 
   --bs-blue: #0d6efd;
   --bs-blue2: #0045ad;
@@ -64,9 +91,36 @@
 }
 
 [data-theme="dark"] {
-  --bs-bg1: #0d0d0d;
+
+  --bs-nav-bg: #0f172a;
+  
+  --bs-htx: #ffffff;
+  --sub-htx: #e2e8f0;
+  --bs-hlg: #94a3b8;
+  --bs-hlg-hv: #64748b;
+
+  --bs-lnk-tx: #cbd5e1;
+  --sub-lnk-tx: #94a3b8;
+  --bs-lnk-tx-hv: #ffffff;
+
+  --bs-h-ff: 'Poppins', sans-serif;
+  --sub-h-ff: 'Roboto', sans-serif;
+
+  --bs-text-imp: #e2e8f0;
+  --bs-text-imp-hv: #f1f5f9;
+
+  --bs-btn1-bg: #1e293b;
+  --bs-btn1-tx: #ffffff;
+  --bs-btn1-bg-hv: #334155;
+
+  --bs-card1-bg: #1e293b;
+  --bs-card2-bg: #334155;
+
+
+
+  --bs-bg1: #0c1831;
   --bs-bg2: #1c1b1b;
-  --bs-bg3: #272626;
+  --bs-bg3: #0e0e0f;
   --bs-bg4: #242323;
   --bs-bg5: #333333;
   --bs-tx: #f5f5f5;
@@ -106,33 +160,15 @@ html,
 body {
   height: 100%;
   overflow: auto;
-  background-color: var(--bs-bg1);
+  background-color: var(--bs-card1-bg);
+  font-family: 'Roboto', sans-serif;
+  color: var(--bs-tx);
 }
 
-@keyframes dynamicBorder {
-  0% {
-    border-color: red;
-  }
-  25% {
-    border-color: orange;
-  }
-  50% {
-    border-color: yellow;
-  }
-  75% {
-    border-color: green;
-  }
-  100% {
-    border-color: blue;
-  }
+button, a, h1, h2, h3 {
+  all: unset;
 }
 
-.debug {
-  margin: 20px;
-  border: 3px solid red;
-  animation: dynamicBorder 2s infinite;
-  padding: 2px;
-}
-.debug :hover {
-  box-shadow: 2px 2px 5px black;
+button {
+  cursor: pointer;
 }

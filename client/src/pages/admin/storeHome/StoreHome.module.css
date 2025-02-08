@@ -66,13 +66,22 @@
       padding-left: 24px;
 }
 .name {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--bs-tx1);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--bs-tx1);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+
 .header {
       font-size: large;
       color: var(--bs-success);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
 }
 .edit_wrap {
       margin-right: 16px;

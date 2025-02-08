@@ -1,8 +1,8 @@
 .main {
-      height: auto;
+      height: 100%;
       width: 100vw;
-      background-color: var(--bs-bg1);
 }
 
 .main .main_container {
+      height: 100%;
 }

@@ -1,19 +1,20 @@
 .main_box {
-      background-color: var(--bs-bg3);
-      margin: 80px 40px 80px 40px;
+      background-color: var(--bs-card1-bg);
+      padding: 80px;
       height: 100%;
 }
 
 .header_box {
       padding: 24px 0 16px 0;
       margin-left: 16px;
-      border-bottom: 2px solid var(--bs-accent);
+      margin-bottom: 40px;
       width: fit-content;
 }
 .header_box h2{
-      color: var(--bs-tx1);
-      font-size: 1.5rem;
+      color: var(--bs-htx);
+      font-size: 2.25rem;
       font-weight: 500;
+      font-family: var(--bs-h-ff);
       text-shadow: 0.1px 0.1px 0 currentColor;
 }
 

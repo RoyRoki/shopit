@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Navber.module.css";
 import { NavLink, Link } from "react-router-dom";
-import { isAction, isPending } from "@reduxjs/toolkit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ThemeToggleButton from "../../buttons/toggleButton/ThemeToggleButton";
 import HomeSearchBar from "../../searchbar/HomeSearchBar";
-import CategorySearch from "../../buttons/categorySearch/CategorySearch";
+import ExploreBox from "../exploreBox/ExploreBox";
 
 const Navber = ({ isLogged }) => {
   const [isSearchBarFocused, setIsSearchBarFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <header>
       <div className={styles.header_wrap}>
@@ -27,7 +28,7 @@ const Navber = ({ isLogged }) => {
                     : " "
                 }
               >
-                SHopIt
+                ShopIt
               </NavLink>
             </li>
           </div>
@@ -39,7 +40,7 @@ const Navber = ({ isLogged }) => {
             <div className={styles.menu_wrap}>
               <ul className={styles.hdt_menu}>
                 <li>
-                  <CategorySearch />
+                  <ExploreBox isOpen={isOpen} setIsOpen={setIsOpen} />
                 </li>
                 {!isLogged && (
                   <>
@@ -99,22 +100,6 @@ const Navber = ({ isLogged }) => {
                     </li>
                   </>
                 )}
-                <li>
-                  <NavLink
-                    to={`/about`}
-                    className={({ isActive, isPending }) =>
-                      `${
-                        isActive
-                          ? styles.nav_link_action
-                          : isPending
-                          ? styles.nav_link_pending
-                          : styles.nav_link_default
-                      }`
-                    }
-                  >
-                    About
-                  </NavLink>
-                </li>
               </ul>
             </div>
           </div>
@@ -125,23 +110,26 @@ const Navber = ({ isLogged }) => {
               isSearchBarFocused ? styles.htd_search_bar_focused : " "
             }`}
           >
-            <HomeSearchBar onFocused={setIsSearchBarFocused} />
+            <HomeSearchBar onFocused={setIsSearchBarFocused} isFocused={isSearchBarFocused}/>
           </div>
           <div className={styles.hdt_buttons}>
-            <Link to={`/${!isLogged ? "login" : "home?profile_view=true"}`}>
-              <FontAwesomeIcon
-                icon={faUser}
-                style={{
-                  color: `${
-                    new URLSearchParams(location.search).get("profile_view") ===
-                    "true"
-                      ? "var(--bs-accent)"
-                      : ""
-                  }`,
-                }}
-              />
-              Profile
-            </Link>
+            {isLogged && (
+              <Link to={`/${!isLogged ? "login" : "home?profile_view=true"}`}>
+                <FontAwesomeIcon
+                  icon={faUser}
+                  style={{
+                    color: `${
+                      new URLSearchParams(location.search).get(
+                        "profile_view"
+                      ) === "true"
+                        ? "var(--bs-accent)"
+                        : ""
+                    }`,
+                  }}
+                />
+                Profile
+              </Link>
+            )}
             <Link to={"/cart"}>
               <FontAwesomeIcon
                 icon={faCartShopping}

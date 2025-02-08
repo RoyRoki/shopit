@@ -16,17 +16,87 @@
       left: 0;
       opacity: 0;
       z-index: 0;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 0.8s ease-in-out; 
+}
+.slider_show .inner_wrap {
+      display: none;
+}
+.slider_show_active .inner_wrap {
+      margin: 8% auto auto 16%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 104px;
+      position: relative;
+      animation: upMotion;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
 }
 
-.slider .slider_show span{
-      opacity: 0;
-      display: none;
-      transition: opacity 0.5s ease-in-out;
+.info_wrap p {
+      font-family: var(--sub-h-ff);
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding-left: 4px;
+      color: var(--sub-lnk-tx);
+}
+
+.info_header_wrap {
+      display: flex;
+
+      flex-direction: column;
+      font-size: 4.5rem;
+      font-weight: 800;
+      font-family: var(--bs-h-ff);
+      color: var(--bs-accent-tx);
+}
+
+@keyframes upMotion {
+      0% {
+            transform: translate(20px, 40px);
+            opacity: 0;
+      }
+      100% {
+            transform: translate(0, 0);
+            opacity: 1;
+      }
+}
+
+
+@keyframes rightMotion {
+      0% {
+            transform: translateX(-40px);
+            opacity: 0.5;
+      }
+      100% {
+            transform: translateX(0);
+            opacity: 1;
+      }
+}
+
+.slider_show_active .btn_wrap {
+      width: 216px;
+      height: 72px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      font-size: 1.15rem;
+      font-family: var(--bs-h-ff);
+      font-weight: 600;
+      border-radius: 50px;
+      background-color: var(--bs-btn1-bg);
+      color: var(--bs-btn1-tx);
+     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+     cursor: pointer;
+}
+
+.slider_show_active .btn_wrap:hover {
+      background-color: var(--bs-btn1-bg-hv);
 }
 
 .slider .slider_show_active span {
-      display: none; /*@Fix*/
+      display: none;
       color: var(--bs-tx);
       opacity: 1;
       font-size: 1rem;
@@ -39,6 +109,9 @@
 .slider .slider_show_active {
       opacity: 1;
       z-index: 1;
+      animation: rightMotion;
+      animation-duration: 1s;
+      animation-fill-mode: both;     
 }
 
 .slider .arrow_left {
@@ -48,6 +121,7 @@
       left: 32px;
       scale: 2;
       z-index: 2;
+      color: var(--sub-htx);
       cursor: pointer;
 }
 
@@ -58,24 +132,48 @@
       right: 32px;
       scale: 2;
       z-index: 2;
+      color: var(--sub-htx);
       cursor: pointer;
 }
 
-.slider .dot_container {
+.slider .ber_container {
+      width: 100%;
+      height: auto;
       display: flex;
       justify-content: center;
-      color: var(--bs-tx) !important;
-      margin: 20px 0;
-      z-index: 2;
+      position: relative;
+      transform: translateY(-32px);
+      z-index: 15;
+      gap: 24px;
 }
 
-.slider .dot_container .dot_style {
-      margin: 0 5px;
-      scale: 0.5;
-      cursor: pointer;
-      transition: transform 0.2s ease-in-out;
+.ber {
+    width: 80px;
+    height: 4px;
+    background-color: var(--bs-ber);
+    cursor: pointer;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
 }
 
-.slider .dot_container .dot_style :hover {
-      transform: translateY(2px);
+.ber_active::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--bs-ber-active);
+    border-radius: inherit;
+    animation: fillAnimation 0.8s ease-in forwards;
+}
+
+@keyframes fillAnimation {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
 }

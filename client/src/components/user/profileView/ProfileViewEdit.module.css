@@ -9,8 +9,11 @@
 
 .main_container .main_header {
       width: 56%;
-      font-size: 1.5rem;
-      color: var(--bs-tx1);
+      font-size: 2.25rem;
+      font-weight: 500;
+      color: var(--bs-htx);
+      font-family: var(--bs-h-ff);
+      margin-bottom: 40px;
 }
 
 
@@ -40,16 +43,20 @@
 .action_box_info {
       padding-left: 16px;
       padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
 }
 .action_buttons_wrap .action_box .action_box_info h2 {
       font-size: 1.2rem;
       text-align: start;
       color: var(--bs-tx2);
+      line-height: 2rem;
 }
 
 .action_buttons_wrap .action_box .action_box_info span {
       color: var(--bs-tx1);
-      text-align: center;
 }
 
 

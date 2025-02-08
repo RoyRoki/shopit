@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './HeroProduct.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../../../features/home/productSlice';
 import { homeProductTypes, urls } from '../../../util/URLS';
-import { faCartShopping, faStore, faCircleCheck, faPlus, faMinus, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faStore, faCircleCheck, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ProductHeroTable from '../../table/productTable/ProductHeroTable';
 import KeywordsNavigationSet from '../../listAndControl/keywordsNav/KeywordsNavigationSet';
@@ -66,8 +66,10 @@ const HeroProduct = ({ product_id }) => {
 
       }, [heroProduct]);
       
-      const handleAddToCart = async () => {
-            startNotifier();
+      const handleAddToCart = async (isBuy) => {
+            if(!isBuy) {
+                  startNotifier();
+            }
             // For Guest
             if(auth.profileMode === role.guest) {
                   const cart = JSON.parse(localStorage.getItem("cart")) || { cartItems: [], totalCartPrice: 0 };
@@ -106,6 +108,11 @@ const HeroProduct = ({ product_id }) => {
                         dispatch(setCart(response.data));
                   }
             }
+      }
+
+      const handleBuyNow = async () => {
+            handleAddToCart(true);
+            navigate('/cart');
       }
 
 
@@ -201,14 +208,17 @@ const HeroProduct = ({ product_id }) => {
 
                               <div className={styles.button_box}>
                                     <button 
-                                          className={styles.btn_add_to_cart} onClick={handleAddToCart}
+                                          className={styles.btn_add_to_cart} onClick={() => handleAddToCart(false)}
                                           disabled={cartNotifier}
                                           style={{backgroundColor: `${cartNotifier ? '#ffd81473' : '#ffd814'}`}}
                                     >
                                           <FontAwesomeIcon icon={faCartShopping} />
                                           Add to cart
                                     </button>
-                                    <button className={styles.btn_buy_now}>
+                                    <button 
+                                          className={styles.btn_buy_now}
+                                          onClick={() => handleBuyNow()}
+                                    >
                                           <FontAwesomeIcon icon={faStore} />
                                           Buy Now
                                     </button>

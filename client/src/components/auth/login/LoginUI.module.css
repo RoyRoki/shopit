@@ -119,6 +119,9 @@
       width: 70%;
       height: 48px;
       transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 .form_submit_button:hover {
