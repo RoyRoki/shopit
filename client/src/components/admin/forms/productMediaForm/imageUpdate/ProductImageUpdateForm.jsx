@@ -5,6 +5,7 @@ import styles from './ProductImageUpdateForm.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { request } from '../../../../../helper/AxiosHelper';
 
 const ProductImageUpdateForm = ({ productId, savedUrls, onComplete }) => {
       const [imagesToRemove, setImagesToRemove] = useState([]);
@@ -66,7 +67,7 @@ const ProductImageUpdateForm = ({ productId, savedUrls, onComplete }) => {
               console.log(response);
 
             } catch (error) {
-              console.error(error);
+              console.error("Failed to remove images ", error);
               setUploading(false);
               return;
             }

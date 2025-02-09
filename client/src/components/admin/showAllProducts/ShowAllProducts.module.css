@@ -9,6 +9,6 @@
 .product_box {
       min-height: 320px;
       width: 100%;
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-card1-bg);
       box-shadow: var(--bs-box-shadow3);
 }

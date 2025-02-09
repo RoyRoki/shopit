@@ -77,14 +77,14 @@
       color: var(--bs-tx1);
       text-decoration: underline;
       text-underline-offset: 8px;
-      margin-bottom: 8px;
+      line-height: 4rem;
 }
 
 .keyword_row h2 {
       color: var(--bs-tx1);
       text-decoration: underline;
       text-underline-offset: 8px;
-      margin-bottom: 16px;
+      line-height: 4rem;
 }
 
 .submit_btn {

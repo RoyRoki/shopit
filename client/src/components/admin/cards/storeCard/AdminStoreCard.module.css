@@ -59,13 +59,14 @@
 
 .edit_btn {
       margin-top: 40px;
+      padding-bottom: 80px;
 }
 
 .edit_btn button {
       display: flex;
       gap: 16px;
       align-items: center;
-      padding: 4px 8px 4px 8px;
+      padding: 8px 16px 8px 16px;
       border: 2px solid var(--bs-blue);
       font-size: 1.2rem;
       font-weight: 600;
@@ -116,10 +117,12 @@
       text-underline-offset: 8px;
       margin-bottom: 16px;
       color: var(--bs-tx1);
+      line-height: 4rem;
 }
 
 .store_description_box p {
       color: var(--bs-tx2);
+      line-height: 1.5rem;
 }
 
 .address_box {
@@ -128,6 +131,7 @@
 
 .address_box p {
       color: var(--bs-tx2);
+      line-height: 1.5rem;
 } 
 
 .category_box {

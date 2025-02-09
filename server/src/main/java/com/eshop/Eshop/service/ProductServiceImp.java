@@ -40,6 +40,9 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     private CloudinaryServiceImp cloudinaryService;
 
+    @Autowired
+    private AwsServiceImp awsServiceImp;
+
     public List<Product> getProductsByCategoryId(Long id) {
         return categoryRepo.findProductsByCategoryId(id);
     }
@@ -167,7 +170,7 @@ public class ProductServiceImp implements ProductService {
             List<String> oldUrls = product.getImageUrls();
             imageUrls.forEach((url) -> {
                 if(oldUrls.contains(url)) {
-                    cloudinaryService.deleteImage(url);
+                    awsServiceImp.deleteImage(url);
                     oldUrls.remove(url);
                 }
             });
@@ -202,7 +205,7 @@ public class ProductServiceImp implements ProductService {
 
             try {
                 product.getImageUrls().forEach((url) -> {
-                    cloudinaryService.deleteImage(url);
+                    awsServiceImp.deleteImage(url);
                 });
             } catch (Exception e) {
                 throw new RuntimeException(e);

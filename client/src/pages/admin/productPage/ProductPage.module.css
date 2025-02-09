@@ -11,7 +11,7 @@
 }
 
 .action_btn {
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-card1-bg);
       padding: 8px 8px 8px 8px;
       border-radius: 24px;
       box-shadow: var(--bs-box-shadow3);

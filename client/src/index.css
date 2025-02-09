@@ -1,6 +1,7 @@
 :root {
 
   --bs-nav-bg: #ffffff;
+  --bs-nav-logo-hv: #cbe5ff;  
 
   --bs-htx: #000000;
   --sub-htx: #0f172a;
@@ -119,7 +120,7 @@
 
 
   --bs-bg1: #0c1831;
-  --bs-bg2: #1c1b1b;
+  --bs-bg2: #2e2d30c9;
   --bs-bg3: #0e0e0f;
   --bs-bg4: #242323;
   --bs-bg5: #333333;
@@ -172,3 +173,4 @@ button, a, h1, h2, h3 {
 button {
   cursor: pointer;
 }
+

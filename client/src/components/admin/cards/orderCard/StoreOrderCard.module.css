@@ -69,6 +69,9 @@
       box-shadow: var(--bs-box-shadow1);
       color: var(--bs-accent-tx);
       font-size: large;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 .others_info {

@@ -2,7 +2,7 @@
       width: 560px;
       min-height: 720px;
       margin-bottom: 104px;
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-card1-bg);
       box-shadow: var(--bs-box-shadow1);
       border-radius: 8px;
 }
@@ -75,25 +75,33 @@
       margin-right: 24px;
       display: flex;
       justify-content: center;
+      gap: 20%;
 }
 
 .action_box button {
       color:var(--bs-tx1);
-      width: 50%;
+      width: 40%;
       height: 40px;
       border: 2px solid var(--bs-bd1);
       padding: 0 4px 0 4px;
       border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+li {
+      list-style: none;
 }
 
 .category_row {
       color: var(--bs-tx1);
+      line-height: 1.5rem;
 }
 
 .category_row h2 {
       text-decoration: underline;
       text-underline-offset: 8px;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       font-size: 1rem;
       color: var(--bs-tx3);
       font-weight: 600;

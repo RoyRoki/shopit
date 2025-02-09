@@ -56,6 +56,9 @@ public class StoreServiceImp implements StoreService {
     @Autowired
     private CloudinaryServiceImp cloudinaryService;
 
+    @Autowired
+    private AwsServiceImp awsServiceImp;
+
     @Lazy
     @Autowired
     private OrderServiceImp orderService;
@@ -320,18 +323,18 @@ public class StoreServiceImp implements StoreService {
             if (logo != null) {
                 if (logoUrl != null) {
                     // Remove older one
-                    cloudinaryService.deleteImage(logoUrl);
+                    awsServiceImp.deleteImage(logoUrl);
                 }
                 // Upload logo
-                logoUrl = cloudinaryService.uploadImage(logo);
+                logoUrl = awsServiceImp.uploadFile(logo);
             }
             if (banner != null) {
                 if (bannerUrl != null) {
                     // Remove older one
-                    cloudinaryService.deleteImage(bannerUrl);
+                    awsServiceImp.deleteImage(bannerUrl);
                 }
                 // Upload banner
-                bannerUrl = cloudinaryService.uploadImage(banner);
+                bannerUrl = awsServiceImp.uploadFile(banner);
             }
 
             if (logoUrl != null) {

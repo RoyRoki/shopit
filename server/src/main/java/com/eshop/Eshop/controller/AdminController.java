@@ -13,6 +13,7 @@ import com.eshop.Eshop.model.dto.responsedto.CreateStoreResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreDTO;
 import com.eshop.Eshop.service.AdminServiceImp;
+import com.eshop.Eshop.service.AwsServiceImp;
 import com.eshop.Eshop.service.CloudinaryServiceImp;
 import com.eshop.Eshop.service.ProductServiceImp;
 import com.eshop.Eshop.service.StoreServiceImp;
@@ -46,6 +47,9 @@ public class AdminController {
 
     @Autowired
     private CloudinaryServiceImp cloudinaryService;
+
+    @Autowired
+    private AwsServiceImp awsServiceImp;
 
     @Autowired
     private AuthenticationContextService authContextService;
@@ -130,12 +134,13 @@ public class AdminController {
             List<String> imageUrls = product.getImageUrls() == null ? new ArrayList<>() : product.getImageUrls();
 
             for(MultipartFile file : files) {
-                String imageUrl = cloudinaryService.uploadImage(file);
+                // String imageUrl = cloudinaryService.uploadImage(file);
+                String imageUrl = awsServiceImp.uploadFile(file);
                 if(imageUrl != null && !imageUrl.isEmpty()) {
                     imageUrls.add(imageUrl);
                 }
                 else {
-                    return new ResponseEntity<>("uploading failed for null image url from cloudinary ", HttpStatus.BAD_REQUEST);
+                    return new ResponseEntity<>("uploading failed for null image url from AWS S3 ", HttpStatus.BAD_REQUEST);
                 }
             }
 
@@ -163,6 +168,7 @@ public class AdminController {
             return ResponseEntity.ok(urls);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Update failed");
         }
     }

@@ -4,7 +4,7 @@
       top: 2%;
       bottom: 2%;
       border: 2px solid var(--bs-bd1);
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-nav-bg);
       border-radius: 40px;
       height: 96%;
       width: 80px;
@@ -39,12 +39,12 @@
       cursor: pointer;  
 }
 .nav_item_focus {
-      background-color: var(--bs-accent);
+      background-color: var(--bs-nav-logo-hv);
 }
 
 
 .nav_item:hover {
-      background-color: var(--bs-accent);
+      background-color: var(--bs-nav-logo-hv);
 }
 
 .nav_item svg {

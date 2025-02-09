@@ -65,6 +65,7 @@ const StoreHome = ({ store, setHeroDiv }) => {
       </div>
       <div className={styles.section2}>
         <div className={styles.statistic_wrap}>
+          Store Analysis Under Development
         </div>
       </div>
     </div>

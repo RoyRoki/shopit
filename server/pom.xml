@@ -29,6 +29,17 @@
 	<properties>
 		<java.version>23</java.version>
 	</properties>
+	
+	<repositories>
+	<repository>
+		<id>spring-milestones</id>
+		<url>https://repo.spring.io/milestone</url>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+	</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -131,6 +142,22 @@
 			<version>2.2.4</version>
 		</dependency>
 
+		<dependency>
+		<groupId>com.amazonaws</groupId>
+		<artifactId>aws-java-sdk</artifactId>
+		<version>1.12.62</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws -->
+		<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-aws</artifactId>
+		<version>2.2.6.RELEASE</version>
+		</dependency>
+
+
+
 		<!-- For API calling -->
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
@@ -143,6 +170,19 @@
 			<artifactId>shippo-java-client</artifactId>
 			<version>3.2.0</version>
 		</dependency>
+
+		<dependency>
+		<groupId>javax.xml.bind</groupId>
+		<artifactId>jaxb-api</artifactId>
+		<version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+		<groupId>org.glassfish.jaxb</groupId>
+		<artifactId>jaxb-runtime</artifactId>
+		<version>2.3.1</version>
+		</dependency>
+
 
 		<!--For payment getWay -->
 		<dependency>

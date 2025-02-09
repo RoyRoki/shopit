@@ -7,6 +7,7 @@
       border-radius: 8px;
       position: relative;
       margin-top: 24px;
+      line-height: 1.5rem;
 }
 
 .form_wrap {
@@ -107,6 +108,7 @@
       font-size: 1rem;
       color: var(--bs-tx3);
       font-weight: 600;
+      line-height: 4rem;
 } 
 
 .img_upload_wrap {
@@ -117,6 +119,8 @@
 
 .upload_logo, .upload_banner {
       width: 100%;
+      background-color: var(--bs-card1-bg);
+      padding: 8px 0 0 8px;
 }
 
 .upload_logo span, .upload_banner span {
@@ -181,7 +185,7 @@
       gap: 16px;
       justify-content: inherit;
       align-items: inherit;
-      color: var(--bs-tx1);
+      color: var(--bs-btn1-tx);
       font-size: 1.2rem;
       font-weight: 600;
 }
