@@ -33,3 +33,8 @@ jobs:
       - name: Deploy to S3
         run: |
           aws s3 sync client/dist s3://shopit-frontend --delete
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id EVZ16RMJKRUSC --paths "/*"
+
