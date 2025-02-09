@@ -19,12 +19,6 @@ public class CartServiceImp {
     @Autowired
     private ProductRepo productRepo;
 
-    @Autowired
-    private DeliveryPartnerService deliveryPartner;
-
-    @Autowired
-    private StoreServiceImp storeService;
-
 
     public CartItem createCartItem(Long productId, Integer quantity, Cart cart) {
         Product product = productRepo.findById(productId)
@@ -98,7 +92,7 @@ public class CartServiceImp {
                     double gstAmount = storeSubtotal * 0.18;
 
                     // Delivery cost (assuming a simple flat rate, can be customized)
-                    double deliveryCost = deliveryPartner.calculateDeliveryCost(storeService.getAddress(store), user.getAddresses().getFirst(), cartItems);
+                    double deliveryCost = 80;
 
                     // Total = Subtotal + GST + Delivery Cost
                     double total = storeSubtotal + gstAmount + deliveryCost;
@@ -148,7 +142,7 @@ public class CartServiceImp {
                     double gstAmount = storeSubtotal * 0.18;
 
                     // Delivery cost (assuming a simple flat rate, can be customized)
-                    double deliveryCost = deliveryPartner.calculateDeliveryCost(storeService.getAddress(store), user.getAddresses().getFirst(), cartItems);
+                    double deliveryCost = 80;
 
                     // Total = Subtotal + GST + Delivery Cost
                     double total = storeSubtotal + gstAmount + deliveryCost;

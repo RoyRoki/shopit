@@ -38,9 +38,6 @@ public class ProductServiceImp implements ProductService {
     private CategoryServiceHelper categoryHelper;
 
     @Autowired
-    private CloudinaryServiceImp cloudinaryService;
-
-    @Autowired
     private AwsServiceImp awsServiceImp;
 
     public List<Product> getProductsByCategoryId(Long id) {

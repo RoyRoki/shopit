@@ -5,7 +5,6 @@ import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.StoreOrderDto;
 import com.eshop.Eshop.model.dto.requestdto.AddProductRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.StoreUpdateRequestDTO;
-import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreResponseDto;
 import com.eshop.Eshop.repository.*;
@@ -52,9 +51,6 @@ public class StoreServiceImp implements StoreService {
 
     @Autowired
     private OrderPerStoreRepo orderPerStoreRepo;
-
-    @Autowired
-    private CloudinaryServiceImp cloudinaryService;
 
     @Autowired
     private AwsServiceImp awsServiceImp;

@@ -1,8 +1,6 @@
 package com.eshop.Eshop.controller;
 
-import com.eshop.Eshop.model.OrderPerStore;
 import com.eshop.Eshop.model.Product;
-import com.eshop.Eshop.model.Store;
 import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.StoreOrderDto;
 import com.eshop.Eshop.model.dto.requestdto.AddProductRequestDTO;
@@ -10,11 +8,9 @@ import com.eshop.Eshop.model.dto.requestdto.CreateStoreRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.ProductEditRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.StoreUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.CreateStoreResponseDTO;
-import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.StoreDTO;
 import com.eshop.Eshop.service.AdminServiceImp;
 import com.eshop.Eshop.service.AwsServiceImp;
-import com.eshop.Eshop.service.CloudinaryServiceImp;
 import com.eshop.Eshop.service.ProductServiceImp;
 import com.eshop.Eshop.service.StoreServiceImp;
 import com.eshop.Eshop.util.AuthenticationContextService;
@@ -44,9 +40,6 @@ public class AdminController {
 
     @Autowired
     private ProductServiceImp productService;
-
-    @Autowired
-    private CloudinaryServiceImp cloudinaryService;
 
     @Autowired
     private AwsServiceImp awsServiceImp;
@@ -134,7 +127,6 @@ public class AdminController {
             List<String> imageUrls = product.getImageUrls() == null ? new ArrayList<>() : product.getImageUrls();
 
             for(MultipartFile file : files) {
-                // String imageUrl = cloudinaryService.uploadImage(file);
                 String imageUrl = awsServiceImp.uploadFile(file);
                 if(imageUrl != null && !imageUrl.isEmpty()) {
                     imageUrls.add(imageUrl);

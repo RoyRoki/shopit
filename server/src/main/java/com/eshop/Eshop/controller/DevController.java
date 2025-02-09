@@ -1,13 +1,6 @@
 package com.eshop.Eshop.controller;
 
 import com.eshop.Eshop.service.DevService;
-import com.eshop.Eshop.service.DeliveryPartnerService;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.model.Shipment;
-import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,8 +17,6 @@ public class DevController {
     @Autowired
     private DevService devService;
 
-    @Autowired
-    private DeliveryPartnerService deliveryPartnerService;
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
@@ -36,21 +27,6 @@ public class DevController {
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", "getAllUsers failed");
             return new ResponseEntity<>("Not found any Users",headers, HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    @GetMapping("/delivery-partner-test")
-    public String getFedExAuthentication() {
-        return deliveryPartnerService.testDeliveryPartner();
-    }
-
-    @GetMapping("/shipment-test")
-    public ResponseEntity<Object> shipmentTest(){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(deliveryPartnerService.createShipmentObject());
-        }
-         catch (Exception e) {
-            return new ResponseEntity<>("Error: ",HttpStatus.FORBIDDEN);
         }
     }
 
