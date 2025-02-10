@@ -77,7 +77,7 @@ public class CartServiceImp {
 
         cart.getCartItems()
                 .forEach(item -> {
-                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), _ -> new ArrayList<>()).add(item);
+                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), n -> new ArrayList<>()).add(item);
                 });
 
         List<OrderSummaryPerStoreDTO> orderSummaryPerStores = cartItemsPerStore.entrySet().stream()
@@ -123,7 +123,7 @@ public class CartServiceImp {
 
         cart.getCartItems()
                 .forEach(item -> {
-                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), _ -> new ArrayList<>()).add(item);
+                    cartItemsPerStore.computeIfAbsent(item.getProduct().getStore(), n -> new ArrayList<>()).add(item);
                 });
 
         List<OrderPerStore> orderPerStores = cartItemsPerStore.entrySet().stream()
