@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getAuthToken, setAuthToken, setRefreshToken } from "./TokenService";
-axios.defaults.baseURL = 'http://localhost:8080';
+
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 axios.defaults.headers.post['Content-Type'] =  'application/json';
 
 export const isAuthenticated = () => {

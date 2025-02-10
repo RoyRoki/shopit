@@ -13,16 +13,8 @@ jobs:
     - name: Checkout Code (Only /server)
       uses: actions/checkout@v3
       with:
-        sparse-checkout: |
-          server
+        sparse-checkout: server
         sparse-checkout-cone-mode: false
-        fetch-depth: 0  # Ensure full history for server
-
-    - name: Pull Latest Changes for /server
-      run: |
-        cd server
-        git fetch origin master
-        git reset --hard origin/master
 
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -43,5 +35,7 @@ jobs:
     - name: Restart Application on EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ubuntu@${{ secrets.EC2_HOST }} <<EOF
-          sudo systemctl restart shopit
+          sudo systemctl stop shopit
+          sudo cp /home/ubuntu/shopit/server/app.jar /home/ubuntu/shopit/server/backup/app-$(date +%F-%H-%M-%S).jar
+          sudo systemctl start shopit
         EOF
