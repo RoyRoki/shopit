@@ -25,7 +25,7 @@ const AdminStoreCard = ({ store, onUpdate }) => {
                 className={styles.banner_frame}
                 style={{
                   backgroundImage: `url(${
-                    store.bannerUrl || "banner/bd3.png"
+                    store.bannerUrl || "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/bd3.png"
                   })`,
                 }}
               ></div>
@@ -35,7 +35,7 @@ const AdminStoreCard = ({ store, onUpdate }) => {
                 <div
                   className={styles.logo_frame}
                   style={{
-                    backgroundImage: `url(${store.logoUrl || "logo/lg1.png"})`,
+                    backgroundImage: `url(${store.logoUrl || "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/lg1.png"})`,
                   }}
                 ></div>
               </div>

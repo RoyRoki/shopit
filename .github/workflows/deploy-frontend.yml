@@ -35,10 +35,3 @@ jobs:
         run: |
           aws s3 sync client/dist s3://shopit-frontend --delete
 
-      - name: Debug AWS Identity
-        run: aws sts get-caller-identity
-
-      - name: Invalidate CloudFront Cache
-        run: |
-          aws cloudfront create-invalidation --distribution-id EVZ16RMJKRUSC --paths "/*"
-

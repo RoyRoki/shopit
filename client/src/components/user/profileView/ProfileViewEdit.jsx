@@ -13,7 +13,7 @@ const ProfileViewEdit = () => {
             <div className={styles.action_buttons_wrap}>
                   <div className={styles.action_box} onClick={() => navigate('/orders')}>
                         <div className={styles.action_box_img_frame}
-                        style={{backgroundImage: 'url(logo/orderbox.png)'}}
+                        style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/orderbox.png)'}}
                         ></div>
                         <div className={styles.action_box_info}>
                               <h2>Your Orders</h2>
@@ -22,7 +22,7 @@ const ProfileViewEdit = () => {
                   </div>
                   <div className={styles.action_box} onClick={() => navigate('/security')}>
                         <div className={styles.action_box_img_frame}
-                        style={{backgroundImage: 'url(logo/security.png)'}}
+                        style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/security.png)'}}
                         ></div>
                         <div className={styles.action_box_info}>
                               <h2>Login & security</h2>
@@ -31,7 +31,7 @@ const ProfileViewEdit = () => {
                   </div>      
                   <div className={styles.action_box} onClick={() => navigate('/addresses')}>
                         <div className={styles.action_box_img_frame}
-                        style={{backgroundImage: 'url(logo/address.png)'}}
+                        style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/address.png)'}}
                         ></div> 
                         <div className={styles.action_box_info}>
                               <h2>Your Addresses</h2>
@@ -40,7 +40,7 @@ const ProfileViewEdit = () => {
                   </div>
                   <div className={styles.action_box} onClick={() => navigate('/wishlist')}>
                         <div className={styles.action_box_img_frame}
-                        style={{backgroundImage: 'url(logo/wish.png)'}}
+                        style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/wish.png)'}}
                         ></div>
                         <div className={styles.action_box_info}>
                               <h2>Wish List</h2>
@@ -49,7 +49,7 @@ const ProfileViewEdit = () => {
                   </div>
                   <div className={styles.action_box} onClick={() => navigate('/cart')}>
                         <div className={styles.action_box_img_frame}
-                        style={{backgroundImage: 'url(logo/shoping.png)'}}
+                        style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/shoping.png)'}}
                         ></div>
                         <div className={styles.action_box_info}>
                               <h2>Your Cart</h2>
@@ -59,7 +59,7 @@ const ProfileViewEdit = () => {
                   
                   <div className={styles.action_box} onClick={() => navigate('/contact_us')}>
                         <div className={styles.action_box_img_frame}
-                        style={{backgroundImage: 'url(logo/contact.png)'}}
+                        style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/contact.png)'}}
                         ></div>
                         <div className={styles.action_box_info}>
                               <h2>Contact Us</h2>

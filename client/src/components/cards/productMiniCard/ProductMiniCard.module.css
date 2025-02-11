@@ -27,7 +27,7 @@
 }
 
 .mini_card .no_img_box {
-      background-image: url('/public/demo/heroProducts/shopingBag.png');
+      background-image: url('https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/shopingBag.png');
       width: 80%;
       height: 80%;
       object-fit: contain;

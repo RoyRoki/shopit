@@ -15,7 +15,7 @@ const StoreHome = ({ store, setHeroDiv }) => {
                 className={styles.banner_frame}
                 style={{
                   backgroundImage: `url(${
-                    store.bannerUrl || "banner/bd3.png"
+                    store.bannerUrl || "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/bd3.png"
                   })`,
                 }}
               ></div>
@@ -25,7 +25,7 @@ const StoreHome = ({ store, setHeroDiv }) => {
                 <div
                   className={styles.logo_frame}
                   style={{
-                    backgroundImage: `url(${store.logoUrl || "logo/lg1.png"})`,
+                    backgroundImage: `url(${store.logoUrl || "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/lg1.png"})`,
                   }}
                 ></div>
               </div>
@@ -50,7 +50,7 @@ const StoreHome = ({ store, setHeroDiv }) => {
           >
             <div 
               className={styles.add_product_frame}
-              style={{backgroundImage: 'url(logo/add_product.png)'}}
+              style={{backgroundImage: 'url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/add_product.png)'}}
             >
             </div>
 

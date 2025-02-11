@@ -94,7 +94,7 @@ const StorePublicPage = ({ storeId }) => {
                               <div 
                                     className={styles.banner_frame}
                                     style={{
-                                          backgroundImage: `url(${store.bannerUrl || 'banner/bd3.png'})`
+                                          backgroundImage: `url(${store.bannerUrl || 'https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/bd3.png'})`
                                     }}
                               ></div>
                         </div>
@@ -103,7 +103,7 @@ const StorePublicPage = ({ storeId }) => {
                                     <div
                                           className={styles.logo_frame}
                                           style={{
-                                                backgroundImage: `url(${store.logoUrl || 'logo/lg1.png'})`
+                                                backgroundImage: `url(${store.logoUrl || 'https://shopitbuket.s3.ap-south-1.amazonaws.com/public/logo/lg1.png'})`
                                           }}
                                     ></div>
                               </div>

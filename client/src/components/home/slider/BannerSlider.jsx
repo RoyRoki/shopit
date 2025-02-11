@@ -10,13 +10,13 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyin
 
 const BannerSlider = ({ slidesItems }) => {
   const [slides, setSlides] = useState([
-    { url: "banner/adsBanner1.png", header: "Fashion sale" },
+    { url: "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/adsBanner1.png", header: "Fashion sale" },
     {
-      url: "banner/adsBanner2.png",
+      url: "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/adsBanner2.png",
       header: "Fashion sale",
     },
     {
-      url: "banner/adsBanner3.png",
+      url: "https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/adsBanner3.png",
       header: "Fashion sale",
     },
   ]);

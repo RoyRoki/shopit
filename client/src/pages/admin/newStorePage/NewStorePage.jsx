@@ -31,7 +31,7 @@ const NewStorePage = ({ onNewStoreCreated }) => {
             </div>
             <div 
                   className={styles.banner_wrap}
-                  style={{backgroundImage: "url(banner/bd5.png)"}}
+                  style={{backgroundImage: "url(https://shopitbuket.s3.ap-south-1.amazonaws.com/public/banner/bd5.png)"}}
             >
             </div>
       </div>      

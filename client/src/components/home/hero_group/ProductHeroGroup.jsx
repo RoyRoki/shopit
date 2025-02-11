@@ -15,7 +15,7 @@ const ProductHeroGroup = () => {
 
                   <div key={1} className={styles.sub_hero} onClick={() => navigate("/home?key=bottle")}>
                         <div className={styles.sub_hero_img_box}
-                                    style={{backgroundImage: 'url("./demo/heroProducts/bottle1.png" )'}}>
+                                    style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/bottle1.png" )'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
@@ -43,7 +43,7 @@ const ProductHeroGroup = () => {
 
                   <div key={3} className={styles.sub_hero} onClick={() => navigate("/home?key=moisturizer")}>
                         <div className={styles.sub_hero_img_box}
-                              style={{backgroundImage: 'url("./demo/heroProducts/cream1.png")'}}>
+                              style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/cream1.png")'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
@@ -57,7 +57,7 @@ const ProductHeroGroup = () => {
 
                   <div key={4} className={styles.sub_hero} onClick={() => navigate("/home?key=diy")}>
                         <div className={styles.sub_hero_img_box} 
-                              style={{backgroundImage: 'url("./demo/heroProducts/scikit.png")'}}>
+                              style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/scikit.png")'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
@@ -72,7 +72,7 @@ const ProductHeroGroup = () => {
       </div>
       <div className={styles.main_hero_box} onClick={() => navigate("/home?key=headphone")}>
             <div className={styles.hero_img_box}
-                  style={{backgroundImage: 'url("./demo/heroProducts/jbl1.png")'}}>
+                  style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/jbl1.png")'}}>
             </div>
             <div className={styles.hero_header}>
                   <span>Your Music, Your Way – JBL Headsets</span>

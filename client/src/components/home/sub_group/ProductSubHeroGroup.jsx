@@ -15,7 +15,7 @@ const ProductSubHeroGroup = () => {
 
                   <div key={1} className={styles.sub_hero} onClick={() => navigate("/home?key=winter")}>
                         <div className={styles.sub_hero_img_box}
-                                    style={{backgroundImage: 'url("./demo/heroProducts/bottle1.png" )'}}>
+                                    style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/jbl1.png" )'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
@@ -29,7 +29,7 @@ const ProductSubHeroGroup = () => {
 
                   <div key={2} className={styles.sub_hero} onClick={() => navigate("/home?key=phone")}>
                         <div className={styles.sub_hero_img_box}
-                                    style={{backgroundImage: 'url("./demo/heroProducts/lamp1.png" )'}}>
+                                    style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/lamp1.png" )'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
@@ -43,7 +43,7 @@ const ProductSubHeroGroup = () => {
 
                   <div key={3} className={styles.sub_hero} onClick={() => navigate("/home?store_id=1")}>
                         <div className={styles.sub_hero_img_box}
-                              style={{backgroundImage: 'url("./demo/heroProducts/cream1.png")'}}>
+                              style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/cream1.png")'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
@@ -57,7 +57,7 @@ const ProductSubHeroGroup = () => {
 
                   <div key={4} className={styles.sub_hero} onClick={() => navigate("/home?store_id=2")}>
                         <div className={styles.sub_hero_img_box} 
-                              style={{backgroundImage: 'url("./demo/heroProducts/scikit.png")'}}>
+                              style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/scikit.png")'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
