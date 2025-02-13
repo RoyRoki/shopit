@@ -6,8 +6,14 @@ import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
 import com.eshop.Eshop.model.User;
 
 public interface AuthService {
+
     UserSignUpResponseDTO registerNewUser(UserSignUpRequestDTO userSingUpRequestDTO);
     UserSignUpResponseDTO registerNewUserAdmin(UserSignUpRequestDTO userRequest, String admin);
+
+    void generateOTP(SignupRequestOtpDTO requestOtpDTO);
+    void generateOtpForUniqueIdentity(SignupRequestOtpDTO requestOtpDTO);
+    void authenticateOtpForMobile(SignupRequestOtpVerificationDTO requestDTO);
+    
     UserDetailsImp VerifyWithPassAndGetUserDetailsImp(UserLoginRequestDTO requestDTO);
     UserDetailsImp getUserDetailsImp(User user);
     UserDetailsImp getUserDetailsImp(OTPVerifyRequestDTO requestDTO);

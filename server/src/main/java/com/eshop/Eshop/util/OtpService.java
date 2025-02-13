@@ -9,7 +9,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -79,5 +78,23 @@ public class OtpService {
     public void sentOtpToEmail(String email, String otp) {
         String message = "Hey "+email+" \nOtp receive from eshop \notp: "+otp+"\n don't shear otp to anyone\nThanks for login";
         messageService.sentMessageToEmail(email, message);
+    }
+
+    /**
+     * Generates, hashes, sends, and saves OTP for a given mobile number or email.
+     * @param identifier Either a mobile number or an email.
+     * @param isMobile True if identifier is a mobile number, False if it is an email.
+     */
+    public void saveAndSendOTP(String identifier, boolean isMobileNO) {
+        String otp = generateOTP();        // Generate OTP
+        String hashOtp = hashMe(otp);      // Hash OTP
+
+        if(isMobileNO) {
+            sentOtpToMobile(identifier, otp);
+        } else {
+            sentOtpToEmail(identifier, otp);
+        }
+
+        saveOTP(identifier, hashOtp);   // Save OTP for verification
     }
 }

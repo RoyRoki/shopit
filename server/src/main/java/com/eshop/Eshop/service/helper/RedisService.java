@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.eshop.Eshop.exception.custom.InvalidMobileNumberException;
+
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -21,7 +24,8 @@ public class RedisService {
     }
 
     public boolean isMobileNoVerified(String mobileNo) {
-        return redisTemplate.opsForValue().get(mobileNo + ":V") == null;
+        String value = redisTemplate.opsForValue().get(mobileNo + ":V");
+        return Objects.nonNull(value); // Returns true if value exists
     }
 
     public void put(String key, String value, long timeMILLIS) {

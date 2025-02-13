@@ -3,80 +3,90 @@ package com.eshop.Eshop.service;
 import com.eshop.Eshop.model.dto.UserDetailsImp;
 import com.eshop.Eshop.model.dto.requestdto.*;
 import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
+import com.eshop.Eshop.exception.custom.InvalidMobileNumberException;
+import com.eshop.Eshop.exception.custom.InvalidOTPException;
+import com.eshop.Eshop.exception.custom.MobileNumberNotVerifiedException;
+import com.eshop.Eshop.exception.custom.UserAlreadyExistsException;
 import com.eshop.Eshop.model.User;
 import com.eshop.Eshop.repository.UserRepo;
 import com.eshop.Eshop.service.Interface.AuthService;
 import com.eshop.Eshop.service.helper.RedisService;
 import com.eshop.Eshop.util.OtpService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.validation.Valid;
+
+import java.util.Objects;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImp implements AuthService {
 
-    @Autowired
-    private UserServiceImp userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserServiceImp userService;
+    private final PasswordEncoder passwordEncoder;
+    private final AdminServiceImp adminService;
+    private final OtpService otpService;
+    private final RedisService redisService;
+    private final UserRepo userRepo;
 
-    @Autowired
-    private AdminServiceImp adminService;
-
-    @Autowired
-    private OtpService otpService;
-
-    @Autowired
-    private RedisService redisService;
-
-    @Autowired
-    private UserRepo userRepo;
+    public AuthServiceImp(UserServiceImp userService, PasswordEncoder passwordEncoder, 
+                          AdminServiceImp adminService, OtpService otpService, 
+                          RedisService redisService, UserRepo userRepo) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.adminService = adminService;
+        this.otpService = otpService;
+        this.redisService = redisService;
+        this.userRepo = userRepo;
+    }
 
     @Override
     public UserSignUpResponseDTO registerNewUser(UserSignUpRequestDTO userRequest) {
 
-        // Check the mobile No is Verified or not
-        if(redisService.isMobileNoVerified(userRequest.getMobileNo())) {
-            throw new RuntimeException("unverified mobileNo try to signup-error");
-        }
+        checkMobileNumberEligibility(userRequest.getMobileNo());
 
-        // MobileNo valid so continue
+        // Hash the password before saving
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        try {
-            if(!userService.isUserExist(userRequest.getEmail(), userRequest.getMobileNo())) {
-                return userService.addNewUser(userRequest);
-            }
 
-            return null;
-
-        } catch (Exception e) {
-            throw new RuntimeException("AuthServiceImp-registerNewUser-error");
-        }
+        // Save the new user
+        return userService.addNewUser(userRequest); 
     }
 
 
     @Override
     public UserSignUpResponseDTO registerNewUserAdmin(UserSignUpRequestDTO userRequest, String admin) {
-        //Check the mobile No is Verified or not
-        if(redisService.isMobileNoVerified(userRequest.getMobileNo())) {
-            throw new RuntimeException("unverified mobileNo try to signup-error");
-        }
 
-        //mobileNo valid so continue
+        checkMobileNumberEligibility(userRequest.getMobileNo());
+
+        // Hash the password before saving
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
-        try {
-            if(!userService.isUserExist(userRequest.getEmail(), userRequest.getMobileNo()))
-                return adminService.addNewUserAdmin(userRequest, admin);
-
-            return null;
-
-        } catch (Exception e) {
-            throw new RuntimeException("AuthServiceImp-registerNewUserAdmin-error");
-        }
+        // Save the new admin
+        return adminService.addNewUserAdmin(userRequest, admin);
     }
 
+
+    private void checkMobileNumberEligibility(String mobileNo) {
+
+        // Check the mobileNo is not null
+        if(Objects.isNull(mobileNo) || mobileNo.trim().isEmpty()) {
+            System.out.println("Received mobileNo: " + mobileNo);
+
+            throw new InvalidMobileNumberException("Mobile number cannot be null or empty");
+        }
+
+        // Check the mobileNo. is Verified
+        if(!redisService.isMobileNoVerified(mobileNo)) {
+            throw new MobileNumberNotVerifiedException("Mobile number not verified! Verify via /verify-otp");
+        }
+
+        // Check if user already exists
+        if(userService.isUserExist(null, mobileNo)) {
+            throw new UserAlreadyExistsException("Mobile Number already exists.");
+        }        
+    }
 
 
     @Override
@@ -192,6 +202,34 @@ public class AuthServiceImp implements AuthService {
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void generateOTP(SignupRequestOtpDTO requestOtpDTO) {
+
+        if(Objects.nonNull(requestOtpDTO.getMobileNo()) && !requestOtpDTO.getMobileNo().trim().isEmpty()) {
+            otpService.saveAndSendOTP(requestOtpDTO.getMobileNo(), true);
+        } else {
+            otpService.saveAndSendOTP(requestOtpDTO.getEmail(), false);
+        }
+    }
+
+    @Override
+    public void generateOtpForUniqueIdentity(SignupRequestOtpDTO requestOtpDTO) {
+        if(userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
+            throw new UserAlreadyExistsException("Mobile/Email already exists.");
+        }
+        generateOTP(requestOtpDTO);
+    }
+
+    @Override
+    public void authenticateOtpForMobile(SignupRequestOtpVerificationDTO requestDTO) {
+        String hashOTP = otpService.hashMe(requestDTO.getOtp());
+        String savedHashOtp = otpService.getOTP(requestDTO.getMobileNo());
+
+        if (!hashOTP.equals(savedHashOtp)) {
+            throw new InvalidOTPException("Invalid OTP provided.");
         }
     }
 }

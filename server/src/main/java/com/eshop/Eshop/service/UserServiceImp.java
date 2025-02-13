@@ -57,7 +57,6 @@ public class UserServiceImp implements UserService {
         User newUser = User.builder()
                     .userName(requestDTO.getUserName())
                     .password(requestDTO.getPassword()+" encoded")
-                    .email(requestDTO.getEmail())
                     .mobileNo(requestDTO.getMobileNo())
                     .roles(roles)
                     .createAt(LocalDateTime.now())
@@ -68,7 +67,6 @@ public class UserServiceImp implements UserService {
 
         return UserSignUpResponseDTO.builder()
                 .userName(requestDTO.getUserName())
-                .email(requestDTO.getEmail())
                 .mobileNo(requestDTO.getMobileNo())
                 .userId(Long.toString(savedUser.getId()))
                 .build();

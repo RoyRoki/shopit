@@ -11,143 +11,132 @@ import com.eshop.Eshop.service.helper.RedisService;
 import com.eshop.Eshop.util.JwtService;
 import com.eshop.Eshop.util.OtpService;
 import com.eshop.Eshop.util.RefreshTokenService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/auth")
+@Validated
+@Tag(name = "Authentication", description = "APIs for user/Admin authentication and signup")
 public class AuthController {
 
-    @Autowired
     private AuthServiceImp authService;
-
-    @Autowired
     private JwtService jwtService;
-
-    @Autowired
     private RefreshTokenService refreshTokenService;
-
-    @Autowired
     private UserServiceImp userService;
-
-    @Autowired
     private OtpService otpService;
+    public AuthController( AuthServiceImp authServiceImp, JwtService jwtService,
+            RefreshTokenService refreshTokenService,UserServiceImp userServiceImp,
+            OtpService otpService, RedisService redisService) {
 
-    @Autowired
-    private RedisService redisService;
-
-    /*
-     * After mobile No verified vai OTP, then signup
-     */
-    @PostMapping("/signup")
-    public ResponseEntity<?> doSingUp(@RequestBody UserSignUpRequestDTO requestDTO) {
-        try {
-            UserSignUpResponseDTO responseDTO = authService.registerNewUser(requestDTO);
-            if (responseDTO.getUserId() != null) {
-                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-            }
-
-            return new ResponseEntity<>("Email / MobileNo already exists", HttpStatus.FORBIDDEN);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>("MobileNo not Verified! verify mobileNo /verify-otp", HttpStatus.BAD_REQUEST);
-        }
+        this.authService = authServiceImp;
+        this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
+        this.userService = userServiceImp;
+        this.otpService = otpService;
     }
 
-    /*
-     * After mobile No verified vai OTP, then signup
+
+    /**
+     * After mobile number verification using OTP, users can sign up.
+     *
+     * @param requestDTO UserSignUpRequestDTO containing username, mobile number, and password.
+     * @return ResponseEntity with UserSignUpResponseDTO containing user details.
+     */
+    @PostMapping(value = "/signup")
+    @Operation(
+        summary = "User Signup",
+        description = "Registers a new user after verifying the mobile number with OTP.  **This is a public API and does not require authentication.**",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "User registered successfully",
+                         content = @Content(schema = @Schema(implementation = UserSignUpResponseDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Validation error"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+        }
+    )
+    public ResponseEntity<?> doSignUp(@Valid @RequestBody UserSignUpRequestDTO requestDTO) {
+        UserSignUpResponseDTO responseDTO = authService.registerNewUser(requestDTO);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+
+    /**
+     * Registers a new admin user after verifying their mobile number via OTP.
+     *
+     * @param requestDTO Admin signup details.
+     * @return ResponseEntity with admin details or an error message.
      */
     @PostMapping("/admin-signup")
-    public ResponseEntity<?> doAdminSingUp(@RequestBody UserSignUpRequestDTO requestDTO) {
-        try {
-            UserSignUpResponseDTO responseDTO = authService.registerNewUserAdmin(requestDTO, "ADMIN");
-            if (responseDTO != null)
-                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-
-            return new ResponseEntity<>("Email / MobileNo already exists", HttpStatus.FORBIDDEN);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>("MobileNo not Verified! verify mobileNo /verify-otp", HttpStatus.BAD_REQUEST);
+    @Operation(
+        summary = "Admin Signup",
+        description = "Registers a new admin user after verifying their mobile number via OTP.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Admin registered successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request data"),
+            @ApiResponse(responseCode = "403", description = "Registration failed (e.g., email/mobile exists)"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
         }
-
+    )
+    public ResponseEntity<?> doAdminSingUp(@Valid @RequestBody UserSignUpRequestDTO requestDTO) {
+        UserSignUpResponseDTO responseDTO = authService.registerNewUserAdmin(requestDTO, "ADMIN");
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    // Accept MobileNo and Email and generate an otp and sent it.
+    /**
+     * Accepts a mobile number or email and generates an OTP, then sends it to the user.
+     *
+     * @param requestOtpDTO The DTO containing either mobile number or email.
+     * @return ResponseEntity with a success message.
+     */
     @PostMapping(value = "/generate-otp")
-    public ResponseEntity<?> generateOtp(@RequestBody SignupRequestOtpDTO requestOtpDTO) {
+    public ResponseEntity<String> generateOtp(@Valid @RequestBody SignupRequestOtpDTO requestOtpDTO) {
 
-        if (requestOtpDTO.getMobileNo() != null) {
-            String otp = otpService.generateOTP();
-            String hashOtp = otpService.hashMe(otp);
-
-            otpService.sentOtpToMobile(requestOtpDTO.getMobileNo(), otp);
-            otpService.saveOTP(requestOtpDTO.getMobileNo(), hashOtp);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("Otp sent to " + requestOtpDTO.getMobileNo() + "/n Otp: {" + otp + "}");
-        } else if (requestOtpDTO.getEmail() != null) {
-            String otp = otpService.generateOTP();
-            String hashOtp = otpService.hashMe(otp);
-
-            otpService.sentOtpToEmail(requestOtpDTO.getEmail(), otp);
-            otpService.saveOTP(requestOtpDTO.getEmail(), hashOtp);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("Otp sent to " + requestOtpDTO.getEmail() + "/n Otp: {" + otp + "}");
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Mobile No!");
+        authService.generateOTP(requestOtpDTO);
+        return ResponseEntity.ok("OTP sent successfully.");
     }
 
-    // Accept new unique MobileNo and Email and generate an otp and sent it.
+    /**
+     * Accepts a new unique mobile number or email, generates an OTP, and sends it to the user.
+     * Ensures that the provided mobile number or email has not been used before.
+     *
+     * @param requestOtpDTO The DTO containing either a new mobile number or email.
+     * @return ResponseEntity with a success message if the OTP is sent successfully.
+     */
     @PostMapping(value = "/generate-otp/unique")
-    public ResponseEntity<?> generateOtpForUniqueUser(@RequestBody SignupRequestOtpDTO requestOtpDTO) {
+    public ResponseEntity<?> generateOtpForUniqueUser(@Valid @RequestBody SignupRequestOtpDTO requestOtpDTO) {
 
-        // Check that the email or mobile is already exist
-        if (userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email/mobile already Exist. Cant send otp");
-        }
-        if (requestOtpDTO.getMobileNo() != null) {
-            String otp = otpService.generateOTP();
-            String hashOtp = otpService.hashMe(otp);
-
-            otpService.sentOtpToMobile(requestOtpDTO.getMobileNo(), otp);
-            otpService.saveOTP(requestOtpDTO.getMobileNo(), hashOtp);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("Otp sent to " + requestOtpDTO.getMobileNo() + "/n Otp: {" + otp + "}");
-        } else if (requestOtpDTO.getEmail() != null) {
-            String otp = otpService.generateOTP();
-            String hashOtp = otpService.hashMe(otp);
-
-            otpService.sentOtpToEmail(requestOtpDTO.getEmail(), otp);
-            otpService.saveOTP(requestOtpDTO.getEmail(), hashOtp);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("Otp sent to " + requestOtpDTO.getEmail() + "/n Otp: {" + otp + "}");
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Mobile No!");
+        authService.generateOtpForUniqueIdentity(requestOtpDTO);
+        return ResponseEntity.ok("OTP sent successfully.");
     }
 
-    /*
-     * Accept MobileNo and OTP and verify the OTP
-     * And Mark the mobileNo as Verified
+    /**
+     * Verifies the OTP for a given mobile number and marks it as verified if valid.
+     *
+     * @param requestDTO The DTO containing the mobile number and OTP for verification.
+     * @return ResponseEntity with a success message if the OTP is valid.
+     * @throws InvalidOTPException if the provided OTP is incorrect.
      */
     @PostMapping(value = "verify-otp")
-    public ResponseEntity<?> verifyOtpMobileNo(@RequestBody SignupRequestOtpVerificationDTO requestDTO) {
-        try {
-            String hashOTP = otpService.hashMe(requestDTO.getOtp());
-            String savedHashOtp = otpService.getOTP(requestDTO.getMobileNo());
+    public ResponseEntity<String> verifyOtpMobileNo(@Valid @RequestBody SignupRequestOtpVerificationDTO requestDTO) {
 
-            if (hashOTP.equals(savedHashOtp)) {
-                redisService.savedVerifiedMobileNo(requestDTO.getMobileNo());
-                return ResponseEntity.status(HttpStatus.OK).body("Valid OTP, Mark the mobileNo verified");
-            }
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("OTP invalid!");
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error during verify the otp");
-        }
+        authService.authenticateOtpForMobile(requestDTO);
+        return ResponseEntity.ok("Valid OTP, mobile number marked as verified.");
     }
+
 
     // Login using mobileNo/email and password
     @PostMapping("/login")

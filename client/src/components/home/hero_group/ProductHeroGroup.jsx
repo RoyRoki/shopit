@@ -29,7 +29,7 @@ const ProductHeroGroup = () => {
 
                   <div key={2} className={styles.sub_hero} onClick={() => navigate("/home?key=table+lamp")}>
                         <div className={styles.sub_hero_img_box}
-                                    style={{backgroundImage: 'url("./demo/heroProducts/lamp1.png" )'}}>
+                                    style={{backgroundImage: 'url("https://shopitbuket.s3.ap-south-1.amazonaws.com/public/demo/heroProducts/lamp1.png" )'}}>
                         </div>
                         <div className={styles.sub_hero_info_box}>
                               <div className={styles.info_name}>
