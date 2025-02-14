@@ -12,6 +12,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.eshop.Eshop.exception.custom.AuthenticationException;
+import com.eshop.Eshop.exception.custom.InvalidJwtTokenException;
 import com.eshop.Eshop.exception.custom.InvalidMobileNumberException;
 import com.eshop.Eshop.exception.custom.InvalidOTPException;
 import com.eshop.Eshop.exception.custom.MobileNumberNotVerifiedException;
@@ -28,7 +30,7 @@ public class GlobalExceptionHandler {
       // Catch Authentication & Validation Exceptions (Grouped)
       @ExceptionHandler({ MobileNumberNotVerifiedException.class, InvalidMobileNumberException.class,
                   InvalidOTPException.class })
-      public ResponseEntity<String> handleValidationExceptions(RuntimeException ex) {
+      public ResponseEntity<String> handleAuthValidationExceptions(RuntimeException ex) {
             logger.warn("Validation error: {}", ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
       }
@@ -56,7 +58,8 @@ public class GlobalExceptionHandler {
       @ExceptionHandler(IllegalArgumentException.class)
       public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
             logger.warn("Invalid request: {}", ex.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                  .body("Invalid request: " + ex.getMessage());
       }
 
       // Handle Unexpected Errors (Catch-All)
@@ -66,5 +69,14 @@ public class GlobalExceptionHandler {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("An unexpected error occurred. Please try again later.");
       }
+
+      // Handle Authentication Failures
+      @ExceptionHandler({ AuthenticationException.class, InvalidJwtTokenException.class })
+      public ResponseEntity<String> handleAuthenticationException(AuthenticationException ex) {
+            logger.warn("Authentication failed: {}", ex.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                  .body("Authentication failed: " + ex.getMessage());
+      }
+
 
 }

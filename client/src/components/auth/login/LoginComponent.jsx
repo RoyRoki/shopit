@@ -99,7 +99,7 @@ const LoginComponent = () => {
           }
           await Promise.all([updateProfileMode(), updateCart()]);
 
-          navigate('/');
+          navigate("/");
         } else {
           setPopup({ message: "Login Failed. Try Again!", type: "error" });
         }
@@ -119,6 +119,7 @@ const LoginComponent = () => {
 
   const getOtp = async () => {
     try {
+      let request = {};
       if (loginMth === loginVai.mobileotp) {
         const mobileNo = watch("mobileNo");
 
@@ -126,21 +127,7 @@ const LoginComponent = () => {
           setPopup({ message: "Mobile No is not valid", type: "error" });
           return;
         }
-
-        const response = await publicRequest("POST", urls.generateOtp, {
-          mobileNo,
-        });
-
-        if (response.status === 200) {
-          setOtpSend(true);
-          setTimer(60); // Reset timer when OTP is sent
-          setPopup({ message: "OTP sent successfully!", type: "success" });
-        } else {
-          setPopup({
-            message: "Failed to send OTP. Try again!",
-            type: "error",
-          });
-        }
+        request = { mobileNo: mobileNo };
       } else if (loginMth === loginVai.emailotp) {
         const email = watch("email");
 
@@ -148,26 +135,27 @@ const LoginComponent = () => {
           setPopup({ message: "Email is not valid", type: "error" });
           return;
         }
+        request = { email: email };
+      }
 
-        const response = await publicRequest("POST", urls.generateOtp, {
-          email,
+      const response = await publicRequest(
+        "POST",
+        urls.loginOtpRequest,
+        request
+      );
+      if (response.status === 200) {
+        setOtpSend(true);
+        setTimer(60); // Reset timer when OTP is sent
+        setPopup({ message: "OTP sent successfully!", type: "success" });
+      } else {
+        setPopup({
+          message: "Failed to send OTP. Try again!",
+          type: "error",
         });
-        if (response.status === 200) {
-          setOtpSend(true);
-          setTimer(60); // Reset timer when OTP is sent
-          setPopup({ message: "OTP sent successfully!", type: "success" });
-        } else {
-          setPopup({
-            message: "Failed to send OTP. Try again!",
-            type: "error",
-          });            
-        }
       }
     } catch (error) {
-      console.error(error);
-
       if (error?.response?.status === 401) {
-        setPopup({ message: "Invalid OTP request. Try again!", type: "error" });
+        setPopup({ message: "We couldn't find your account.", type: "error" });
       } else {
         setPopup({ message: "Failed to send OTP. Try again!", type: "error" });
       }

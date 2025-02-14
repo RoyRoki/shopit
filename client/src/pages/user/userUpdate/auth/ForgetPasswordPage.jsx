@@ -23,7 +23,7 @@ const ForgetPasswordPage = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const requestData = { ...data, [using.field]: using.value };
+    const requestData = { ...data, [using.field === 'mobile' ? 'mobileNo' : 'email']: using.value };
     try {
       const response = await request(
         "PUT",
@@ -47,6 +47,8 @@ const ForgetPasswordPage = () => {
   };
 
   const handleRequest = async (field, value) => {
+    let data = {};
+
     if (field === "mobile" && (!value || !/^[0-9]{10}$/.test(value))) {
       setPopup({
         message: "Enter a valid 10-digit mobile number",
@@ -54,18 +56,28 @@ const ForgetPasswordPage = () => {
       });
       return;
     }
+    if(field === "mobile") {
+      data = {'mobileNo': value};
+    } else {
+      data = {'email': value};
+    }
     try {
       const response = await request(
         "POST",
-        `${urls.forgetPasswordRequest}${field}=${value}`
+        urls.forgetPasswordRequest,
+        data
       );
       if (response.status === 200) {
         setPopup({ message: "OTP sent successfully!", type: "success" });
         setOtpSend(true);
       }
     } catch (error) {
-      setPopup({ message: "Failed to send OTP. Try again!", type: "error" });
-      console.error(error);
+      if(error?.response?.status === 401) {
+        setPopup({ message: "We couldn't find your account.", type: "error" });        
+      } else {
+        setPopup({ message: "Failed to send OTP. Try again!", type: "error" });
+        console.error(error);
+      }
     }
   };
 

@@ -6,6 +6,7 @@ import com.eshop.Eshop.model.dto.CartItemDTO;
 import com.eshop.Eshop.model.dto.CartSummaryDTO;
 import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.ViewCartDTO;
+import com.eshop.Eshop.model.dto.requestdto.UpdatePasswordDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.responsedto.OrderDTO;
@@ -14,6 +15,9 @@ import com.eshop.Eshop.model.dto.responsedto.UserDTO;
 import com.eshop.Eshop.service.UserServiceImp;
 import com.eshop.Eshop.util.OtpService;
 import com.shippo.model.Address;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -315,6 +319,18 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Termination Failed! "+e.getMessage());
         }
+    }
+
+    /**
+     * Updates the user's password using the old password for verification. @Todo => usercontroler
+     *
+     * @param passwordDTO Contains old and new passwords.
+     * @return Success message if the password is updated.
+     */
+    @PutMapping(value = "/update-password")
+    public ResponseEntity<String> updatePasswordByOldPass(@Valid @RequestBody UpdatePasswordDTO passwordDTO) {
+        userService.handleUpdatePassword(passwordDTO);
+        return ResponseEntity.ok("Successfully password updated");
     }
 
 }

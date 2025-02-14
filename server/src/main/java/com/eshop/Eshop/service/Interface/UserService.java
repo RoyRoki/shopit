@@ -3,6 +3,7 @@ package com.eshop.Eshop.service.Interface;
 import com.eshop.Eshop.model.Order;
 import com.eshop.Eshop.model.dto.CartSummaryDTO;
 import com.eshop.Eshop.model.dto.ViewCartDTO;
+import com.eshop.Eshop.model.dto.requestdto.UpdatePasswordDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
@@ -39,7 +40,11 @@ public interface UserService {
 
     void updateUserName(String name);
 
+    void handleUpdatePassword(UpdatePasswordDTO passwordDTO);
+
     void addNewAddress(UserAddressDTO addressDTO);
+
+    void updateUserPassword(String hashPass, User user);
 
     void updateUserAddress(Long id, UserAddressDTO addressDTO);
 

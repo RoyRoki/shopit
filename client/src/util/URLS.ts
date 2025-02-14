@@ -5,11 +5,10 @@ export const urls = {
       generateOtpUnique: 'auth/generate-otp/unique',
       verifyOtp: 'auth/verify-otp',
       loginPass: 'auth/login',
+      loginOtpRequest: "auth/login-otp/request",
       loginOtp: 'auth/login-verify',
-      updatePassword: 'auth/update-password',
-      forgetPasswordRequest: 'auth/forget-password-request?',
+      forgetPasswordRequest: 'auth/forget-password/request',
       updatePasswordVaiOtp: 'auth/set-password-otp',
-
 
       fetchCategories: 'home/get-categories',
       fetchAdminStore: 'admin/get-store',
@@ -26,7 +25,6 @@ export const urls = {
       getAdminOrders: 'admin/orders',
       shippedOrderById: 'admin/shipped/',
       
-
       fetchUserDto: 'user/get-user',
       fetchUserDetails: 'user/get-user',
       updateUserDetails: 'user/update-user',
@@ -41,8 +39,8 @@ export const urls = {
       setDefaultAddressById: 'user/set-default-address?addressId=',
       getUserCartSummary: 'user/cart-summary',
       userOrdersList: 'user/orders',
+      updatePassword: 'user/update-password',
       
-
       fetchHomeProductsBy_: 'home/products',
       fetchHomeStore: 'home/stores',
       fetchHomeStoreById: 'home/store-id?id=',

@@ -2,21 +2,16 @@ package com.eshop.Eshop.controller;
 
 import com.eshop.Eshop.model.Role;
 import com.eshop.Eshop.service.UserServiceImp;
-import com.eshop.Eshop.util.AuthenticationContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @RestController
 @RequestMapping(value = "/api")
 public class ApiController {
-
-    @Autowired
-    private AuthenticationContextService authContextService;
 
     @Autowired
     private UserServiceImp userService;

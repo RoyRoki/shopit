@@ -1,7 +1,9 @@
 package com.eshop.Eshop.service;
 
+import com.eshop.Eshop.exception.custom.AuthenticationException;
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.*;
+import com.eshop.Eshop.model.dto.requestdto.UpdatePasswordDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserSignUpRequestDTO;
@@ -12,9 +14,14 @@ import com.eshop.Eshop.model.dto.responsedto.UserSignUpResponseDTO;
 import com.eshop.Eshop.model.enums.OrderStatus;
 import com.eshop.Eshop.repository.*;
 import com.eshop.Eshop.service.Interface.UserService;
+import com.eshop.Eshop.service.helper.AuthServiceHelper;
 import com.eshop.Eshop.util.AuthenticationContextService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -49,6 +56,13 @@ public class UserServiceImp implements UserService {
     @Autowired
     private MessageServiceImp messageService;
 
+    @Autowired
+    @Lazy
+    private AuthServiceHelper authServiceHelper;
+
+    /**
+     * + " encoded" for saved hash password
+     */
     @Override
     public UserSignUpResponseDTO addNewUser(UserSignUpRequestDTO requestDTO) {
         List<Role> roles = new ArrayList<>();
@@ -56,7 +70,7 @@ public class UserServiceImp implements UserService {
 
         User newUser = User.builder()
                     .userName(requestDTO.getUserName())
-                    .password(requestDTO.getPassword()+" encoded")
+                    .password(requestDTO.getPassword() + " encoded") //@Fix
                     .mobileNo(requestDTO.getMobileNo())
                     .roles(roles)
                     .createAt(LocalDateTime.now())
@@ -427,6 +441,34 @@ public class UserServiceImp implements UserService {
     @Override
     public void handleShipped(Order order) {
         messageService.sentMessageToMobile(order.getUser().getMobileNo(), "Hey "+order.getUser().getUserName()+"\nOrder Shipped id: "+order.getId()+"\n Total cost: "+order.getGrandPrice()); 
+    }
+
+    /**
+     * Updates the current user's password after verifying the old password.
+     * + " encoded" for saved hash password
+     * @param passwordDTO Contains the old and new passwords.
+     * @throws AuthenticationException If the old password is incorrect.
+     */
+    @Override
+    public void handleUpdatePassword(UpdatePasswordDTO passwordDTO) {
+        // Get the currently authenticated user
+        User user = currentUser();
+        String savedHashPass = user.getPassword().replace(" encoded", "");
+        
+        // Verify if the old password matches
+        if(!authServiceHelper.matchRawAndEncoded(passwordDTO.getOldPassword(), savedHashPass)) {
+            throw new AuthenticationException("Old password is incorrect. Please try again.");
+        }
+
+        // Encrypt and update the new password
+        user.setPassword(authServiceHelper.passwordToHash(passwordDTO.getNewPassword()) + " encoded");
+        userRepo.save(user);
+    }
+
+    @Override
+    public void updateUserPassword(String hashPass, User user) {
+        user.setPassword(hashPass);
+        userRepo.save(user);
     }
     
 }
