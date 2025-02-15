@@ -3,6 +3,8 @@ package com.eshop.Eshop.service.Interface;
 import com.eshop.Eshop.model.Order;
 import com.eshop.Eshop.model.dto.CartSummaryDTO;
 import com.eshop.Eshop.model.dto.ViewCartDTO;
+import com.eshop.Eshop.model.dto.requestdto.MobileOrEmailRequestDTO;
+import com.eshop.Eshop.model.dto.requestdto.OTPVerifyRequestDTO;
 import com.eshop.Eshop.model.dto.requestdto.UpdatePasswordDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserAddressDTO;
 import com.eshop.Eshop.model.dto.requestdto.UserDetailsUpdateRequestDTO;
@@ -53,4 +55,7 @@ public interface UserService {
     void setDefaultAddress(Long addressId);
 
     void handleShipped(Order order);
+
+    void handleMobileEmailUpdateRequest(MobileOrEmailRequestDTO request);
+    void handleMobileEmailUpdateRequest(OTPVerifyRequestDTO request);
 }

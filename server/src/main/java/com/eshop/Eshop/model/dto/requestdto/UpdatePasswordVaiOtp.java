@@ -1,7 +1,5 @@
 package com.eshop.Eshop.model.dto.requestdto;
 
-import jakarta.persistence.Embedded;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

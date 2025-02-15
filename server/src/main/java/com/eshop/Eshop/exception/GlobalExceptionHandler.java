@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.eshop.Eshop.exception.custom.AuthenticationException;
+import com.eshop.Eshop.exception.custom.DatabaseOperationException;
+import com.eshop.Eshop.exception.custom.InvalidInputException;
 import com.eshop.Eshop.exception.custom.InvalidJwtTokenException;
 import com.eshop.Eshop.exception.custom.InvalidMobileNumberException;
 import com.eshop.Eshop.exception.custom.InvalidOTPException;
 import com.eshop.Eshop.exception.custom.MobileNumberNotVerifiedException;
+import com.eshop.Eshop.exception.custom.ResourceNotFoundException;
+import com.eshop.Eshop.exception.custom.UnprocessableEntityException;
 import com.eshop.Eshop.exception.custom.UserAlreadyExistsException;
 
 /**
@@ -72,11 +76,58 @@ public class GlobalExceptionHandler {
 
       // Handle Authentication Failures
       @ExceptionHandler({ AuthenticationException.class, InvalidJwtTokenException.class })
-      public ResponseEntity<String> handleAuthenticationException(AuthenticationException ex) {
+      public ResponseEntity<String> handleAuthenticationException(RuntimeException ex) {
             logger.warn("Authentication failed: {}", ex.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                   .body("Authentication failed: " + ex.getMessage());
       }
 
+      // Handles cases where a requested resource is not found.
+      @ExceptionHandler(ResourceNotFoundException.class)
+      public ResponseEntity<Map<String, String>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+            logger.warn("Resource not found: {}", ex.getMessage());
+            Map<String, String> response = new HashMap<>();
+
+            response.put("error", "Resource Not Found");
+            response.put("message", ex.getMessage());
+
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+      }
+
+      // Handling database operation failures.
+      @ExceptionHandler(DatabaseOperationException.class)
+      public ResponseEntity<Map<String, String>> handleDatabaseException(DatabaseOperationException ex) {
+            logger.error("Database operation failed: {}", ex.getMessage());
+
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Database Error");
+            response.put("message", ex.getMessage());
+
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+
+      // Handle Invalid Inputs
+      @ExceptionHandler(InvalidInputException.class)
+      public ResponseEntity<Map<String, String>> handleInvalidInputException(InvalidInputException ex) {
+
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Invalid Input");
+            response.put("message", ex.getMessage());
+
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+      }
+
+      // Handle Unprocessable Entity Errors
+      @ExceptionHandler(UnprocessableEntityException.class)
+      public ResponseEntity<Map<String, String>> handleUnprocessableEntityException(UnprocessableEntityException ex) {
+
+            logger.warn("Unprocessable entity: {}", ex.getMessage());
+
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Unprocessable Entity");
+            response.put("message", ex.getMessage());
+
+            return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
+      }
 
 }

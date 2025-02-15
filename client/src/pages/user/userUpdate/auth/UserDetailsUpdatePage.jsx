@@ -13,7 +13,7 @@ import {
 import { request } from "../../../../helper/AxiosHelper";
 import { urls } from "../../../../util/URLS";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import PopupNotification from "../../../../components/popup/notification/PopupNotification";
 
@@ -54,7 +54,7 @@ const UserDetailsUpdatePage = () => {
       return;
     }
     try {
-      const response = await request("PUT", `${urls.updateUserName}${name}`);
+      const response = await request("PUT", urls.updateUserName, {"userName" : name});
       if (response.status === 200) {
         setPopup({ message: "Name updated successfully!", type: "success" });
         dispatch(fetchUserDetails());
@@ -114,7 +114,15 @@ const UserDetailsUpdatePage = () => {
     }
 
     try {
-      await request("POST", `${urls.userUpdateRequest}${field}=${value}`);
+      let requestData = {};
+
+      if(field === 'mobile') {
+        requestData = {"mobileNo": value};
+      } else {
+        requestData = {"email": value};
+      }
+
+      await request("POST", urls.userUpdateRequest, requestData);
       setPopup({ message: "OTP sent successfully!", type: "success" });
       setOtpSend(true);
     } catch (error) {
@@ -138,8 +146,14 @@ const UserDetailsUpdatePage = () => {
       return;
     }
     try {
-      const api = `${urls.userEmailOrMobileUpdate}${field}?${field}=${value}&otp=${otp}`;
-      await request("PUT", api);
+      let requestData = {};
+      if(field === 'mobile') {
+        requestData = {"mobileNo" : value, "otp" : otp};
+      } else {
+        requestData = {"email" : value, "otp" : otp};
+      }
+
+      await request("PUT", urls.userContactUpdate, requestData);
 
       if (field === "email") {
         setPopup({ message: "Email updated successfully!", type: "success" });
