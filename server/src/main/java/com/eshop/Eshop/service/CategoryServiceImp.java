@@ -5,7 +5,6 @@ import com.eshop.Eshop.model.dto.responsedto.ProductResponseDTO;
 import com.eshop.Eshop.model.Product;
 import com.eshop.Eshop.repository.CategoryRepo;
 import com.eshop.Eshop.service.Interface.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,18 +13,19 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImp implements CategoryService {
 
-    @Autowired
-    private CategoryRepo categoryRepo;
+    private final CategoryRepo categoryRepo;
+    private final DTOService dtoService;
 
-    @Autowired
-    private DTOService dtoService;
+    public CategoryServiceImp(
+        CategoryRepo categoryRepo,
+        DTOService dtoService ) {
+            
+            this.categoryRepo = categoryRepo;
+            this.dtoService = dtoService;
+    }
 
     public List<Category> getAllCategories() {
-        try {
-            return categoryRepo.findAll();
-        } catch (Exception e) {
-            throw new RuntimeException("CategoryServiceImp-getAllCategories-error");
-        }
+        return categoryRepo.findAll();
     }
 
     public List<ProductResponseDTO> getProductsById(Long categoryId) {

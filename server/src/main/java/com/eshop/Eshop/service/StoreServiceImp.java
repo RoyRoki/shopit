@@ -1,5 +1,7 @@
 package com.eshop.Eshop.service;
 
+import com.eshop.Eshop.exception.custom.DatabaseOperationException;
+import com.eshop.Eshop.exception.custom.ResourceNotFoundException;
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.StoreOrderDto;
@@ -13,7 +15,6 @@ import com.eshop.Eshop.service.helper.CategoryServiceHelper;
 import com.eshop.Eshop.service.helper.KeywordServiceHelper;
 import com.eshop.Eshop.util.AuthenticationContextService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,98 +26,102 @@ import java.util.stream.Collectors;
 
 @Service
 public class StoreServiceImp implements StoreService {
-    @Autowired
-    private StoreRepo storeRepo;
 
-    @Autowired
-    private ProductRepo productRepo;
+    private final StoreRepo storeRepo;
+    private final ProductRepo productRepo;
+    private final CategoryRepo categoryRepo;
+    private final AuthenticationContextService authenticationContextService;
+    private final DTOService dtoService;
+    private final CategoryServiceHelper categoryHelper;
+    private final KeywordServiceHelper keywordHelper;
+    private final MessageServiceImp messageService;
+    private final OrderPerStoreRepo orderPerStoreRepo;
+    private final AwsServiceImp awsServiceImp;
+    private final OrderServiceImp orderService;
 
-    @Autowired
-    private CategoryRepo categoryRepo;
-
-    @Autowired
-    private AuthenticationContextService authenticationContextService;
-
-    @Autowired
-    private DTOService dtoService;
-
-    @Autowired
-    private CategoryServiceHelper categoryHelper;
-
-    @Autowired
-    private KeywordServiceHelper keywordHelper;
-
-    @Autowired
-    private MessageServiceImp messageService;
-
-    @Autowired
-    private OrderPerStoreRepo orderPerStoreRepo;
-
-    @Autowired
-    private AwsServiceImp awsServiceImp;
-
-    @Lazy
-    @Autowired
-    private OrderServiceImp orderService;
+    public StoreServiceImp(
+            StoreRepo storeRepo,
+            ProductRepo productRepo,
+            CategoryRepo categoryRepo,
+            AuthenticationContextService authenticationContextService,
+            DTOService dtoService,
+            CategoryServiceHelper categoryHelper,
+            KeywordServiceHelper keywordHelper,
+            MessageServiceImp messageService,
+            OrderPerStoreRepo orderPerStoreRepo,
+            AwsServiceImp awsServiceImp,
+            @Lazy OrderServiceImp orderService) {
+        this.storeRepo = storeRepo;
+        this.productRepo = productRepo;
+        this.categoryRepo = categoryRepo;
+        this.authenticationContextService = authenticationContextService;
+        this.dtoService = dtoService;
+        this.categoryHelper = categoryHelper;
+        this.keywordHelper = keywordHelper;
+        this.messageService = messageService;
+        this.orderPerStoreRepo = orderPerStoreRepo;
+        this.awsServiceImp = awsServiceImp;
+        this.orderService = orderService;
+    }
 
     @Override
     public Store createStore(Store store) {
-        try {
-            return storeRepo.save(store);
-        } catch (Exception e) {
-            return null;
-        }
+        return storeRepo.save(store);
     }
 
     @Override
     public ProductDTO addProduct(AddProductRequestDTO productRequest) {
-        try {
-            Long admin_id = authenticationContextService.getAuthenticatedUserId();
-            Store store = storeRepo.findByOwnerId(admin_id)
-                    .orElseThrow(() -> new RuntimeException("Store not found for admin ID: " + admin_id));
 
-            Set<Category> categories = categoryHelper.getCategorySetByIdSet(productRequest.getCategoryIds());
+        // Fetch Admin's Store
+        Store store = getAdminStore();
 
-            Set<Keyword> keywords = keywordHelper.getKeywordsByStringSet(productRequest.getKeywords());
+        // Retrieve Categories & Keywords
+        Set<Category> categories = categoryHelper.getCategorySetByIdSet(productRequest.getCategoryIds());
+        Set<Keyword> keywords = keywordHelper.getKeywordsByStringSet(productRequest.getKeywords());
 
-            Product newProduct = Product.builder()
-                    .name(productRequest.getName())
-                    .description(productRequest.getDescription())
-                    .prices(productRequest.getPrices())
-                    .stock(productRequest.getStock())
-                    .keywords(keywords)
-                    .categories(categories)
-                    .store(store)
-                    .isActive(false)
-                    .tableData("")
-                    .createdAt(LocalDateTime.now())
-                    .updatedAt(LocalDateTime.now())
-                    .build();
+        // Build & Save Product
+        Product newProduct = buildProduct(productRequest, store, categories, keywords);
+        Product savedProduct = productRepo.save(newProduct);
 
-            Product savedProduct = productRepo.save(newProduct);
-            return dtoService.productToProductDTO(savedProduct);
-
-        } catch (Exception e) {
-            throw new RuntimeException("StoreServiceImp-addProduct-error " + e.getMessage());
-        }
+        // Convert to DTO & Return
+        return dtoService.productToProductDTO(savedProduct);
     }
 
-    public List<Store> getAllStore() {
-        return storeRepo.findAll();
+    // Helper Method: Fetch Store for Admin
+    private Store getAdminStore() {
+        Long adminId = authenticationContextService.getAuthenticatedUserId();
+        return storeRepo.findByOwnerId(adminId)
+                .orElseThrow(() -> new ResourceNotFoundException("Store not found for admin ID: " + adminId));
+    }
+
+    // Helper Method: Build Product Entity
+    private Product buildProduct(AddProductRequestDTO productRequest, Store store, Set<Category> categories,
+            Set<Keyword> keywords) {
+        return Product.builder()
+                .name(productRequest.getName())
+                .description(productRequest.getDescription())
+                .prices(productRequest.getPrices())
+                .stock(productRequest.getStock())
+                .keywords(keywords)
+                .categories(categories)
+                .store(store)
+                .isActive(false)
+                .tableData("")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
     }
 
     @Override
     public Store findById(Long id) {
-        return storeRepo.findById(id).orElseThrow(() -> new RuntimeException("StoreServiceImp-findById-error"));
+        return storeRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Store not found with ID: " + id));
     }
 
     @Override
     public List<Store> getStoresByCategoryId(Long categoryId) {
-        try {
-            return storeRepo.findByCategories_Id(categoryId);
-        } catch (Exception e) {
-            throw new RuntimeException("StoreServiceImp-getStoreByCategoryId-error " + e.getMessage());
-        }
+        return storeRepo.findByCategories_Id(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Stores not found by categoryId : " + categoryId));
     }
 
     @Override
@@ -140,7 +145,7 @@ public class StoreServiceImp implements StoreService {
     }
 
     @Override
-    public Store updateStore(StoreUpdateRequestDTO requestDTO) {
+    public StoreDTO updateStore(StoreUpdateRequestDTO requestDTO) {
         try {
             Store store = authenticationContextService.getAuthenticatedStore();
 
@@ -199,10 +204,12 @@ public class StoreServiceImp implements StoreService {
             // Set updated timestamp
             store.setUpdatedAt(LocalDateTime.now());
 
-            return storeRepo.save(store);
+            storeRepo.save(store);
+
+            return dtoService.storeToStoreDTO(store);
 
         } catch (Exception e) {
-            throw new RuntimeException("Error in storeServiceImp-updateStore : " + e.getMessage());
+            throw new DatabaseOperationException("Error in storeServiceImp-updateStore : " + e.getMessage());
         }
     }
 
@@ -228,7 +235,7 @@ public class StoreServiceImp implements StoreService {
             });
 
         } catch (Exception e) {
-            throw new RuntimeException("Database operation failed : " + e.getMessage());
+            throw new DatabaseOperationException("Database operation failed : " + e.getMessage());
         }
     }
 
@@ -240,47 +247,37 @@ public class StoreServiceImp implements StoreService {
             List<OrderPerStore> orderPerStores = orderPerStoreRepo.findOrdersByStoreId(storeId);
 
             return orderPerStores.stream()
-            .map(opStore -> {
+                    .map(opStore -> {
 
-                return StoreOrderDto.builder()
-                            .storeSubtotal(opStore.getStoreSubtotal())
-                            .gstAmount(opStore.getGstAmount())
-                            .deliveryCost(opStore.getDeliveryCost())
-                            .total(opStore.getTotal())
-                            .orderItems(opStore.getOrderItems().stream()
-                                .map(orderItem -> dtoService.orderItemToDTO(orderItem))
-                                .toList()
-                            )
-                            .orderInfo(dtoService.orderToOrderInfo(opStore.getOrder()))
-                            .customer(dtoService.userToCustomerDTO(opStore.getOrder().getUser()))
-                            .build();
-            })
-            .toList();
+                        return StoreOrderDto.builder()
+                                .storeSubtotal(opStore.getStoreSubtotal())
+                                .gstAmount(opStore.getGstAmount())
+                                .deliveryCost(opStore.getDeliveryCost())
+                                .total(opStore.getTotal())
+                                .orderItems(opStore.getOrderItems().stream()
+                                        .map(orderItem -> dtoService.orderItemToDTO(orderItem))
+                                        .toList())
+                                .orderInfo(dtoService.orderToOrderInfo(opStore.getOrder()))
+                                .customer(dtoService.userToCustomerDTO(opStore.getOrder().getUser()))
+                                .build();
+                    })
+                    .toList();
 
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error during fetch orders for store"+e);
+            throw new DatabaseOperationException("Error during fetch orders for store" + e);
         }
     }
 
     @Override
     public StoreDTO getStore() {
-        try {
-            Store store = authenticationContextService.getAuthenticatedStore();
-            return dtoService.storeToStoreDTO(store);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        Store store = authenticationContextService.getAuthenticatedStore();
+        return dtoService.storeToStoreDTO(store);
     }
 
     @Override
     public List<StoreResponseDto> getAllStoreDto() {
-        try {
-            return storeRepo.findAll().stream()
-                    .map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Error during fetch all stores and return storeDto " + e.getMessage());
-        }
+        return storeRepo.findAll().stream()
+                .map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
     }
 
     @Override
@@ -290,23 +287,22 @@ public class StoreServiceImp implements StoreService {
 
     @Override
     public List<StoreResponseDto> getStoreResponseDtosByCategoryId(Long categoryId) {
-        try {
-            return storeRepo.findByCategories_Id(categoryId).stream()
-                    .map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new RuntimeException("StoreServiceImp-getStoreByCategoryId-error " + e.getMessage());
-        }
+
+        return storeRepo.findByCategories_Id(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Stores not found for categoryId : " + categoryId))
+                .stream()
+                .map(s -> dtoService.storeToStoreResponseDTO(s)).collect(Collectors.toList());
+
     }
 
     @Override
     public List<StoreResponseDto> getStoresDtoBySearch(String q) {
-        try {
-            List<Store> stores = storeRepo.findStoreBySearch(q);
-            return stores.stream().map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
-        }
+
+        List<Store> stores = storeRepo.findStoreBySearch(q)
+                .orElseThrow(() -> new ResourceNotFoundException("Store not found for query : " + q));
+
+        return stores.stream()
+            .map(store -> dtoService.storeToStoreResponseDTO(store)).collect(Collectors.toList());
     }
 
     @Override
@@ -341,17 +337,13 @@ public class StoreServiceImp implements StoreService {
             }
             storeRepo.save(store);
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new DatabaseOperationException("Failed to update LogoBanner " + e.getMessage());
         }
     }
 
-
+    @Override
     public void shippedOrder(Long orderId) {
-        try {
-            Store store = authenticationContextService.getAuthenticatedStore();
-            orderService.handleShipped(orderId, store);
-        } catch(Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        Store store = authenticationContextService.getAuthenticatedStore();
+        orderService.handleShipped(orderId, store);
     }
 }

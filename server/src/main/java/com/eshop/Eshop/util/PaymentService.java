@@ -3,18 +3,13 @@ package com.eshop.Eshop.util;
 import com.eshop.Eshop.model.PaymentOrder;
 import com.eshop.Eshop.model.enums.PayStatus;
 import com.eshop.Eshop.repository.PaymentOrderRepo;
-import com.eshop.Eshop.service.OrderServiceImp;
 import com.eshop.Eshop.service.helper.PaymentServiceHelper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
-
 import com.razorpay.*;
 
 @Service

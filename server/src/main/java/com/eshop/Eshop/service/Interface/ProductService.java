@@ -17,11 +17,11 @@ public interface ProductService {
 
     List<ProductResponseDTO> getProductsByStoreId(Long id);
 
-    ProductDTO UpdateProduct(ProductEditRequestDTO requestDTO, Product product);
+    ProductDTO UpdateProduct(ProductEditRequestDTO requestDTO, Long productId);
 
     List<ProductResponseDTO> getProductsByIds(List<Long> ids);
 
-    List<String> removeImageUrls(List<String> imageUrls, Product product);
+    List<String> removeImageUrls(List<String> imageUrls, Long productId);
 
     List<ProductResponseDTO> getProductBySearch(String q);
 

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface StoreRepo extends JpaRepository<Store, Long> {
     Optional<Store> findByOwnerId(Long userId);
-    List<Store> findByCategories_Id(Long category_id);
+    Optional<List<Store>> findByCategories_Id(Long category_id);
 
     @Query(value = """
     WITH aggregated_data AS (
@@ -35,6 +35,6 @@ public interface StoreRepo extends JpaRepository<Store, Long> {
     WHERE ad.document @@ websearch_to_tsquery('english', :query)
     ORDER BY ts_rank(ad.document, websearch_to_tsquery('english', :query)) DESC;
     """, nativeQuery = true)
-    List<Store> findStoreBySearch(@Param("query") String query);
+    Optional<List<Store>> findStoreBySearch(@Param("query") String query);
 
 }

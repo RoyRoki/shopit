@@ -42,7 +42,6 @@ export const urls = {
       updatePassword: 'user/update-password',
       
       fetchHomeProductsBy_: 'home/products',
-      fetchHomeStore: 'home/stores',
       fetchHomeStoreById: 'home/store-id?id=',
       fetchHomeStoreDtoByQuery: 'home/stores/query?query=',
 

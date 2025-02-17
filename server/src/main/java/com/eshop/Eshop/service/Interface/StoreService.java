@@ -15,7 +15,6 @@ public interface StoreService {
 
     Store createStore(Store store);
     ProductDTO addProduct(AddProductRequestDTO addProductRequest);
-    List<Store> getAllStore();
 
     Store findById(Long id);
     List<Store> getStoresByCategoryId(Long categoryId);
@@ -23,7 +22,7 @@ public interface StoreService {
     List<ProductDTO> getAllProduct();
     Address getAddress(Store store);
 
-    Store updateStore(StoreUpdateRequestDTO requestDTO);
+    StoreDTO updateStore(StoreUpdateRequestDTO requestDTO);
 
     void handleConfirmedOrder(Order order);
 
@@ -38,4 +37,5 @@ public interface StoreService {
     List<StoreResponseDto> getStoresDtoBySearch(String q);
 
     void updateLogoBanner(MultipartFile logo, MultipartFile banner, Long storeId);
+    void shippedOrder(Long orderId);
 }

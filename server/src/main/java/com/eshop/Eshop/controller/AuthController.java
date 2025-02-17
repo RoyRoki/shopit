@@ -1,6 +1,5 @@
 package com.eshop.Eshop.controller;
 
-import com.eshop.Eshop.model.dto.*;
 import com.eshop.Eshop.model.dto.requestdto.*;
 import com.eshop.Eshop.model.dto.responsedto.JwtRefreshResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserLoginResponseDTO;
@@ -20,7 +19,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -29,16 +27,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthController {
 
     private final AuthServiceImp authService;
-    private final  UserServiceImp userService;
-    private final  OtpService otpService;
-
+    
     public AuthController( AuthServiceImp authServiceImp, JwtService jwtService,
             RefreshTokenService refreshTokenService,UserServiceImp userServiceImp,
             OtpService otpService, RedisService redisService) {
 
         this.authService = authServiceImp;
-        this.userService = userServiceImp;
-        this.otpService = otpService;
     }
 
 

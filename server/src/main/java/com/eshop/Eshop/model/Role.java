@@ -1,7 +1,6 @@
 package com.eshop.Eshop.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

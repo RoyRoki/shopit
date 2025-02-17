@@ -1,5 +1,8 @@
 package com.eshop.Eshop.service;
 
+import com.eshop.Eshop.exception.custom.AuthenticationException;
+import com.eshop.Eshop.exception.custom.DatabaseOperationException;
+import com.eshop.Eshop.exception.custom.ResourceNotFoundException;
 import com.eshop.Eshop.model.*;
 import com.eshop.Eshop.model.dto.ProductDTO;
 import com.eshop.Eshop.model.dto.requestdto.ProductEditRequestDTO;
@@ -9,6 +12,7 @@ import com.eshop.Eshop.repository.ProductRepo;
 import com.eshop.Eshop.service.Interface.ProductService;
 import com.eshop.Eshop.service.helper.CategoryServiceHelper;
 import com.eshop.Eshop.service.helper.KeywordServiceHelper;
+import com.eshop.Eshop.util.AuthenticationContextService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +44,9 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     private AwsServiceImp awsServiceImp;
 
+    @Autowired
+    private AuthenticationContextService authenticationContextService;
+
     public List<Product> getProductsByCategoryId(Long id) {
         return categoryRepo.findProductsByCategoryId(id);
     }
@@ -49,8 +56,7 @@ public class ProductServiceImp implements ProductService {
             List<Product> products = productRepo.findByKeywords_WordAndIsActiveTrue(word);
 
             return products.stream()
-                    .map(product ->
-                            dtoService.productToResponseDto(product)).toList();
+                    .map(product -> dtoService.productToResponseDto(product)).toList();
 
         } catch (Exception e) {
             throw new RuntimeException("ProductServiceImp-getProductsByKeyword");
@@ -59,11 +65,8 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Product getProductById(Long productId) {
-        try {
-            return productRepo.findById(productId).orElseThrow();
-        } catch (Exception e) {
-            throw new RuntimeException("ProductServiceImp-getProductById-error");
-        }
+        return productRepo.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Products not found by id : " + productId));
     }
 
     @Override
@@ -79,14 +82,21 @@ public class ProductServiceImp implements ProductService {
                     .map(product -> dtoService.productToResponseDto(product))
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            throw new RuntimeException("productServiceImp-getProductsByStoreId-error");
+            throw new DatabaseOperationException("productServiceImp-getProductsByStoreId-error");
         }
     }
 
     @Override
-    public ProductDTO UpdateProduct(ProductEditRequestDTO requestDTO, Product product) {
+    public ProductDTO UpdateProduct(ProductEditRequestDTO requestDTO, Long productId) {
 
-        if(requestDTO.getTable() != null) {
+        if(!authenticationContextService.isValidProductOfStore(productId)) {
+            throw new AuthenticationException("You are not authorized to update this product.");
+        }
+
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found for id : " + productId));
+
+        if (requestDTO.getTable() != null) {
             ObjectMapper mapper = new ObjectMapper();
             try {
                 String jsonObjData = mapper.writeValueAsString(requestDTO.getTable());
@@ -97,55 +107,59 @@ public class ProductServiceImp implements ProductService {
             }
         }
 
-        if(requestDTO.getName() != null) {
+        if (requestDTO.getName() != null) {
             product.setName(requestDTO.getName());
         }
 
-        if(requestDTO.getDescription() != null) {
+        if (requestDTO.getDescription() != null) {
             product.setDescription(requestDTO.getDescription());
         }
 
-        if(requestDTO.getStock() != null) {
+        if (requestDTO.getStock() != null) {
             product.setStock(requestDTO.getStock());
         }
 
-        if(requestDTO.getPrices() != null) {
+        if (requestDTO.getPrices() != null) {
             product.setPrices(requestDTO.getPrices());
         }
 
-        if(requestDTO.getDiscount() != null) {
+        if (requestDTO.getDiscount() != null) {
             product.setDiscount(requestDTO.getDiscount());
         }
 
-        if(requestDTO.getKeywords() != null && !requestDTO.getKeywords().isEmpty()) {
+        if (requestDTO.getKeywords() != null && !requestDTO.getKeywords().isEmpty()) {
             Set<Keyword> existingKeywords = keywordHelper.getKeywordsByStringSet(requestDTO.getKeywords());
             product.setKeywords(existingKeywords);
         }
-        if(requestDTO.getCategoryIds() != null && !requestDTO.getCategoryIds().isEmpty()) {
+        if (requestDTO.getCategoryIds() != null && !requestDTO.getCategoryIds().isEmpty()) {
             Set<Category> categories = categoryHelper.getCategorySetByIdSet(requestDTO.getCategoryIds());
             product.setCategories(categories);
         }
-        if(requestDTO.getIsActive() != null) {
+        if (requestDTO.getIsActive() != null) {
             product.setIsActive(requestDTO.getIsActive());
         }
-        if(requestDTO.getWeight() != null) {
+        if (requestDTO.getWeight() != null) {
             product.setWeight(requestDTO.getWeight());
         }
-        if(requestDTO.getHeight() != null) {
+        if (requestDTO.getHeight() != null) {
             product.setHeight(requestDTO.getHeight());
         }
-        if(requestDTO.getWidth() != null) {
+        if (requestDTO.getWidth() != null) {
             product.setWidth(requestDTO.getWidth());
         }
-        if(requestDTO.getLength() != null) {
+        if (requestDTO.getLength() != null) {
             product.setLength(requestDTO.getLength());
         }
-        if(requestDTO.getMaterial() != null) {
+        if (requestDTO.getMaterial() != null) {
             product.setMaterial(requestDTO.getMaterial());
         }
 
         product.setUpdatedAt(LocalDateTime.now());
+
+        // Save the updated product
         Product savedProduct = productRepo.save(product);
+
+        // Return the productDto
         return dtoService.productToProductDTO(savedProduct);
     }
 
@@ -157,37 +171,50 @@ public class ProductServiceImp implements ProductService {
             }).collect(Collectors.toList());
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get products by ids in getProductsByIds-error");
+            throw new DatabaseOperationException("Failed to get products by ids in getProductsByIds-error");
         }
     }
 
     @Override
-    public List<String> removeImageUrls(List<String> imageUrls, Product product) {
-        try {
-            List<String> oldUrls = product.getImageUrls();
-            imageUrls.forEach((url) -> {
-                if(oldUrls.contains(url)) {
-                    awsServiceImp.deleteImage(url);
-                    oldUrls.remove(url);
-                }
-            });
+    public List<String> removeImageUrls(List<String> imageUrls, Long productId) {
 
-            // Update the product
-            product.setImageUrls(oldUrls);
-            product.setUpdatedAt(LocalDateTime.now());
-            productRepo.save(product);
-
-            return oldUrls;
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Error during removing imgUrl from product. "+e);
+        // Check if the product belongs to the authenticated user's store. If not, throw an AuthenticationException.
+        if (!authenticationContextService.isValidProductOfStore(productId)) {
+            throw new AuthenticationException("You are not authorized to update this product.");
         }
+
+        // Fetch the product
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found by id : " + productId));
+
+        // Old images urls
+        List<String> oldUrls = product.getImageUrls();
+
+        // Remove the urls that match with the given
+        imageUrls.forEach((url) -> {
+            if (oldUrls.contains(url)) {
+                awsServiceImp.deleteImage(url);
+                oldUrls.remove(url);
+            }
+        });
+
+        // Update the product
+        product.setImageUrls(oldUrls);
+        product.setUpdatedAt(LocalDateTime.now());
+
+        // Save the product
+        productRepo.save(product);
+
+        // return urls
+        return oldUrls;
     }
 
     @Override
     public List<ProductResponseDTO> getProductBySearch(String q) {
         try {
             List<Product> products = productRepo.findProductBySearch(q);
-            return products.stream().map(product -> dtoService.productToResponseDto(product)).collect(Collectors.toList());
+            return products.stream().map(product -> dtoService.productToResponseDto(product))
+                    .collect(Collectors.toList());
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
@@ -213,6 +240,5 @@ public class ProductServiceImp implements ProductService {
             throw new RuntimeException(e.getMessage());
         }
     }
-
 
 }

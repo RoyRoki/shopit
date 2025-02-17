@@ -1,7 +1,6 @@
 package com.eshop.Eshop.repository;
 
 import com.eshop.Eshop.model.Keyword;
-import com.eshop.Eshop.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
