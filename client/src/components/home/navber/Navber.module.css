@@ -16,6 +16,7 @@ header {
       height: 3rem;
       padding-top: .375rem;
       padding-bottom: .375rem;
+      z-index: 12;
 }
 
 .header_wrap .htd_logo_nav {

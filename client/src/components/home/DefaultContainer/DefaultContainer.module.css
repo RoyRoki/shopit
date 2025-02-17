@@ -1,6 +1,7 @@
 .main_content {
       width: auto;
       height: 100%;
+      overflow: scroll;
 }
 
 .main_content  .main_banner {
@@ -17,11 +18,11 @@
 }
 
 .main_content  .img_hero_group {
-      height: 800px;
+      min-height: 800px;
       width: 100%;
       display: grid;
       place-items: center;
-      background-color: var(--bs-bg1);
+      background-image: var(--bs-hero-bg-img2);
       padding: 80px 40px 80px 40px;   
       margin-bottom: 160px; 
 }

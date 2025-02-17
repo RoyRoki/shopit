@@ -32,7 +32,7 @@
       position: absolute;
       z-index: 10;
       margin-top: 1rem;
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-explore-bg);
       padding: 16px 24px 16px 24px;
       box-shadow: var(--bs-box-shadow2);
       border-radius: 8px;
@@ -40,6 +40,8 @@
       display: flex;
       justify-content: space-between;
       gap: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
 }
 
 .category_box,

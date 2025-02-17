@@ -1,5 +1,5 @@
 .main_wrap {
-      background-color: var(--bs-nav);  
+      background-image: var(--bs-hero-bg-img2);
       width: 100%;
       height: 960px;
       padding: 40px 80px 80px 80px;
@@ -23,7 +23,7 @@
       width: 80%;
       margin: 0 auto;
       display: flex;
-      background-color: var(--bs-card1-bg);
+      background-color: var(--bs-card2-bg);
       border-radius: 15px;
       padding: 16px;
       transform: translateY(-100px);
@@ -79,8 +79,7 @@
 .main_container .hero_container .product_header .gallery_box .gallery_explorer {
       width: 124px;
       height: 100%;
-      background-color: var(--bs-bg1);
-      box-shadow: var(--bs-box-shadow);
+      background-color: var(--bs-bg1-light);
       border-radius: 8px;
       display: flex;
       flex-direction: column;
@@ -101,7 +100,7 @@
       width: 100%;
       height: 100%;
       padding: 24px;
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-bg1-light);
       margin-left: 8px;
 }
 
@@ -169,16 +168,16 @@
 
 
 .main_container .hero_container .product_meta .store_info {
-      margin: 16px 0 8px 0;
+      margin: 16px 0 16px 0;
       width: fit-content;
       cursor: pointer;
 }
 
 .product_meta .store_info button {
-      padding: 8px;
-      background-color: var(--bs-bg3);
+      padding: 4px 8px 4px 8px;
+      background-color: var(--bs-card1-bg);
       border-radius: 20px;
-      font-size: large;
+      font-size: 1rem;
       font-style: italic;
       color: var(--bs-blue);
 }
@@ -354,7 +353,7 @@
       padding: 2px;
       display: flex;
       transform: translateY(24px);
-      background-color: var(--bs-bg3);
+      background-color: var(--bs-bg1-light);
       border-radius: 10px;
       color: var(--bs-tx2);
       justify-content: center;
@@ -362,7 +361,6 @@
 .select_quantity_option span {
       cursor: pointer;
       position: relative;
-      background-color: var(--bs-bg3);
       padding: 10px;
       border-radius: 5px;
       color: var(--bs-tx2);    
@@ -371,7 +369,7 @@
   position: absolute;
   top: 40px;
   left: 0;
-  background-color: var(--bs-bg3);
+  background: var(--bs-card1-bg);
   border: 1px solid var(--bs-tx2);
   border-radius: 5px;
   max-height: 135px;
@@ -379,15 +377,18 @@
   min-width: 207px;
   z-index: 10;      
 }
+
+
 .select_quantity_option .dropdown .select_quantity {
       
 }
 .select_quantity .a_dropdown_item {
    padding: 5px;
-  cursor: pointer;     
+   cursor: pointer;     
 }
-.a-dropdown-item:hover {
-  background-color: var(--bs-bg2);
+
+.a_dropdown_item:hover {
+  background-color: var(--bs-glass1);
 }
 
 .select_quantity a {

@@ -3,7 +3,7 @@ import styles from './BestProductsByCategory.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCurrentCacheKey } from '../../../features/home/productSlice'; 
 import { fetchProducts } from '../../../features/home/productSlice';
-import { useNavigate } from 'react-router-dom';
+import { replace, useNavigate } from 'react-router-dom';
 import { homeProductTypes } from '../../../util/URLS'
 import ProductShowCaseCard from '../../cards/productShowCard/ProductShowCaseCard';
 import ProductShowCaseMiniCard from '../../cards/productMiniCard/ProductShowCaseMiniCard';

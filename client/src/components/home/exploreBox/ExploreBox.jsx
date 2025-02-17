@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchCategories } from "../../../features/categories/categoriesSlice";
 import styles from "./ExploreBox.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
-import { faCaretUp } from "@fortawesome/free-solid-svg-icons/faCaretUp";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
 
 const ExploreBox = ({ isOpen, setIsOpen}) => {
