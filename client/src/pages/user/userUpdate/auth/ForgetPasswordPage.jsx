@@ -93,8 +93,19 @@ const ForgetPasswordPage = () => {
           />
         )}
         <div className={styles.header}>
-          <h1>Reset your password.</h1>
+          <span onClick={() => navigate("/home?profile_view=true")}>
+            Profile
+          </span>{" "}
+          {` > `}
+          <span
+            onClick={() => {
+              setShowForm(false);
+            }}
+          >
+            Reset your password
+          </span>
         </div>
+
         <div className={styles.form_wrap}>
           {!isOtpSend ? (
             <div className={styles.form_box}>

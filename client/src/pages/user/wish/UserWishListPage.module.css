@@ -1,0 +1,19 @@
+.header {
+      margin-top: 80px;
+      width: 100%;
+      margin-left: 10%;
+      padding-left: 16px;
+      margin-bottom: 24px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      border-left: 4px solid var(--bs-accent);
+      color: var(--bs-tx1);
+}
+.header span {
+      cursor: pointer;
+      color: inherit;
+      transition: color .3s ease;
+}
+.header span:hover {
+      color: var(--bs-accent);
+}

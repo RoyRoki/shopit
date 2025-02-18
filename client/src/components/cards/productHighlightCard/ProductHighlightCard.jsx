@@ -34,8 +34,8 @@ const ProductHighlightCard = ({ product }) => {
             <p>{`₹${parseFloat(product.prices - product.prices * product.discount) || '000'}`}</p>
             </div>
             <div className={styles.offer_info}>
-              <p className={styles.mrp_line}>{`M.R.P.: ₹${product.prices || "000"}`}</p>
-              <p className={styles.offer_line}>{`${product.discount * 100}% off`}</p>
+              <p className={styles.mrp_line}>{`M.R.P.: ₹${Number(product.prices).toFixed(2) || "000"}`}</p>
+              <p className={styles.offer_line}>{`${Number(product.discount * 100).toFixed(2)}% off`}</p>
             </div>
           </div>
 

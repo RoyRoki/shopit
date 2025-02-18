@@ -128,6 +128,7 @@ public class AuthServiceImp implements AuthService {
 
     /**
      * Retrieves user details after verifying OTP.
+     * Redis key + ":lg:" for separate the login otps
      */
     @Override
     public UserDetailsImp getUserDetailsWithOTP(OTPVerifyRequestDTO requestDTO) {
@@ -136,7 +137,7 @@ public class AuthServiceImp implements AuthService {
         String identifier = requestDTO.getEmail() != null ? requestDTO.getEmail() : requestDTO.getMobileNo();
 
         // Append a unique identifier for OTP storage
-        identifier = identifier  + ":lg:";
+        identifier = identifier + ":lg:";     
 
         String savedHashOtp = otpService.getOTP(identifier);
 
@@ -247,6 +248,9 @@ public class AuthServiceImp implements AuthService {
         if (!hashOTP.equals(savedHashOtp)) {
             throw new InvalidOTPException("Invalid OTP provided.");
         }
+
+        // Saved the mobile as verified.
+        redisService.savedVerifiedMobileNo(requestDTO.getMobileNo());
     }
 
     @Override
@@ -262,7 +266,7 @@ public class AuthServiceImp implements AuthService {
     public void handleSendOTPForLogin(SignupRequestOtpDTO requestOtpDTO) {
 
         // Check if the user exists before sending OTP
-        if(userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
+        if(!userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
             throw new AuthenticationException("User not found. Please check the email or mobile number.");
         }
         
@@ -306,15 +310,10 @@ public class AuthServiceImp implements AuthService {
     }
 
     private User getUser(String mobileNo, String email) {
-        try {
-            User user;
-            if(email != null)
-                user = userService.getUserByEmail(email);
-            else user = userService.getUserByMobileNo(mobileNo);
-            return user;
-        } catch (Exception e) {
-            return null;
+        if(email != null) {
+            return userService.getUserByEmail(email);
         }
+        else return userService.getUserByMobileNo(mobileNo);
 
     }
 

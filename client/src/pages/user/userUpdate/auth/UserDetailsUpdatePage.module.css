@@ -10,17 +10,23 @@
 
 .header {
       width: 100%;
-      padding-left: 20%;
-      font-size: larger;
+      margin-left: 10%;
+      padding-left: 16px;
+      margin-bottom: 24px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      border-left: 4px solid var(--bs-accent);
       color: var(--bs-tx1);
-      font-weight: 600;
 }
 .header span {
       cursor: pointer;
+      color: inherit;
+      transition: color .3s ease;
 }
 .header span:hover {
-      color: var(--bs-blue);
+      color: var(--bs-accent);
 }
+
 .section {
       padding: 16px;
       background-color: var(--bs-card1-bg);

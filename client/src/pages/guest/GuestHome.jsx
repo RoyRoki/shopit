@@ -34,7 +34,7 @@ export const GuestHome = () => {
 
   return (
     <div className={styles.main}>
-      <Navber isLogged={false} />
+      <Navber className={styles.nav} isLogged={false} />
       <div className={styles.main_container}>
         {/* Products show by keyword */}
         {key && <ProductsByKeyword keyword={key} />}
@@ -52,7 +52,7 @@ export const GuestHome = () => {
         {productId && (
           <>
             <HeroProduct product_id={productId} />
-            <DefaultContainer withBanner={false} />
+            {/* <DefaultContainer withBanner={false} /> */}
           </>
         )}
 

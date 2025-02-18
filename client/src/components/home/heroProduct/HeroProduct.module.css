@@ -234,11 +234,11 @@
       min-height: 200px;
       width: 80%;
       margin: 0 auto;
-      margin-bottom: 24px;
+      margin-bottom: 60px;
       padding: 24px 24px 24px 24px;
       display: flex;
       justify-content: space-evenly;
-      background-color: var(--bs-bg4);
+      background-image: var(--bs-hero-bg-img2);
       border-radius: 8px;
       box-shadow: var(--bs-box-shadow1);
       transform: translateY(-50%);
@@ -262,7 +262,7 @@
 }
 .cart_notifier_box .highlight_box {
       width: 42%;
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-glass1);
       padding-left: 24px;
       display: flex;
       align-items: center;
@@ -303,7 +303,7 @@
 }
 
 .cart_notifier_box .action_box {
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-glass);
       width: 50%;
 }
 .action_btn_wrap {

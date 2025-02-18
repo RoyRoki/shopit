@@ -6,7 +6,7 @@
 .main_page .hero_box {
       min-height: 100%;
       padding-bottom: 40px;
-      background-color: var(--bs-bg3);
+      background-image: var(--bs-hero-bg-img);
 }
 .hero_box .cartItems_section {
       margin: 0 auto;
@@ -17,7 +17,7 @@
 .hero_box .cartItems_section .cart_header {
       display: flex;
       justify-content: space-between;
-      padding: 0 24px 8px 24px;
+      padding: 0 24px 18px 24px;
       margin: 40px 0 24px 0;
       align-items: center;
       border-bottom: 2px solid var(--bs-bd1);
@@ -39,6 +39,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      padding-top: 16px;
 }
 
 .cartItems_section .cartItems_wrap .cartItem_wrap {
@@ -71,7 +72,7 @@
 }
 
 .cartItem_wrap .img_box .img_wrap .demo_img_frame {
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card1-bg);
       width: 190px;
       height: 190px;
       border-radius: 10px;
@@ -95,7 +96,7 @@
 }
 
 .info_store {
-      background-color: var(--bs-bg2);
+      background-image: var(--bs-hero-bg-img1);
       width: fit-content;
       padding: 2px 8px 2px 8px;
       border-radius: 15px;
@@ -111,7 +112,7 @@
 }
 .item_control .icon_control {
       width: fit-content;
-      background-color: var(--bs-bg4);
+      background-image: var(--bs-hero-bg-img1);
       border: 2px solid var(--bs-accent);
       border-radius: 15px;
       min-width: 104px;
@@ -192,23 +193,30 @@
       display: flex;
       justify-content: space-around;
 }
-.guest_btn_wrap button {
-      border: 2px solid var(--bs-tx1);
-      padding: 8px 12px 8px 12px;
-      border-radius: 15px;
-      font-size: 1.3rem;
-      color: var(--bs-tx1);
-      transition: all 0.3s ease-in-out;
-}
+
+.login_btn,
 .register_btn {
-      background-color: var(--bs-bg1);
-}
-.login_btn {
-      background-color: var(--bs-bg1);
-}
-.guest_btn_wrap button:hover{
-      border-color: var(--bs-accent);
+      max-width: 240px;
+      border-radius: 8px;
+      border: 2px solid var(--bs-accent);
       color: var(--bs-accent);
+      font-weight: 600;
+      font-size: 1.2rem;
+      width: 70%;
+      height: 48px;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.register_btn {
+      max-width: 300px;
+}
+
+.guest_btn_wrap button:hover {
+            background-color: var(--bs-accent);
+      color: var(--bs-accent-tx1) !important;
 }
 
 .user_btn_wrap {
@@ -230,5 +238,5 @@
 .user_btn_wrap button:hover {
       transform: translateY(2px);
       background-color: var(--bs-btn2-h);
-      box-shadow: var(--bs-box-shadow2);
+      box-shadow: var(--bs-box-shadow1);
 }

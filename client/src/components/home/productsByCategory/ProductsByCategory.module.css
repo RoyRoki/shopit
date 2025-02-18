@@ -1,5 +1,5 @@
 .main_box {
-      background-color: var(--bs-card1-bg);
+      background-image: var(--bs-hero-bg-img1);
       padding: 80px;
       height: 100%;
 }
@@ -12,10 +12,12 @@
 }
 .header_box h2{
       color: var(--bs-htx);
-      font-size: 2.25rem;
+      font-size: 2rem;
       font-weight: 500;
       font-family: var(--bs-h-ff);
       text-shadow: 0.1px 0.1px 0 currentColor;
+      border-left: 4px solid var(--bs-accent);
+      padding-left: 8px;
 }
 
 .products_wrap {

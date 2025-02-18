@@ -1,7 +1,7 @@
 .main_card {
  width: 480px;
- height: 640px;
- background-color: var(--bs-bg1);
+ height: 720px;
+ background-color: var(--bs-card1-bg);
  cursor: pointer;
 }
 
@@ -30,13 +30,16 @@
 .main_card .card_wrap .img_box .demo_img_frame {
       width: 100%;
       height: inherit;
-      background-color: var(--bs-bg3);
+      background-color: var(--bs-bg1);
       border-radius: 5px;
 }
 
 .main_card .card_wrap .info_box {
       height: fit-content;
       max-height: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
 }
 
 .main_card .card_wrap .info_box .name_line {

@@ -286,9 +286,27 @@ const LoginComponent = () => {
                 <div className={styles.pass_box}>
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder=" "
-                    {...register("password")}
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
+                      maxLength: {
+                        value: 20,
+                        message: "Password cannot exceed 20 characters",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                        message:
+                          "Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character",
+                      },
+                    })}
                   />
+                  {errors.password && (
+                    <p className={styles.error}>{errors.password.message}</p>
+                  )}
                   <span
                     className={`${
                       showPassword ? styles.pass_show : styles.pass_hide

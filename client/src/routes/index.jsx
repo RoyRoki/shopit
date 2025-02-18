@@ -4,7 +4,6 @@ import { AuthContext } from "../context";
 import { role } from "../util/ROLE";
 import UserLayout from "./layout/UserLayout";
 import HomeLayout from "./layout/HomeLayout";
-import AboutPage from "../pages/shopitHelp/about/AboutPage"
 import ContactUsPage from "../pages/shopitHelp/contactus/ContactUsPage"
 import AdminLayout from "./layout/AdminLayout";
 
@@ -35,7 +34,6 @@ const RootRoutes = () => {
       {auth.profileMode === role.admin && <Route path="*" element={<AdminLayout />} />}
 
       {/* For Public pages*/}
-      <Route path="/about" element={<AboutPage />} />
       <Route path="/contact_us" element={<ContactUsPage />} />
 
     </Routes>

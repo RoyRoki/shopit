@@ -125,7 +125,7 @@ const UserAddressUpdatePage = () => {
           <span onClick={() => navigate("/home?profile_view=true")}>
             Profile
           </span>{" "}
-          {` >`}
+          {` > `}
           <span
             onClick={() => {
               setShowForm(false);

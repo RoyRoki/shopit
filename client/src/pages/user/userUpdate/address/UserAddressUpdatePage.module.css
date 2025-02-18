@@ -10,18 +10,21 @@
 
 .header {
       width: 100%;
-      padding-left: 10%;
+      margin-left: 10%;
+      padding-left: 16px;
       margin-bottom: 24px;
-      font-size: larger;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 800;
+      border-left: 4px solid var(--bs-accent);
       color: var(--bs-tx1);
 }
 .header span {
       cursor: pointer;
-      border-bottom: 3px solid var(--bs-bd1);
+      color: inherit;
+      transition: color .3s ease;
 }
 .header span:hover {
-      color: var(--bs-blue);
+      color: var(--bs-accent);
 }
 .box_wrap {
       min-width: 480px;
@@ -66,11 +69,12 @@
 }
 .box_wrap .address_box:hover,
 .box_wrap .add_address_box:hover {
-      background-color: var(--bs-bg4);
+      background-color: var(--bs-glass1);
 }
 .box_wrap .address_box .info_box {
       color: var(--bs-tx1);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      line-height: 1.8rem;
       overflow-wrap: break-word;
       word-wrap: break-word;
       white-space: normal;

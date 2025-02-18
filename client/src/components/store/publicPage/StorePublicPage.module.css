@@ -1,7 +1,8 @@
 .main_page {
       width: 100%;
       min-height: 1200px;
-      background-color: var(--bs-bg1);
+      background-image: var(--bs-hero-bg-img2);
+      border: transparent 2px solid;
 }
 
 .main_page .store_main {
@@ -32,7 +33,7 @@
 }
 
 .profile_info_box {
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card1-bg);
       display: flex;
       align-items: start;
 }
@@ -75,18 +76,18 @@
       margin: auto 0;
 }
 .email {
-      color: var(--bs-accent-tx);
+      color: var(--bs-tx);
 }
 .creation_data {
-      color: var(--bs-accent-tx);
+      color: var(--bs-tx);
 }
 .store_wrap .store_nav_bar_wrap {
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card1-bg);
 }
 
 .store_wrap .store_nav_bar_wrap .store_nav_bar {
       display: flex;
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-card1-bg);
 }
 
 .store_wrap .store_nav_bar_wrap .store_nav_bar .nav_option {
@@ -115,7 +116,7 @@
 
 .store_main .store_hero {
       height: auto;
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card1-bg);
 }
 
 .store_main .store_hero .store_products_box {

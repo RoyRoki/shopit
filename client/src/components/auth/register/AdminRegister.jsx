@@ -32,7 +32,6 @@ const AdminRegister = () => {
       const response = await publicRequest("POST", urls.adminRegister, {
         userName: data.userName,
         mobileNo: data.mobileNo,
-        email: data.email,
         password: data.password,
       });
 
@@ -219,26 +218,7 @@ const AdminRegister = () => {
             )}
           </div>
         </div>
-
-        <div className={styles.form_row}>
-          <div className={styles.form_input_box}>
-            <label>Email</label>
-            <input
-              type="email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Enter a valid email address",
-                },
-              })}
-            />
-            {errors.email && (
-              <p className={styles.error}>{errors.email.message}</p>
-            )}
-          </div>
-        </div>
-
+        
         <div className={styles.form_row}>
           <div className={styles.form_input_box}>
             <label>Password</label>

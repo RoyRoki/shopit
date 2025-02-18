@@ -7,7 +7,6 @@ const ProductShowCaseMiniCard = ({ product }) => {
       <div className={styles.img_wrap}>
             {(product.imageUrls?.[0]) && (
                 <img 
-                  className='max-h-[200px] max-w-[200px]'
                   src={product.imageUrls?.[0]}
                   alt={`product Image`}
                 />

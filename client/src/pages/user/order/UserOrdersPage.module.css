@@ -3,7 +3,25 @@
       width: 100vw;
       line-height: 1.5rem;
 }
-
+.header {
+      width: 100%;
+      margin-left: 10%;
+      margin-top: 80px;
+      padding-left: 16px;
+      margin-bottom: 24px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      border-left: 4px solid var(--bs-accent);
+      color: var(--bs-tx1);
+}
+.header span {
+      cursor: pointer;
+      color: inherit;
+      transition: color .3s ease;
+}
+.header span:hover {
+      color: var(--bs-accent);
+}
 .summary_wrap {
       min-height: 100%;
       padding-bottom: 40px;
@@ -357,3 +375,12 @@
       color: var(--bs-tx3);
 }
 
+.no_order {
+      width: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      padding-top: 10%;
+}

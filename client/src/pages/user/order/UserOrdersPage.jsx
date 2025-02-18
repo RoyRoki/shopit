@@ -108,7 +108,15 @@ const UserOrdersPage = ({ state }) => {
   return (
     <div className={styles.main_page}>
       {<Navber isLogged={true} />}
-
+        <div className={styles.header}>
+          <span onClick={() => navigate("/home?profile_view=true")}>
+            Profile
+          </span>{" "}
+          {` > `}
+          <span>
+            Orders
+          </span>
+        </div>
       {/* New Order Summary Page*/}
       {pageState === userOrderPage.newOrderSum &&
         (cartSummary ? (
@@ -332,8 +340,8 @@ const UserOrdersPage = ({ state }) => {
               ))}
               {ordersList.length === 0 && (
                 //@Fix style it
-                <div>
-                  No Order
+                <div className={styles.no_order}>
+                  No Order, Keep shopping, keep smiling!
                 </div>
               )}
             </div>

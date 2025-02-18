@@ -211,12 +211,13 @@ const UserDetailsUpdatePage = () => {
           {` > `}
           <span
             onClick={() => {
-              setEditingField(null);
+              setShowForm(false);
             }}
           >
             Login & security
           </span>
         </div>
+
         <div className={styles.section}>
           <div className={styles.form_row}>
             <label>User Name</label>

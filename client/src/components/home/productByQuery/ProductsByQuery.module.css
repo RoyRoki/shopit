@@ -1,16 +1,18 @@
 .main_container {
-      margin: 80px 40px 80px 40px;
-      background-color: var(--bs-bg2);
+      padding: 80px 40px 80px 40px;
+      height: 100%;
+      background-image: var(--bs-hero-bg-img2);
 }
 
 .products_show_header {
-      padding: 24px 4px 4px 4px;
+      margin: 24px 4px 4px 4px;
+      padding-left: 16px;
       margin-left: 24px;
       box-sizing: border-box;
       font-size: 1.5rem;
       font-weight: 500;
       color: var(--bs-tx1);
-      border-bottom: 2px solid var(--bs-accent);
+      border-left: 4px solid var(--bs-accent);
       width: fit-content;
       display: inline-block;
 }
@@ -40,7 +42,7 @@
 .main_container .demo_card {
       width: 480px;
       height: 640px;
-      background-color: var(--bs-bg3);
+      background-color: var(--bs-card2-bg);
       border-radius: 15px;
 }
 

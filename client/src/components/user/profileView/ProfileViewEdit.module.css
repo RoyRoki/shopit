@@ -9,11 +9,13 @@
 
 .main_container .main_header {
       width: 56%;
-      font-size: 2.25rem;
+      font-size: 2rem;
       font-weight: 500;
       color: var(--bs-htx);
       font-family: var(--bs-h-ff);
       margin-bottom: 40px;
+      border-left: 4px solid var(--bs-accent);
+      padding-left: 16px;
 }
 
 
@@ -37,7 +39,7 @@
 }
 
 .action_buttons_wrap .action_box:hover {
-      background-color: var(--bs-bg4);
+      background-color: var(--bs-card2-bg);
 }
 
 .action_box_info {

@@ -95,7 +95,7 @@ public class AuthController {
      * @return ResponseEntity with a success message if the OTP is valid.
      * @throws InvalidOTPException if the provided OTP is incorrect.
      */
-    @PostMapping(value = "verify-otp")
+    @PostMapping(value = "/verify-otp")
     public ResponseEntity<String> verifyOtpMobileNo(@Valid @RequestBody SignupRequestOtpVerificationDTO requestDTO) {
 
         authService.authenticateOtpForMobile(requestDTO);

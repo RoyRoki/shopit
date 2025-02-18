@@ -39,7 +39,7 @@ const ProductsByKeyword = ({ keyword }) => {
       { keyword && (
         <div className={styles.products_show_box}>
           <div className={styles.products_show_header}>
-            <span>{`Products For #${keyword}`}</span>
+            <span>{`Products For`} <span className={styles.tag}>#{keyword}</span>  </span>
           </div>
           <div className={styles.products_wrap}>
 

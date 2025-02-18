@@ -211,7 +211,6 @@ const HeroProduct = ({ product_id }) => {
               </div>
             </div>
 
-            {/*  @Todo add new dropdown */}
             <div
               className={styles.select_quantity_option}
               onClick={() => setDropdown(!dropdown)}

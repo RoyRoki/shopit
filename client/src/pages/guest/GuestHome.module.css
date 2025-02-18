@@ -5,6 +5,10 @@
       background-color: var(--bs-bg1);
 }
 
+.nav {
+      position: fixed;
+}
+
 .main .main_container {
       width: auto;
       height: auto;

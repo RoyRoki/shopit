@@ -121,9 +121,6 @@ const UserCartPage = ({ isLogged }) => {
         }
       }, [dispatch, isLogged]);
 
-
-
-
   return (
     <div className={styles.main_page} >
       {(

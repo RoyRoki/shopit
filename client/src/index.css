@@ -70,6 +70,7 @@
 
   --bs-blue: #0d6efd;
   --bs-blue2: #0045ad;
+  --bs-box-hover: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
 
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -142,8 +143,8 @@
   --bs-accent-tx: #171717;
   --bs-accent-tx1: #000;
 
-  --bs-box-shadow: 0px 3px 14px 0px rgb(47, 45, 45);
-  --bs-box-shadow2: rgb(255 255 255 / 42%) 0px 1px 1px 2px;
+  --bs-box-shadow: 0px 3px 14px 0px rgb(36 50 71 / 66%);
+  --bs-box-shadow2: rgb(255 255 255 / 42%) 0px 0px 1px 2px;
   --bs-box-shadow3: 0 4px 6px 0 rgba(105, 105, 105, 0.12);
 
   --bs-box-bg: #343a40;
@@ -155,6 +156,7 @@
   --bs-btn2: #ffa41c;
 
   --bs-success: #198754;
+  --bs-box-hover: rgba(169, 169, 169, 0.25) 0px 1px 1px, rgba(181, 181, 181, 0.13) 0px 0px 1px 1px;
 
   --bs-op1: 0.7;
 }
