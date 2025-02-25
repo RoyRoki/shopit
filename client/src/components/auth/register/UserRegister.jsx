@@ -66,6 +66,7 @@ const UserRegister = () => {
         mobileNo: mobileNo,
       });
       if (response.status === 200) {
+        alert("Your OTP is: " + response.data.otp + "\n(Note: This is for development purposes only)");
         setOtpSend(true);
         setTimer(60); // Reset timer when OTP is sent
         setPopup({ message: "OTP sent successfully!", type: "success" });

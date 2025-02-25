@@ -9,7 +9,7 @@ const ThemeToggleButton = () => {
         { theme === 'light' ? (
           <FontAwesomeIcon icon="fa-regular fa-moon" />
         ) : (
-          <FontAwesomeIcon icon="fa-regular fa-sun" color='white' />
+          <FontAwesomeIcon icon="fa-regular fa-lightbulb" color='white' />
         )}
       </button>
   )

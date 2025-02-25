@@ -1,5 +1,6 @@
 package com.eshop.Eshop.service.Interface;
 
+import com.eshop.Eshop.model.dto.DevOtpDTO;
 import com.eshop.Eshop.model.dto.UserDetailsImp;
 import com.eshop.Eshop.model.dto.requestdto.*;
 import com.eshop.Eshop.model.dto.responsedto.JwtRefreshResponseDTO;
@@ -12,10 +13,10 @@ public interface AuthService {
     UserSignUpResponseDTO registerNewUser(UserSignUpRequestDTO userSingUpRequestDTO);
     UserSignUpResponseDTO registerNewUserAdmin(UserSignUpRequestDTO userRequest, String admin);
 
-    void generateOTP(SignupRequestOtpDTO requestOtpDTO);
-    void generateOtpForUniqueIdentity(SignupRequestOtpDTO requestOtpDTO);
+    DevOtpDTO generateOTP(SignupRequestOtpDTO requestOtpDTO);
+    DevOtpDTO generateOtpForUniqueIdentity(SignupRequestOtpDTO requestOtpDTO);
     void authenticateOtpForMobile(SignupRequestOtpVerificationDTO requestDTO);
-    void handleSendOTPForLogin(SignupRequestOtpDTO requestOtpDTO);
+    DevOtpDTO handleSendOTPForLogin(SignupRequestOtpDTO requestOtpDTO);
 
     UserDetailsImp VerifyWithPassAndGetUserDetailsImp(UserLoginRequestDTO requestDTO);
     UserDetailsImp getUserDetailsImp(User user);

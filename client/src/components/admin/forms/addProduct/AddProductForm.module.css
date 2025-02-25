@@ -89,6 +89,8 @@
 
 .submit_btn {
       width: 180px;
+      display: flex;
+      justify-content: center;
       background-color: var(--bs-btn1);
       padding: 8px 8px 8px 8px;
       border-radius: 8px;

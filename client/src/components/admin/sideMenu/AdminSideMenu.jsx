@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { adminHeroDiv } from "../../../util/HERODIV";
 
-const AdminSideMenu = ({ curr, setHeroDiv }) => {
+const AdminSideMenu = ({ curr, setHeroDiv, isExist = true }) => {
   const getNavItemClass = (...heroes) =>
     `${styles.nav_item} ${heroes.includes(curr) ? styles.nav_item_focus : ""}`;
   
@@ -27,7 +27,7 @@ const AdminSideMenu = ({ curr, setHeroDiv }) => {
 
         <div
           className={getNavItemClass(adminHeroDiv.store)}
-          onClick={() => setHeroDiv(adminHeroDiv.store)}
+          onClick={() => setHeroDiv(isExist ?  adminHeroDiv.store : adminHeroDiv.home)}
         >
           <FontAwesomeIcon icon={faStore} />
         </div>
@@ -37,7 +37,7 @@ const AdminSideMenu = ({ curr, setHeroDiv }) => {
             adminHeroDiv.addProduct,
             adminHeroDiv.allProduct
           )}
-          onClick={() => setHeroDiv(adminHeroDiv.allProduct)}
+          onClick={() => setHeroDiv(isExist ?  adminHeroDiv.allProduct : adminHeroDiv.home)}
         >
           <FontAwesomeIcon icon={faBox} />
         </div>
@@ -48,7 +48,7 @@ const AdminSideMenu = ({ curr, setHeroDiv }) => {
 
         <div
           className={getNavItemClass(adminHeroDiv.orders)}
-          onClick={() => setHeroDiv(adminHeroDiv.orders)}
+          onClick={() => setHeroDiv(isExist ? adminHeroDiv.orders : adminHeroDiv.home)}
         >
           <FontAwesomeIcon icon={faTruck} />
         </div>

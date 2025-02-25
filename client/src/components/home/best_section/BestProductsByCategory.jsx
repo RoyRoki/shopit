@@ -90,17 +90,7 @@ const BestProductsByCategory = ({ category_id, header, max }) => {
                         <div key={3} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
                         </div>        
                         <div key={4} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
-                        </div>
-                        <div key={5} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
-                        </div>
-                        <div key={6} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
-                        </div> 
-                        <div key={7} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
-                        </div>
-                        <div key={8} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
-                        </div>
-                        <div key={9} className={`${styles.product_box} ${styles.product_box_empty}`}>                        
-                        </div>        
+                        </div>     
                   </>
             )}
       </div>     

@@ -1,5 +1,6 @@
 package com.eshop.Eshop.service;
 
+import com.eshop.Eshop.model.dto.DevOtpDTO;
 import com.eshop.Eshop.model.dto.UserDetailsImp;
 import com.eshop.Eshop.model.dto.requestdto.*;
 import com.eshop.Eshop.model.dto.responsedto.JwtRefreshResponseDTO;
@@ -211,33 +212,42 @@ public class AuthServiceImp implements AuthService {
     }
 
     @Override
-    public void generateOTP(SignupRequestOtpDTO requestOtpDTO) {
+    public DevOtpDTO generateOTP(SignupRequestOtpDTO requestOtpDTO) {
         // Check that user is present
         if(!userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
             throw new UserAlreadyExistsException("Mobile/Email is not exists and try to get otp.");
         }
 
+        String devOtp = "";
+
         // Use Otp service
         if(Objects.nonNull(requestOtpDTO.getMobileNo()) && !requestOtpDTO.getMobileNo().trim().isEmpty()) {
-            otpService.saveAndSendOTP(requestOtpDTO.getMobileNo(), true);
+            devOtp = otpService.saveAndSendOTP(requestOtpDTO.getMobileNo(), true);
         } else {
-            otpService.saveAndSendOTP(requestOtpDTO.getEmail(), false);
+            devOtp = otpService.saveAndSendOTP(requestOtpDTO.getEmail(), false);
         }
+
+        return DevOtpDTO.builder().otp(devOtp).build();
     }
 
     @Override
-    public void generateOtpForUniqueIdentity(SignupRequestOtpDTO requestOtpDTO) {
+    public DevOtpDTO generateOtpForUniqueIdentity(SignupRequestOtpDTO requestOtpDTO) {
 
         // Check for new User
         if(userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
             throw new UserAlreadyExistsException("Mobile/Email already exists.");
         }
+
+        String devOtp = "";
+
         // Generate and send OTP
         if(Objects.nonNull(requestOtpDTO.getMobileNo()) && !requestOtpDTO.getMobileNo().trim().isEmpty()) {
-            otpService.saveAndSendOTP(requestOtpDTO.getMobileNo(), true);
+            devOtp = otpService.saveAndSendOTP(requestOtpDTO.getMobileNo(), true);
         } else {
-            otpService.saveAndSendOTP(requestOtpDTO.getEmail(), false);
+            devOtp = otpService.saveAndSendOTP(requestOtpDTO.getEmail(), false);
         }
+
+        return DevOtpDTO.builder().otp(devOtp).build();
     }
 
     @Override
@@ -263,19 +273,23 @@ public class AuthServiceImp implements AuthService {
      * Redis key + ":lg:" for separate the login otps
      */
     @Override
-    public void handleSendOTPForLogin(SignupRequestOtpDTO requestOtpDTO) {
+    public DevOtpDTO handleSendOTPForLogin(SignupRequestOtpDTO requestOtpDTO) {
 
         // Check if the user exists before sending OTP
         if(!userService.isUserExist(requestOtpDTO.getEmail(), requestOtpDTO.getMobileNo())) {
             throw new AuthenticationException("User not found. Please check the email or mobile number.");
         }
+
+        String devOtp = "";
         
         // Generate and send OTP
         if(Objects.nonNull(requestOtpDTO.getMobileNo()) && !requestOtpDTO.getMobileNo().trim().isEmpty()) {
-            otpService.saveAndSendOTP(requestOtpDTO.getMobileNo() + ":lg:", true);
+            devOtp = otpService.saveAndSendOTP(requestOtpDTO.getMobileNo() + ":lg:", true);
         } else {
-            otpService.saveAndSendOTP(requestOtpDTO.getEmail() + ":lg:", false);
+            devOtp = otpService.saveAndSendOTP(requestOtpDTO.getEmail() + ":lg:", false);
         }
+
+        return DevOtpDTO.builder().otp(devOtp).build();
     }
 
     @Override

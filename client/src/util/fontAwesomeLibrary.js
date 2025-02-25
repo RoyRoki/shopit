@@ -6,6 +6,7 @@ import {
        faEyeSlash, 
        faSun, 
        faMoon,
+       faLightbulb
 
 } from '@fortawesome/free-regular-svg-icons';
 
@@ -16,4 +17,5 @@ library.add(
       faEyeSlash, 
       faSun, 
       faMoon,
+      faLightbulb,
 );

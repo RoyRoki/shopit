@@ -16,7 +16,7 @@
 .store_info {
       width: 80%;
       height: 40%;
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card2-bg);
       box-shadow: var(--bs-box-shadow3);
       border-radius: 8px;
       cursor: pointer;
@@ -39,7 +39,7 @@
       border-radius: 8px 8px 0 0;
 }
 .profile_info_box {
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card2-bg);
       display: flex;
       align-items: start;
       height: 40%;
@@ -94,7 +94,7 @@
 .resent_orders {
       width: 80%;
       height: 40%;
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card2-bg);
       box-shadow: var(--bs-box-shadow3);
       border-radius: 8px;
 }
@@ -137,7 +137,7 @@
       background-size: contain;
       box-shadow: var(--bs-box-shadow3);
       border-radius: 8px;
-      padding: 10% 0 0 10%;
+      padding: 85% 0 0 20%;
       color: var(--bs-lnk-tx);
       font-family: var(--bs-h-ff);
       font-size: 1.4rem;

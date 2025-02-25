@@ -177,3 +177,46 @@
         width: 100%;
     }
 }
+
+
+@media (max-width: 768px) {
+      .slider {
+            top: 80px;
+            height: 250px;
+      }
+      .inner_wrap {
+            gap: 40px !important;
+            margin: none;
+            margin-left: 4px !important;
+            width: 80% !important;
+
+      }
+      .info_wrap p {
+            font-size: 0.8rem;
+      }
+      .info_header_wrap {
+            font-size: 1.5rem;
+      }
+
+      .btn_wrap {
+            width: 148px !important;
+            height: 32px !important;
+            gap: 8px !important;
+            font-size: 0.8rem !important;
+      }
+      .arrow_left {
+            left: 4px !important;
+            scale: 1 !important;
+      } 
+      .arrow_right {
+            right: 4px !important;
+            scale: 1 !important;
+      }
+      .ber_container {
+            gap: 8px !important;
+      }
+      .ber {
+            height: 2px;
+            width: 40px;
+      }
+}

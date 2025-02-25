@@ -67,3 +67,27 @@
       padding: 2px 2px 2px 4px;
       border-radius: 8px;
 }
+
+@media (max-width: 768px) {
+      .mini_card {
+            width: 160px;
+      }
+      .img_wrap {
+            height: 160px !important;
+      }
+      .info_box {
+            margin: 8px 0px 0 0 !important;
+      }
+      .name_line {
+            width: 98% !important;
+            font-size: 0.8rem !important;
+            font-weight: 400 !important;
+      }
+      .prices_line {
+            margin: 2px 0 0 0 !important;
+      }
+      .prices_line p {
+            font-weight: 500 !important;
+            min-width: 48px !important;
+      }
+}

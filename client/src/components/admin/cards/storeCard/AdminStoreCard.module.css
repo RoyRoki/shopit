@@ -20,7 +20,7 @@
       opacity: var(--bs-op1);
 }
 .profile_info_box {
-      background-color: var(--bs-bg1);
+      background-color: var(--bs-card2-bg);
       display: flex;
       align-items: start;
       height: 30%;
@@ -77,7 +77,7 @@
 
 .edit_btn button:hover {
       background-color: var(--bs-blue);
-      color: var(--bs-bg2);
+      color: var(--bs-accent-tx);
 }
 
 .edit_form_wrap {

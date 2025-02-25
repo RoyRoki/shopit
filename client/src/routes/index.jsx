@@ -6,15 +6,21 @@ import UserLayout from "./layout/UserLayout";
 import HomeLayout from "./layout/HomeLayout";
 import ContactUsPage from "../pages/shopitHelp/contactus/ContactUsPage"
 import AdminLayout from "./layout/AdminLayout";
+import TestPage from './../../test/page/TestPage'
+import LoadingPage from "../pages/shopitHelp/loadingPage/LoadingPage";
 
 // Define routes based on role
 const RootRoutes = () => {
   const { auth } = useContext(AuthContext);
 
+  // Show loading page while auth is being determined
+  if (!auth || auth.loading) {
+    return <LoadingPage />;
+  } 
+
   return (
     <Routes>
 
-      
 
       {/* Guest Routes */}
       {auth.profileMode === role.guest && (
@@ -35,6 +41,7 @@ const RootRoutes = () => {
 
       {/* For Public pages*/}
       <Route path="/contact_us" element={<ContactUsPage />} />
+      <Route path="/test" element={<TestPage />} />
 
     </Routes>
   )

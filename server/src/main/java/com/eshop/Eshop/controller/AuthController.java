@@ -1,5 +1,6 @@
 package com.eshop.Eshop.controller;
 
+import com.eshop.Eshop.model.dto.DevOtpDTO;
 import com.eshop.Eshop.model.dto.requestdto.*;
 import com.eshop.Eshop.model.dto.responsedto.JwtRefreshResponseDTO;
 import com.eshop.Eshop.model.dto.responsedto.UserLoginResponseDTO;
@@ -68,10 +69,10 @@ public class AuthController {
      * @return ResponseEntity with a success message.
      */
     @PostMapping(value = "/generate-otp")
-    public ResponseEntity<String> generateOtp(@Valid @RequestBody SignupRequestOtpDTO requestOtpDTO) {
+    public ResponseEntity<DevOtpDTO> generateOtp(@Valid @RequestBody SignupRequestOtpDTO requestOtpDTO) {
 
-        authService.generateOTP(requestOtpDTO);
-        return ResponseEntity.ok("OTP sent successfully.");
+        DevOtpDTO devOtp = authService.generateOTP(requestOtpDTO);
+        return ResponseEntity.ok(devOtp);
     }
 
     /**
@@ -82,10 +83,10 @@ public class AuthController {
      * @return ResponseEntity with a success message if the OTP is sent successfully.
      */
     @PostMapping(value = "/generate-otp/unique")
-    public ResponseEntity<String> generateOtpForUniqueUser(@Valid @RequestBody SignupRequestOtpDTO requestOtpDTO) {
+    public ResponseEntity<DevOtpDTO> generateOtpForUniqueUser(@Valid @RequestBody SignupRequestOtpDTO requestOtpDTO) {
 
-        authService.generateOtpForUniqueIdentity(requestOtpDTO);
-        return ResponseEntity.ok("OTP sent successfully.");
+        DevOtpDTO devOtp = authService.generateOtpForUniqueIdentity(requestOtpDTO);
+        return ResponseEntity.ok(devOtp);
     }
 
     /**
@@ -125,10 +126,10 @@ public class AuthController {
      * @return ResponseEntity indicating the OTP request status.
      */
     @PostMapping(value = "/login-otp/request")
-    public ResponseEntity<String> doLoginByOtp(@Valid @RequestBody SignupRequestOtpDTO requestDTO) {
+    public ResponseEntity<DevOtpDTO> doLoginByOtp(@Valid @RequestBody SignupRequestOtpDTO requestDTO) {
 
-        authService.handleSendOTPForLogin(requestDTO);
-        return ResponseEntity.ok("OTP sent successfully.");
+        DevOtpDTO devOtp = authService.handleSendOTPForLogin(requestDTO);
+        return ResponseEntity.ok(devOtp);
     }
 
     /**

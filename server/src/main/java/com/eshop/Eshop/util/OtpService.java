@@ -85,7 +85,7 @@ public class OtpService {
      * @param identifier Either a mobile number or an email.
      * @param isMobile True if identifier is a mobile number, False if it is an email.
      */
-    public void saveAndSendOTP(String identifier, boolean isMobileNO) {
+    public String saveAndSendOTP(String identifier, boolean isMobileNO) {
         String otp = generateOTP();        // Generate OTP
         String hashOtp = hashMe(otp);      // Hash OTP
 
@@ -96,5 +96,7 @@ public class OtpService {
         }
 
         saveOTP(identifier, hashOtp);   // Save OTP for verification
+
+        return otp; // @Fix only for devlopment
     }
 }

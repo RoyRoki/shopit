@@ -20,6 +20,9 @@
       font-weight: 600;
 }
 .description {
+      border-left: 4px solid var(--bs-blue);
+      border-radius: 8px;
+      padding-left: 8px;
       line-height: 1rem;
       font-size: 0.8rem;
       white-space: normal;
@@ -76,7 +79,10 @@
 }
 .category_info {
       min-height: 172px;
+      display: flex;
+      flex-direction: column;
 }
+
 .category_info h3 {
       text-decoration: underline;
       text-underline-offset: 8px;
@@ -89,13 +95,15 @@
       flex-wrap: wrap;
 }
 .category {
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card2-bg);
       padding: 2px 16px 2px 16px;
       border-radius: 16px;
-      color: var(--bs-tx3);
+      color: var(--bs-tx1);
 }
 .keyword_info {
       min-height: 140px;
+      display: flex;
+      flex-direction: column;
 }
 .keyword_info h3 {
       text-decoration: underline;
@@ -109,10 +117,10 @@
       flex-wrap: wrap;
 }
 .keyword {
-      background-color: var(--bs-bg2);
+      background-color: var(--bs-card2-bg);
       padding: 2px 16px 2px 16px;
       border-radius: 16px;
-      color: var(--bs-tx3);
+      color: var(--bs-tx1);
 }
 .media_wrap {
       position: relative;

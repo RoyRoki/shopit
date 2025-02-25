@@ -1,0 +1,74 @@
+header {
+      width: 100%;
+      background-color: var(--bs-nav-bg);
+      position: fixed;
+      z-index: 1000;
+}
+
+.header_wrap {
+      width: 100%;
+      height: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+
+.logo_wrap {
+      display: flex;
+      width: auto;
+      justify-content: space-between;
+      align-items: center;
+}
+.hamburger {
+      width: 20px;
+}
+.hdt_logo {
+      padding-left: 16px;
+}
+
+.hdt_logo a {
+  font-family: var(--bs-h-ff);
+  font-weight: 500;
+  font-size: 1.5rem;
+  font-style: normal;
+}
+
+.quick_action_wrap a, .hdt_theme_btn {
+      font-family: var(--bs-h-ff);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      cursor: pointer;
+}
+
+.hide {
+      display: none;
+}
+
+.menu_wrap {
+      width: 100%;
+      height: fit-content;
+      padding-bottom: 24px;
+      position: absolute;
+      top: 76px;
+      left: 0;
+      z-index: 10;
+      background-color: var(--bs-nav-bg);
+      border-top: 2px solid var(--bs-accent);
+}
+.menu_wrap li {
+      padding: 10px 20px;
+}
+
+.hdt_menu a {
+      font-family: var(--bs-h-ff);
+      font-size: 1rem;
+      transition: color 0.3s ease-in-out;
+      overflow: hidden;
+      text-wrap: nowrap;
+      cursor: pointer;
+}
+.hdt_theme_btn {
+      z-index: 5000;
+}

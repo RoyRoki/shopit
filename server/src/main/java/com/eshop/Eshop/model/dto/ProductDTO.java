@@ -33,6 +33,9 @@ public class ProductDTO {
     private Double weight;
     private String material;
 
+    private String storeName;
+    private Long storeId;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

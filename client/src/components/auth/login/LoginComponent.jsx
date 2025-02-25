@@ -143,6 +143,11 @@ const LoginComponent = () => {
         urls.loginOtpRequest,
         request
       );
+
+      if(loginMth === loginVai.mobileotp && response.status === 200) {
+        alert("Your OTP is: " + response.data.otp + "\n(Note: This is for development purposes only)");
+      }
+
       if (response.status === 200) {
         setOtpSend(true);
         setTimer(60); // Reset timer when OTP is sent

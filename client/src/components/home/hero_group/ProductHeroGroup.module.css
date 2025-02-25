@@ -117,3 +117,33 @@
       font-family: var(--bs-h-ff);
 }
 
+@media (max-width: 768px) {
+      .main_box {
+            gap: 24px !important;
+            padding: 4px !important;
+            flex-direction: column;
+            aspect-ratio: 1 !important;
+            background-color: transparent !important;
+      }
+      .sub_hero_box {
+            width: 100% !important;
+            gap: 40px !important;
+      }
+
+      .sub_hero_header {
+            height: 40px !important;
+            padding: 0 0 0 0 !important;
+            font-weight: 600 !important;
+            font-size: 1.5rem !important;
+      }
+      .main_hero_box {
+            width: 100% !important;
+      }
+      .hero_img_box {
+            width: 100% !important;
+            height: 100% !important;
+      }
+      .hero_header {
+            display: none !important;
+      }
+}

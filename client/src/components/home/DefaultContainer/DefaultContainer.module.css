@@ -27,3 +27,16 @@
       margin-bottom: 160px; 
 }
 
+@media (max-width: 768px) {
+      .main_banner {
+            height: 320px !important;
+      }
+      .best_section {
+            padding: 8px 4px 8px 4px !important;
+            margin-bottom: 24px;
+      }
+      .img_hero_group {
+             padding: 8px 4px 8px 4px !important;
+             margin-bottom: 40px !important;
+      }
+}

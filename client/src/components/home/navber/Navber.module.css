@@ -7,6 +7,10 @@ header {
       align-items: center;
 }
 
+.hamburger {
+      display: none;
+}
+
 .header_wrap {
       display: flex;
       width: 1536px;
@@ -106,6 +110,9 @@ header {
 
 .header_wrap .hdt_option .hdt_buttons .hdt_theme_btn {
       margin-left: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 .header_wrap .hdt_option .hdt_buttons a {
@@ -134,3 +141,4 @@ header {
 
 /* .header_wrap .hdt_nav .menu_wrap .hdt_menu .nav_link_default {
 } */
+

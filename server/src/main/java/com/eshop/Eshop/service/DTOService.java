@@ -32,6 +32,8 @@ public class DTOService {
                                 .height(product.getHeight())
                                 .weight(product.getWeight())
                                 .material(product.getMaterial())
+                                .storeName(product.getStore().getName())
+                                .storeId(product.getStore().getId())
                                 .createdAt(product.getCreatedAt())
                                 .updatedAt(product.getUpdatedAt())
                                 .build();

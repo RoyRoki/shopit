@@ -41,7 +41,7 @@ const HomeDashBoard = () => {
   return (
     <div className={styles.main}>
       <div className={styles.side_bar_wrap}>
-            <AdminSideMenu curr={heroDiv} setHeroDiv={setHeroDiv} />
+            <AdminSideMenu curr={heroDiv} setHeroDiv={setHeroDiv} isExist={storeExists} />
       </div>
       <div className={styles.hero_section}>
         {heroDiv === adminHeroDiv.home && (
@@ -55,7 +55,7 @@ const HomeDashBoard = () => {
           <ProductPage store={storeDto} state={adminProductPageState.addNewProduct}/>
         )}
         {heroDiv === adminHeroDiv.allProduct && (
-          <ProductPage store={storeDto} state={adminProductPageState.allProducts}/>
+          <ProductPage store={storeDto} state={storeDto.storeProducts?.length !== 0 ? adminProductPageState.allProducts : adminProductPageState.addNewProduct}/>
         )}
 
         {heroDiv === adminHeroDiv.store && (

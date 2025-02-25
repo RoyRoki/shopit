@@ -4,6 +4,7 @@ import { replace, useLocation, useNavigate, useSearchParams } from "react-router
 import { request } from "../../../helper/AxiosHelper";
 import axios from "axios";
 import { useTheme } from "../../../context/theme";
+import LoadingPage from "../../shopitHelp/loadingPage/LoadingPage";
 
 const OrderPaymentPage = () => {
   const navigate = useNavigate();
@@ -74,10 +75,10 @@ const OrderPaymentPage = () => {
   }, [orderId]);
 
   if (error) {
-    return <div className={styles.error}>{JSON.stringify(error)}</div>;
+    return navigate('/home');
   }
   if(loading) {
-    return <div>Loading . . . . </div>
+    return <LoadingPage />
   }
 };
 

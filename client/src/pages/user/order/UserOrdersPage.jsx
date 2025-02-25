@@ -5,19 +5,28 @@ import { request } from "../../../helper/AxiosHelper";
 import { urls } from "../../../util/URLS";
 import { replace, useNavigate, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faMinus, faPlus, faCaretDown, faCaretUp, faMobileScreenButton, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import LoadingPage from './../../shopitHelp/loadingPage/LoadingPage'
+import {
+  faTrash,
+  faMinus,
+  faPlus,
+  faCaretDown,
+  faCaretUp,
+  faMobileScreenButton,
+  faTruckFast,
+} from "@fortawesome/free-solid-svg-icons";
 import { userOrderPage } from "../../../util/HERODIV";
 import { toDate } from "../../../util/dateUtils";
 import AddressSelector from "../../../components/user/addressSelector/AddressSelector";
 import { paymentType } from "../../../util/PaymentType";
 
-const UserOrdersPage = ({ state }) => { 
+const UserOrdersPage = ({ state }) => {
   const navigate = useNavigate();
   const [SearchParams] = useSearchParams();
 
   const [cartSummary, setCartSummary] = useState(null);
   const [addressId, setAddressId] = useState(-1);
-  const [payment_type, setPaymentType] = useState(paymentType.online)
+  const [payment_type, setPaymentType] = useState(paymentType.online);
   const [ordersList, setOrdersList] = useState(null);
   const [pageState, setPageState] = useState(
     state || userOrderPage.prevOrderList
@@ -57,23 +66,27 @@ const UserOrdersPage = ({ state }) => {
 
   const handlePlaceOrder = async () => {
     try {
-      const response = await request("POST", `${urls.placeOrder}?addressId=${addressId}&payment_type=${payment_type}`);
+      const response = await request(
+        "POST",
+        `${urls.placeOrder}?addressId=${addressId}&payment_type=${payment_type}`
+      );
 
       if (response.status === 200) {
-        if(payment_type === paymentType.caseOnDelivery) {
+        if (payment_type === paymentType.caseOnDelivery) {
           action();
           setPageState(userOrderPage.prevOrderList);
-        }
-        else if(payment_type === paymentType.online) {
-          navigate('/payment', {state: {orderId: response.data.id}}, replace);
+        } else if (payment_type === paymentType.online) {
+          navigate(
+            "/payment",
+            { state: { orderId: response.data.id } },
+            replace
+          );
         }
       }
     } catch (error) {
       console.error(error);
     }
   };
-
-
 
   useEffect(() => {
     action();
@@ -87,36 +100,36 @@ const UserOrdersPage = ({ state }) => {
 
   const handlePendingOrderDelete = async (orderId, message) => {
     try {
-      const response = await request("PUT", `${urls.deletePendingOrder}${orderId}`, {message});
-      if(response.status === 200) {
+      const response = await request(
+        "PUT",
+        `${urls.deletePendingOrder}${orderId}`,
+        { message }
+      );
+      if (response.status === 200) {
         // For reload
         action();
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
-  } 
+  };
 
   const confirmButtonText = () => {
-    if(payment_type === paymentType.caseOnDelivery) {
-      return 'Confirm Your Order Now';
-    } else if(payment_type === paymentType.online) {
-      return 'Pay Now To Confirm Your Order';
+    if (payment_type === paymentType.caseOnDelivery) {
+      return "Confirm Your Order Now";
+    } else if (payment_type === paymentType.online) {
+      return "Pay Now To Confirm Your Order";
     }
-  }
+  };
 
   return (
     <div className={styles.main_page}>
       {<Navber isLogged={true} />}
-        <div className={styles.header}>
-          <span onClick={() => navigate("/home?profile_view=true")}>
-            Profile
-          </span>{" "}
-          {` > `}
-          <span>
-            Orders
-          </span>
-        </div>
+      <div className={styles.header}>
+        <span onClick={() => navigate("/home?profile_view=true")}>Profile</span>{" "}
+        {` > `}
+        <span>Orders</span>
+      </div>
       {/* New Order Summary Page*/}
       {pageState === userOrderPage.newOrderSum &&
         (cartSummary ? (
@@ -125,7 +138,7 @@ const UserOrdersPage = ({ state }) => {
               {cartSummary.orderSummaryPerStores?.map(
                 (orderPerStore, index) => (
                   <div className={styles.per_store} key={index}>
-                    <div className={styles.store_name}>
+                    <div className={styles.store_name} onClick={() => navigate(`/home?store_id=${orderPerStore.storeId}`)}>
                       {orderPerStore.storeName}
                     </div>
                     <div className={styles.cart_items_wrap}>
@@ -193,8 +206,18 @@ const UserOrdersPage = ({ state }) => {
                       ))}
                     </div>
                     <div className={styles.footer_box}>
-                      <span>{`products cost: ₹${orderPerStore.storeSubtotal} + gst: ₹${orderPerStore.gstAmount} + delivery: ₹${orderPerStore.deliveryCost}`}</span>
-                      <span>{`Subtotal (${orderPerStore.cartItems?.length} items) :  ₹${orderPerStore.total}`}</span>
+                      <span>
+                        {`products cost: ₹${Number(
+                          orderPerStore.storeSubtotal
+                        ).toFixed(2)}
+                       + gst: ₹${Number(orderPerStore.gstAmount).toFixed(2)} 
+                       + delivery: ₹${Number(
+                         orderPerStore.deliveryCost
+                       ).toFixed(2)}`}
+                      </span>
+                      <span className={styles.sub_total}>
+                        {`Subtotal (${orderPerStore.cartItems?.length} items) :  ₹${Number(orderPerStore.total).toFixed(2)}`}
+                      </span>
                     </div>
                   </div>
                 )
@@ -218,43 +241,55 @@ const UserOrdersPage = ({ state }) => {
                 </div>
                 <div className={styles.change_address_wrap}>
                   <span>Delivery Address</span>
-                  <AddressSelector onSelect={(id) => setAddressId(id)}/>
+                  <AddressSelector onSelect={(id) => setAddressId(id)} />
                 </div>
                 <div className={styles.payment_wrap}>
                   <span>Payment Type</span>
                   <div className={styles.payment_types}>
-                    <div 
+                    <div
                       onClick={() => setPaymentType(paymentType.online)}
-                      className={`${styles.pay_type} ${payment_type === paymentType.online ? styles.pay_type_active : styles.pay_type_inactive}`}
+                      className={`${styles.pay_type} ${
+                        payment_type === paymentType.online
+                          ? styles.pay_type_active
+                          : styles.pay_type_inactive
+                      }`}
                     >
                       <span>online payment</span>
-                      <FontAwesomeIcon icon={faMobileScreenButton}/>
+                      <FontAwesomeIcon icon={faMobileScreenButton} />
                     </div>
-                    <div 
+                    <div
                       onClick={() => setPaymentType(paymentType.caseOnDelivery)}
-                      className={`${styles.pay_type} ${payment_type === paymentType.caseOnDelivery ? styles.pay_type_active : styles.pay_type_inactive}`}
+                      className={`${styles.pay_type} ${
+                        payment_type === paymentType.caseOnDelivery
+                          ? styles.pay_type_active
+                          : styles.pay_type_inactive
+                      }`}
                     >
                       <span>case on delivery</span>
-                      <FontAwesomeIcon icon={faTruckFast}/>
+                      <FontAwesomeIcon icon={faTruckFast} />
                     </div>
                   </div>
                 </div>
               </div>
-              <div 
-                className={`${styles.order_btn} ${payment_type === paymentType.online ? styles.online_pay_btn : payment_type === paymentType.caseOnDelivery ? styles.cod_pay_btn : ''}`}
+              <div
+                className={`${styles.order_btn} ${
+                  payment_type === paymentType.online
+                    ? styles.online_pay_btn
+                    : payment_type === paymentType.caseOnDelivery
+                    ? styles.cod_pay_btn
+                    : ""
+                }`}
               >
-                <button
-                  onClick={() => handlePlaceOrder()}
-                >
+                <button onClick={() => handlePlaceOrder()}>
                   {confirmButtonText()}
                 </button>
-              </div>     
+              </div>
             </div>
           </div>
         ) : (
-          <div>Loading...</div>
+          <LoadingPage />
         ))}
-        
+
       {/*  Already Ordered list */}
       {pageState === userOrderPage.prevOrderList && (
         <div className={styles.orders_list}>
@@ -263,7 +298,14 @@ const UserOrdersPage = ({ state }) => {
             <div className={styles.order_wrap}>
               {ordersList.map((order, index) => (
                 // For Each order
-                <div className={`${styles.per_stores_wrap} ${order.orderStatus === 'CONFIRMED' ? styles.confirmed_order : ''}`} key={index}>
+                <div
+                  className={`${styles.per_stores_wrap} ${
+                    order.orderStatus === "CONFIRMED"
+                      ? styles.confirmed_order
+                      : ""
+                  }`}
+                  key={index}
+                >
                   <div className={styles.order_info}>
                     <p>
                       <span>Order Id:</span> {order.id}
@@ -272,38 +314,42 @@ const UserOrdersPage = ({ state }) => {
                       <span>Ordered Date:</span> {toDate(order.createdAt)}
                     </p>
                     <p>
-                      <span>Grand Price:</span> {order.grandPrice}
+                      <span>Grand Price: </span> ₹{order.grandPrice}
                     </p>
                     <p className={styles.order_status}>
                       <span>Order Status:</span> {order.orderStatus}
                     </p>
                   </div>
-                  <div 
+                  <div
                     className={styles.see_details_wrap}
                     onClick={(e) => {
-                      setVisibleDetailsIndex(visibleDetailsIndex === index ? null : index);
+                      setVisibleDetailsIndex(
+                        visibleDetailsIndex === index ? null : index
+                      );
                     }}
                   >
-                   {visibleDetailsIndex === index ? (
-                    <>
-                      <span>hide details</span>
-                      <FontAwesomeIcon icon={faCaretUp}/>
-                    </>
-                   ) : (
-                    <>
-                      <span>see details</span>  
-                      <FontAwesomeIcon icon={faCaretDown}/>
-                    </>
-                   )}
+                    {visibleDetailsIndex === index ? (
+                      <>
+                        <span>hide details</span>
+                        <FontAwesomeIcon icon={faCaretUp} />
+                      </>
+                    ) : (
+                      <>
+                        <span>see details</span>
+                        <FontAwesomeIcon icon={faCaretDown} />
+                      </>
+                    )}
                   </div>
                   <div className={styles.payment_wrap}>
-                    {
-                      order.orderStatus === 'PENDING' && (
-                        <button onClick={() => navigate(`/payment`, { state: {orderId: order.id} })}>
-                          Complete Payment
-                        </button>
-                      )
-                    }
+                    {order.orderStatus === "PENDING" && (
+                      <button
+                        onClick={() =>
+                          navigate(`/payment`, { state: { orderId: order.id } })
+                        }
+                      >
+                        Complete Payment
+                      </button>
+                    )}
                   </div>
                   {/* Iterate store wise */}
                   {visibleDetailsIndex === index && (
@@ -311,19 +357,26 @@ const UserOrdersPage = ({ state }) => {
                       {order.orderPerStores.map((per_store, index) => (
                         // For Order Per Store
                         <div className={styles.per_store} key={index}>
-                          <div className={styles.store_info}>
-                            {`Store name: ${per_store.storeName}`}
+                          <div 
+                            className={styles.store_info}
+                            onClick={() => navigate(`/home?store_id=${per_store.storeId}`)}
+                          >
+                            {`Store: ${per_store.storeName}`}
                           </div>
                           {/* Iterate over all ordered products */}
                           <div className={styles.products_info}>
                             {per_store.orderItems.map((order_item, index) => (
                               // For Each Product
                               <div className={styles.order_item} key={index}>
-                                <div className={styles.item_product__info}>
+                                <div 
+                                  className={styles.item_product__info} 
+                                  onClick={() => navigate(`/home?product_id=${order_item.product.id}`)}
+                                >
                                   {`Product Name: ${order_item.product.name}`}
                                 </div>
                                 <div className={styles.order_item_info}>
-                                  {`Quantity: ${order_item.quantity}  Final price: ${order_item.finalPrice} `}
+                                  <span>Quantity: {order_item.quantity}</span>
+                                  <span>Final price: ₹{order_item.finalPrice}</span>
                                 </div>
                               </div>
                             ))}
@@ -331,8 +384,15 @@ const UserOrdersPage = ({ state }) => {
                         </div>
                       ))}
                       {/* @Todo fix the cancel system */}
-                      {order.orderStatus === 'PENDING' && (
-                        <button className={styles.cancel_pen_order} onClick={() => handlePendingOrderDelete(order.id, "Demo Message")}>cancel this pending order</button>
+                      {order.orderStatus === "PENDING" && (
+                        <button
+                          className={styles.cancel_pen_order}
+                          onClick={() =>
+                            handlePendingOrderDelete(order.id, "Demo Message")
+                          }
+                        >
+                          cancel this pending order
+                        </button>
                       )}
                     </div>
                   )}

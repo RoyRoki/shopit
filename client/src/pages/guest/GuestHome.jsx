@@ -10,6 +10,7 @@ import HeroProduct from "../../components/home/heroProduct/HeroProduct";
 import ProductsByQuery from "../../components/home/productByQuery/ProductsByQuery";
 import ProductsByCategory from "../../components/home/productsByCategory/ProductsByCategory";
 import StorePublicPage from "../../components/store/publicPage/StorePublicPage";
+import NavberMb from "../../components/home/navber/NavberMb";
 
 export const GuestHome = () => {
   const { auth } = useContext(AuthContext);
@@ -34,7 +35,7 @@ export const GuestHome = () => {
 
   return (
     <div className={styles.main}>
-      <Navber className={styles.nav} isLogged={false} />
+        <Navber className={styles.nav} isLogged={false} />
       <div className={styles.main_container}>
         {/* Products show by keyword */}
         {key && <ProductsByKeyword keyword={key} />}

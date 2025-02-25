@@ -59,10 +59,28 @@
       border-radius: 5px;
 }
 
-.main_box .products_wrap .product_btn_box {
+/* .main_box .products_wrap .product_btn_box {
 
 }
 
 .main_box .products_wrap .product_btn_box .product_show_card{
 
+} */
+
+@media (max-width: 768px) {
+      .main_box {
+            margin-left: auto !important;
+      }
+
+      .header_box {
+            margin-bottom: 16px !important;
+      }
+      .header_box h2 {
+            font-size: 1.5rem !important;
+            line-height: 1.5rem !important;
+      }
+      .products_wrap {
+            gap: 40px !important;
+            justify-content: center;
+      }
 }

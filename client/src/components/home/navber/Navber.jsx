@@ -7,11 +7,20 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ThemeToggleButton from "../../buttons/toggleButton/ThemeToggleButton";
 import HomeSearchBar from "../../searchbar/HomeSearchBar";
 import ExploreBox from "../exploreBox/ExploreBox";
+import { useMediaQuery } from "react-responsive";
+import NavberMb from "./NavberMb";
 
 const Navber = ({ isLogged }) => {
   const [isSearchBarFocused, setIsSearchBarFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  if(isMobile) {
+    return (
+      <NavberMb />
+    )
+  }
   return (
     <header>
       <div className={styles.header_wrap}>

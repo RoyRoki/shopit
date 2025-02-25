@@ -6,8 +6,6 @@ import { LoginPage } from '../../pages/auth/login/LoginPage'
 import { RegisterPage } from '../../pages/auth/register/RegisterPage'
 import UserCartPage from '../../pages/user/cart/UserCartPage'
 
-import TestPage from '../../../test/page/TestPage'
-
 const HomeLayout = () => {
   return (
     <div>
@@ -18,7 +16,6 @@ const HomeLayout = () => {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/cart' element={<UserCartPage isLogged={false} />} />
-            <Route path='/test' element={<TestPage />} />
       </Routes>
     </div>
   )

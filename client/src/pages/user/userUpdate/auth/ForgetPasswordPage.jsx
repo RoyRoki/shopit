@@ -56,6 +56,15 @@ const ForgetPasswordPage = () => {
       });
       return;
     }
+    
+    if (field === "email" && (!value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))) {
+      setPopup({
+        message: "Enter a valid email address",
+        type: "error",
+      });
+      return;
+    }
+
     if(field === "mobile") {
       data = {'mobileNo': value};
     } else {
