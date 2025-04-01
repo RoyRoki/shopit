@@ -81,6 +81,6 @@
       }
       .products_wrap {
             gap: 40px !important;
-            justify-content: center;
+            justify-content: flex-start;
       }
 }

@@ -16,3 +16,11 @@
       margin: 40px auto;
       padding: 20px;
 }
+
+@media (max-width: 768px) {
+      .box_wrap {
+            height: fit-content !important;
+            margin: 120px 16px !important;
+            padding: 0 !important;
+      }
+}

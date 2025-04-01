@@ -1,6 +1,7 @@
 
 header {
       padding: 18.5px;
+      max-height: 85px;
       background-color: var(--bs-nav-bg);
       display: flex;
       justify-content: center;

@@ -1,8 +1,10 @@
-header {
+.mb_header {
       width: 100%;
       background-color: var(--bs-nav-bg);
       position: fixed;
       z-index: 1000;
+      padding: 12px;
+      max-height: 49px;
 }
 
 .header_wrap {
@@ -24,6 +26,7 @@ header {
 }
 .hdt_logo {
       padding-left: 16px;
+      cursor: pointer;
 }
 
 .hdt_logo a {

@@ -185,3 +185,10 @@ button {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+  }
+}

@@ -134,3 +134,20 @@
       color: var(--bs-success);
       font-size: 0.9rem !important;      
 }
+
+@media (max-width: 768px) {
+      .main_container {
+            row-gap: 0 !important;
+            margin: 8px 0 !important;
+      }
+      .main_container h2 {
+            margin-top: 16px !important;
+            margin-left: 8px !important;
+            font-weight: 600 !important;
+            font-size: 1.2rem !important;
+            padding: 0 !important;
+      }
+      .main_container form {
+            padding: 10px 0 16px 16px !important;
+      }
+}

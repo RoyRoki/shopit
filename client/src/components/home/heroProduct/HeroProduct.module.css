@@ -64,6 +64,8 @@
       color: var(--bs-accent-tx1);
       box-shadow: var(--bs-box-shadow3);
       border-radius: 8px;
+      min-width: 160px;
+      padding: 4px;
 }
 
 .btn_add_to_cart {
@@ -76,7 +78,7 @@
 }
 
 
-.main_container .hero_container .product_header .gallery_box .gallery_explorer {
+.gallery_box .gallery_explorer {
       width: 124px;
       height: 100%;
       background-color: var(--bs-bg1-light);
@@ -393,4 +395,83 @@
 
 .select_quantity a {
 
+}
+
+@media (max-width: 768px) {
+      .main_wrap {
+            padding: 24px 0 0 0 !important;
+      }
+      .main_container {
+            padding: 0;
+      }
+      .hero_container {
+            flex-direction: column;
+            width: 100% !important;
+            gap: 184px;
+            padding-top: 80px !important;
+            border-radius: 0 !important;
+            height: fit-content !important;
+      }
+      .product_header, .product_meta {
+            width: 100% !important;
+      }
+      .product_header {
+            height: max-content !important;
+      }
+      .gallery_box {
+            height: 100% !important;
+      }
+      .button_box {
+            height: 50% !important;
+            min-height: 80px !important;
+      }
+      .button_box button {
+            width: 44% !important;
+            height: 49px !important;
+      }
+      .select_quantity_option {
+            margin: 0 0 0 16px !important;
+      }
+      .table_info {
+            height: fit-content !important;
+            width: 100% !important;
+      }
+      .table_info table {
+            min-width: 90% !important;
+      }
+      .keyword_wrap {
+            padding: 16px 0 24px 0 !important;
+      }
+      .cart_notifier_box {
+            transform: translateX(0) translateY(70%) !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 80px 16px 16px 16px !important;
+            min-height: 80px !important;
+            justify-content: space-between !important;
+      }
+      .highlight_img_wrap {
+            display: none !important;
+      }
+      .notifier_show ~ .hero_container {
+            transform: translateY(80px) !important;
+      }
+      .action_box {
+            width: fit-content !important;
+      }
+      .action_btn_wrap {
+            flex-direction: row !important;
+            width: fit-content !important;
+            padding: 0 !important;
+            min-width: 160px !important;
+      }
+      .buy_btn, .auth_btn {
+            display: none !important;
+      }
+      .highlight_box {
+            width: fit-content !important;
+            padding: 0 24px 0 24px !important;
+            border-radius: 8px;
+      }
+      
 }

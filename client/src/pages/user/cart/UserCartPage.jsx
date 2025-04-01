@@ -49,15 +49,15 @@ const UserCartPage = ({ isLogged }) => {
             if(!isLogged) {
                 const localCart =  JSON.parse(localStorage.getItem("cart")) || { cartItems: [], totalCartPrice: 0 };
                 const existingCartItem = localCart.cartItems.find(cartItem => String(cartItem?.product?.id) === String(productId));
-              if(existingCartItem) {
-                  existingCartItem.quantity = prevQuantity + 1;
-              }
-              // Update cart total cart prices
-              localCart.totalCartPrice = cart.cartItems.reduce((total, cartItem) => {
+                // Update cart total cart prices
+                localCart.totalCartPrice = cart.cartItems.reduce((total, cartItem) => {
                   const productPrice = cartItem.product?.prices * (1 - cartItem.product?.discount || 0);
-                  return total + productPrice * (cartItem?.quantity);
-              }, 0);
-
+                  return total + productPrice * (cartItem?.quantity + 1);
+                }, 0);
+                
+                if(existingCartItem) {
+                    existingCartItem.quantity = prevQuantity + 1;
+                }
               localStorage.setItem("cart", JSON.stringify(localCart));
               dispatch(setCart(localCart));
             }
@@ -184,9 +184,9 @@ const UserCartPage = ({ isLogged }) => {
                     </div>
                     <div className={styles.text_control}>
                       <button onClick={() => handleDelete(cartItem?.product?.id)}>{"Delete"}</button>
-                      <button>{"Save for later"}</button>
-                      <button>{"See more like this"}</button>
-                      <button onClick={() => navigator.clipboard.writeText(`${window.location.host}/home?product_id=${cartItem?.product?.id}`)}>{"Share"}</button>
+                      <button className={styles.hide} >{"Save for later"}</button>
+                      <button className={styles.hide} >{"See more like this"}</button>
+                      <button onClick={() => navigator.clipboard.writeText(`${window.location.host}/home?product_id=${cartItem?.product?.id}`)} className={styles.hide} >{"Share"}</button>
                     </div>
                   </div>
                 </div>

@@ -17,13 +17,14 @@ import { AuthContext } from "../../../context";
 import { role } from "../../../util/ROLE";
 import { request } from "../../../helper/AxiosHelper";
 import { setCart } from "../../../features/user/UserCart";
+import LoadingPage from "../../../pages/shopitHelp/loadingPage/LoadingPage"
 
 const HeroProduct = ({ product_id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { auth } = useContext(AuthContext);
-  const { productsMap } = useSelector((state) => state.homeProducts);
+  const { productsMap, loading } = useSelector((state) => state.homeProducts);
 
   const [heroProduct, setHeroProduct] = useState(
     productsMap[product_id] || null
@@ -46,25 +47,25 @@ const HeroProduct = ({ product_id }) => {
   };
 
   useEffect(() => {
-    // Clear heroProduct before fetching new data
-    setHeroProduct(null);
-    setHeroImg(null);
 
     // Then Fetch the product by id
     const handleFetch = async () => {
-      dispatch(
-        fetchProducts({
-          type: homeProductTypes.productIds,
-          query: `${product_id}`,
-          info: { header: `Product Id: ${product_id}` },
-        })
-      );
+      // If product is not already in Redux state, fetch it again
+      if(!productsMap[product_id]) {
+        dispatch(
+          fetchProducts({
+            type: homeProductTypes.productIds,
+            query: `${product_id}`,
+            info: { header: `Product Id: ${product_id}` },
+          })
+        );
+      }
       setHeroProduct(productsMap[product_id] || null);
     };
 
     handleFetch();
 
-  }, [dispatch, product_id]);
+  }, [dispatch, product_id, productsMap]);
 
   useEffect(() => {
     // Update the heroImg when ever heroProduct change
@@ -131,6 +132,10 @@ const HeroProduct = ({ product_id }) => {
     handleAddToCart(true);
     navigate("/cart");
   };
+
+  if(loading || !heroProduct) {
+    return <LoadingPage />
+  }
 
   return (
     <div className={styles.main_wrap}>

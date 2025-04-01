@@ -16,7 +16,7 @@ const NavberMb = ({ isLogged }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header>
+    <header className={styles.mb_header}>
       <div className={styles.header_wrap}>
         <div className={styles.logo_wrap}>
           <div
@@ -36,6 +36,7 @@ const NavberMb = ({ isLogged }) => {
                     ? "nav_link_action"
                     : " "
                 }
+                onClick={() => setMenuOpen(false)}
               >
                 ShopIt
               </NavLink>
@@ -53,6 +54,7 @@ const NavberMb = ({ isLogged }) => {
                   location.pathname === "/cart" ? "var(--bs-accent)" : ""
                 }`,
               }}
+              onClick={() => setMenuOpen(false)}
             />
           </Link>
         </div>
@@ -77,6 +79,7 @@ const NavberMb = ({ isLogged }) => {
                           : styles.nav_link_default
                       }`
                     }
+                    onClick={() => setMenuOpen(false)}
                   >
                     Login
                   </NavLink>
@@ -96,6 +99,7 @@ const NavberMb = ({ isLogged }) => {
                           : styles.nav_link_default
                       }`
                     }
+                    onClick={() => setMenuOpen(false)}
                   >
                     Register
                   </NavLink>
@@ -113,6 +117,7 @@ const NavberMb = ({ isLogged }) => {
                           : styles.nav_link_default
                       }`
                     }
+                    onClick={() => setMenuOpen(false)}
                   >
                     Open Store
                   </NavLink>
@@ -121,13 +126,19 @@ const NavberMb = ({ isLogged }) => {
             )}
             {isLogged && (
               <li>
-                <Link to={`/${!isLogged ? "login" : "home?profile_view=true"}`}>
+                <Link 
+                  to={`/${!isLogged ? "login" : "home?profile_view=true"}`} 
+                  onClick={() => setMenuOpen(false)}
+                >
                   Profile
                 </Link>
               </li>
             )}
             <li>
-            <Link to={"/cart"}>
+            <Link 
+              to={"/cart"}
+              onClick={() => setMenuOpen(false)}
+            >
               Cart
             </Link>                  
             </li>
