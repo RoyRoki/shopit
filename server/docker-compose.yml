@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # Spring Boot Back-End Service
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    env_file:
+      - .env # This will load the .env file for this service
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - shopit-network
+
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=eshop
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - shopit-network
+
+  # Redis Service
+  redis:
+    image: redis:latest
+    ports:
+      - "6380:6379" # Expose Redis on port 6380
+    networks:
+      - shopit-network
+
+networks:
+  shopit-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
