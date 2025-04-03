@@ -1,57 +1,81 @@
 # 🛍️ ShopIt
 
-ShopIt is a full-stack e-commerce platform designed to provide a seamless shopping experience. Built with modern technologies, it supports features like user authentication, secure payments, and efficient data handling.
+ShopIt is a **full-stack e-commerce platform** built with modern technologies to provide a seamless shopping experience. It includes features like **user authentication, secure payments, efficient data handling, and cloud storage**.
+
+---
+
+## 🚀 Features
+
+- **User Authentication** (JWT-based security)
+- **Product Management** (Add, update, and delete products)
+- **Payment Integration** (Razorpay for secure transactions)
+- **Cloud Storage** (AWS S3 for managing product images)
+- **Real-time Cache** (Redis for faster access)
+- **Email & OTP Verification** (SMTP integration)
+- **Dockerized Backend** (Run with Docker Compose for easy deployment)
 
 ---
 
 ## 🖥️ Tech Stack
 
 ### Frontend
+
 - ![React](https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 - ![Vite](https://img.shields.io/badge/-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+- [Redux](https://redux.js.org/)
 
 ### Backend
+
 - ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
 - ![Java](https://img.shields.io/badge/-Java-007396?style=for-the-badge&logo=java&logoColor=white)
+- ![Docker Compose](https://img.shields.io/badge/-Docker%20Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white) for backend deployment
 
 ### Database
+
 - ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 - ![Redis](https://img.shields.io/badge/-Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 
-### Other Tools and Libraries
+### Other Tools & Services
+
 - ![JWT](https://img.shields.io/badge/-JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white) for authentication
-- ![Lombok](https://img.shields.io/badge/-Lombok-EB6E00?style=for-the-badge&logo=java&logoColor=white)
-- ![Cloudinary](https://img.shields.io/badge/-Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white) for image storage
+- ![AWS S3](https://img.shields.io/badge/-AWS%20S3-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white) for image storage
 - ![Razorpay](https://img.shields.io/badge/-Razorpay-0D1A4B?style=for-the-badge&logo=razorpay&logoColor=white) for payments
+- ![SMTP](https://img.shields.io/badge/-SMTP-F2A900?style=for-the-badge&logo=gmail&logoColor=white) for email verification
 
 ---
 
-## 🌟 Features
+## 📸 Screenshots
 
-- **User Authentication**
-  - Password-based and JWT secured.
-- **Product Management**
-  - Add, update, and delete products with ease.
-- **Payment Integration**
-  - Razorpay for secure and fast transactions.
-- **Cloud Image Storage**
-  - Powered by Cloudinary for efficient image management.
-- **Real-time Cache**
-  - Leveraging Redis for faster data access.
+### 🏠 Home Page
+
+![Home Page](./home.png)
+
+### 🛒 Product Page
+
+![Product Page](./product.png)
 
 ---
 
-## 🚀 Getting Started
+## 📜 Environment Variables
 
-### Prerequisites
-Ensure you have the following installed:
-- [Node.js](https://nodejs.org/)
-- [Java (JDK 23)](https://jdk.java.net/)
-- [PostgreSQL](https://www.postgresql.org/)
+Create a `.env` file in the backend and add the following:
 
-### Installation
+```env
+SPRING_DATASOURCE_URL=your_postgresql_url
+SPRING_DATASOURCE_USERNAME=your_db_username
+SPRING_DATASOURCE_PASSWORD=your_db_password
+SPRING_DATA_REDIS_HOST=your_redis_host
+SPRING_DATA_REDIS_PORT=your_redis_port
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_S3_BUCKET_NAME=your_bucket_name
+PAYMENT_RAZORPAY_KEY_ID=your_razorpay_key
+PAYMENT_RAZORPAY_KEY_SECRET=your_razorpay_secret
+SECURITY_JWT_SECRET_KEY=your_jwt_secret
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/royroki/shopit.git
+---
 
+📬 API Endpoints (Postman Collection)
+[![Postman Documentation](https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg)](https://documenter.getpostman.com/view/35037237/2sB2cSh3qT)
+A Postman collection containing all API endpoints is available. You can import it into Postman for easy testing:
