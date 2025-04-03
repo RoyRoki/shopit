@@ -74,8 +74,5 @@ PAYMENT_RAZORPAY_KEY_SECRET=your_razorpay_secret
 SECURITY_JWT_SECRET_KEY=your_jwt_secret
 ```
 
----
-
-📬 API Endpoints (Postman Collection)
 [![Postman Documentation](https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg)](https://documenter.getpostman.com/view/35037237/2sB2cSh3qT)
 A Postman collection containing all API endpoints is available. You can import it into Postman for easy testing:
